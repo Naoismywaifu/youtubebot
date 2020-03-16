@@ -1,0 +1,34 @@
+[
+   {
+    "name": "Top.GG",
+    "certified": "false",
+    "rewarded": "true",
+    "website": "https://top.gg",
+    "emoji": "<a:dblspin:393548363879940108>",
+    "vote": "https://top.gg/bot/486948160124485642/vote"
+   },
+   {
+    "name": "BladeBotList",
+    "certified": "true",
+    "rewarded": "false",
+    "website": "https://bladebotlist.xyz",
+    "emoji": "<:bblblue:645339049258909707>",
+    "vote": "https://bladebotlist.xyz/bot/486948160124485642"
+   },
+   {
+    "name": "Divine Discord Bot List",
+    "certified": "false",
+    "rewarded": "false",
+    "website": "https://divinediscordbots.com",
+    "emoji": "<a:spin_logo:460381273618120704>",
+    "vote": "https://divinediscordbots.com/bot/486948160124485642/vote"
+   },
+   {
+    "name": "Cloud Bot List",
+    "certified": "true",
+    "rewarded": "false",
+    "website": "https://www.cloudlist.xyz",
+    "emoji": "<:error:653279331279175757>",
+    "vote": "https://www.cloudlist.xyz/vote/486948160124485642"
+   }
+]

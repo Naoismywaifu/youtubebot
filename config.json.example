@@ -1,0 +1,35 @@
+{
+    "token":"Your token",
+    "prefix":"yt*",
+    "topgg":"topgg token,
+    "footer":"[Donate](https://www.patreon.com/botyoutube) ● [Website](https://youtube-bot.com) ● [Like Me !](https://bladebotlist.xyz/bot/youtubebot) ● [Invite](https://discordapp.com/oauth2/authorize?client_id=596068311863918604&permissions=8&scope=bot)",
+    "shards":2,
+    "logs":"The logs channel ID (for new servers)",
+    "owner":"The owner ID",
+
+    
+    "giveaways":{
+        "allowbots":"false",
+        "updatetimer":"5000",
+        "embedcolor":"FF0000", 
+        "reaction":"🎉"
+    },
+    "staffsbot":[
+        "355995885085392896",
+        "342640359391625216"
+    ],
+
+    "help_emojis":{
+        "Owner":"👑",
+        "Core":"<:youtubebot:653322797421953047>",
+        "Music":"🎶",
+        "Giveaways":"<a:HypeTada:677204041067003914>"
+    },
+
+
+    "music":{
+        "YT_API_KEY":"yt data api key "
+    }
+
+    
+}
