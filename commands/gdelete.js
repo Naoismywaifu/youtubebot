@@ -3,6 +3,14 @@ const config = require("../config.json")
 
 exports.run = (client, message, args) => {
 
+
+    if(!message.member.roles.cache.some(role => role.name === 'GIVEAWAYS')){
+        if (!message.member.hasPermission('MANAGE_GUILD')) {
+            return message.channel.send("🛑 | this command is only for users with the permission 'MANAGE_GUILD' or users with a role named 'GIVEAWAYS' (case sensitive)")
+        }
+        }
+
+
     if(!args[0]) return message.channel.send("❌ | Error: please add the giveway's message id to delete it")
 
 

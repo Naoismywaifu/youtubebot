@@ -6,7 +6,7 @@
     "shards":2,
     "logs":"The logs channel ID (for new servers)",
     "owner":"The owner ID",
-
+    "maxfreevol": "100",
     
     "giveaways":{
         "allowbots":"false",
@@ -21,9 +21,10 @@
 
     "help_emojis":{
         "Owner":"👑",
-        "Core":"<:youtubebot:653322797421953047>",
+        "Core":"<:YouTubeBot:689789594496925736>",
         "Music":"🎶",
-        "Giveaways":"<a:HypeTada:677204041067003914>"
+        "Giveaways":"<a:HypeTada:677204041067003914>",
+        "NSFW":"<:NSFW:689487898172456999>"
     },
 
 

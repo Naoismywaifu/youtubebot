@@ -15,18 +15,18 @@ exports.run = (client, message, args) => {
         .setColor("RED")
         .setDescription(`Informations about ${toFind.username}`)
         .setFooter(toFind.username, toFind.displayAvatarURL)
-        .addField('Member information:', `**> Display name:** ${toFind.username}
-        **> Joined at:** ${joined}`, true)
+        .addField('Member information:', `> Display name: ${toFind.username}
+        > Joined at: ${joined}`, true)
 
-        .addField('User information:', `**> ID:** ${toFind.id}
-        **> Username**: ${toFind.username}
-        **> Tag**: ${toFind.tag}
-        **> Created at**: ${created}`, true)
+        .addField('User information:', `> ID: ${toFind.id}
+        > Username: ${toFind.username}
+        > Tag: ${toFind.tag}
+        > Created at: ${created}`, true)
         .setThumbnail(toFind.displayAvatarURL)
         .setTimestamp()
 
     if (toFind.presence.game) 
-        embed.addField('Currently playing', `**> Name:** ${toFind.presence.game.name}`);
+        embed.addField('Currently playing', `> Name: ${toFind.presence.game.name}`);
     
     message.channel.send(embed)
 

@@ -4,6 +4,12 @@ const { premium } = require("../premium")
 
 exports.run = (client, message, args) => {
 
+    if(!message.member.roles.cache.some(role => role.name === 'GIVEAWAYS')){
+        if (!message.member.hasPermission('MANAGE_GUILD', { checkAdmin: false, checkOwner: false })) {
+            return message.channel.send("🛑 | this command is only for users with the permission 'MANAGE_GUILD' or users with a role named 'GIVEAWAYS' (case sensitive)")
+        }
+        }
+
     if(premium(message.author.id, client)) {
         var ppremium = true
     } else {

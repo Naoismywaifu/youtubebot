@@ -16,7 +16,7 @@ const { Player } = require("discord-player");
 const player = new Player(client, config.music.YT_API_KEY, {
   leaveOnEnd: false,
   leaveOnStop: true,
-  leaveOnEmpty: true
+  leaveOnEmpty: false
 });
 
 const dbl = new DBL(config.topgg, client);

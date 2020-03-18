@@ -22,7 +22,7 @@ botlists.forEach(p => {
         var name = `${p.emoji} ${p.name}`
     }
 
-    embed.addField(name, `__Rewarded__ **-** ${p.rewarded}\n[Website](${p.website}) ? [Vote](${p.vote})`, false);
+    embed.addField(name, `__Rewarded__ **-** ${p.rewarded}\n[Website](${p.website}) • [Vote](${p.vote})`, false);
 
 });
 embed.setImage("https://top.gg/api/widget/486948160124485642.svg")
