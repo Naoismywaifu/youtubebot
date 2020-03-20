@@ -16,6 +16,6 @@ module.exports.help = {
     usrperm: [],
     owneronly: false,
     usage: "leave",
-    aliases: ["l"],
+    aliases: ["l", "stop", "end"],
     description: "use this command to leave the bot"
     }

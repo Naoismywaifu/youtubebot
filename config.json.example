@@ -7,6 +7,7 @@
     "logs":"The logs channel ID (for new servers)",
     "owner":"The owner ID",
     "maxfreevol": "100",
+    "mysql":"mysql://",
     
     "giveaways":{
         "allowbots":"false",

@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 
 module.exports.run = async (client, message, args) => {
 
+
     let embed = new Discord.MessageEmbed()
     .setTitle("Youtube bot - News")
     .setDescription("Every version take a lot of time to be developed but all versions are awesome !")

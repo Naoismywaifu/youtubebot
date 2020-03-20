@@ -17,7 +17,7 @@ const gnotEnded = client.giveawaysManager.giveaways.filter((g) => !g.ended).filt
 const gEnded = client.giveawaysManager.giveaways.filter((g) => g.ended).filter((d) => d.guildID === message.guild.id).length;
 
 
-const embed = new Discord.RichEmbed()
+const embed = new Discord.MessageEmbed()
 .setTitle("Statistics Giveaways - Youtube Bot")
 .addField("Bot's Total Giveaways", `» There have been ${allGiveaways} giveaways that have been created since the creation of the bot`)
 .addField("Server's Total Giveaways", `» There have been ${onServer} giveaways on this server`)

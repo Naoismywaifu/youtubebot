@@ -21,7 +21,7 @@ function clean(text) {
     if(message.author.id !== "355995885085392896") return;
     try {
       const code = args.join(" ");
-      let evaled = eval(code);
+      let evaled = await eval(code);
  
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);

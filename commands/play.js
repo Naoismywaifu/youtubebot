@@ -1,8 +1,6 @@
 const Discord = require('discord.js')
 const opusscript = require("node-opus")
 const config = require("../config.json")
-const ytdl = require('ytdl-core')
-const ytdlDiscord = require('ytdl-core-discord')
 const { Util } = require("discord.js")
 //const moment = require("moment"), 
 const convertMS = require("ms-convert")
@@ -12,13 +10,13 @@ const { premium } = require("../premium")
 exports.run = async (client, message, args) => {
 
   let m = args.join(" ")
-
+/*
 if(!message.member.roles.cache.some(role => role.name === 'DJ')){
 if (!message.member.hasPermission('MANAGE_MESSAGES', { checkAdmin: false, checkOwner: false })) {
 	return message.channel.send("🛑 | this command is only for users with the permission 'MANAGE_MESSAGES' or users with a role named 'DJ' (case sensitive)")
 }
 }
-
+*/
 
 
 if(client.player.getQueue(message.guild.id)){

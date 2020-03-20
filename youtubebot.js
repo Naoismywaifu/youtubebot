@@ -5,6 +5,9 @@ const client = new Discord.Client({
   disableEveryone: true
 });
 const fs = require("fs");
+//const Keyv = require('keyv');
+//const KeyvFile = require('keyv-file')
+const { GiveawaysManager } = require("discord-giveaways");
 const config = require("./config.json");
 const opusscript = require("node-opus")
 const DBL = require("dblapi.js")
@@ -20,6 +23,30 @@ const player = new Player(client, config.music.YT_API_KEY, {
 });
 
 const dbl = new DBL(config.topgg, client);
+
+//const db = new Keyv({
+// store: new KeyvFile({
+//    filename: `../assets/premium.json`, // the file path to store the data
+//    expiredCheckDelay: 3600 * 1000, // ms, check and remove expired data in each ms
+//    writeDelay: 100, // ms, batch write to disk in a specific duration, enhance write performance.
+//    encode: JSON.stringify, // serialize function
+//    decode: JSON.parse // deserialize function
+//  })
+//})
+
+//db.on('error', err => console.log('Connection Error', err));
+
+const manager = new GiveawaysManager(client, {
+    storage: "./assets/giveaways.json",
+    updateCountdownEvery: config.giveaways.updatetimer,
+    default: {
+        botsCanWin: config.giveaways.allowbots,
+        exemptPermissions: [ "MANAGE_MESSAGES", "ADMINISTRATOR" ],
+        embedColor: config.giveaways.embedcolor,
+        reaction: config.giveaways.reaction
+    }
+})
+
 
 /*
 dbl.webhook.on('ready', hook => {
@@ -50,22 +77,14 @@ dbl.on('error', e => {
 
 client.dbl = dbl;
 
+//client.db = db;
+
 client.player = player;
 
 client.joker = joker
 
-const { GiveawaysManager } = require("discord-giveaways");
-const manager = new GiveawaysManager(client, {
-    storage: "./assets/giveaways.json",
-    updateCountdownEvery: config.giveaways.updatetimer,
-    default: {
-        botsCanWin: config.giveaways.allowbots,
-        exemptPermissions: [ "MANAGE_MESSAGES", "ADMINISTRATOR" ],
-        embedColor: config.giveaways.embedcolor,
-        reaction: config.giveaways.reaction
-    }
-})
 client.giveawaysManager = manager;
+
 
 
 if(!client.shard) return console.error("❌ | Please start the bot with the file sharder.js not index.js !")
@@ -79,24 +98,14 @@ fs.readdir("./events/", (err, files) => {
   });
 });
 
-/* old message handler */
- 
-/*
-client.on("message", message => {
-  if (message.author.bot) return;
-  if(message.content.indexOf(config.prefix) !== 0) return;
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
-  try {
-    let commandFile = require(`./commands/${command}.js`);
-    commandFile.run(client, message, args);
-  } catch (err) {
-  }
-}); */
-
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
+
+
+
+
+
 
 fs.readdir("./commands/", (err, files) => {
 
@@ -119,34 +128,6 @@ fs.readdir("./commands/", (err, files) => {
 
 });
 
-          /*
-client.on("message", async message => {
-   if (message.author.bot) return; 
-   if (message.channel.type === "dm") return message.channel.send("🛑 | Oops: commands are executable only on a server");
- 
-   let prefix = config.prefix
-   let messageArray = message.content.split(" ");
-   let cmd = messageArray[0].toLowerCase();
-   let args = messageArray.slice(1);
-   let cmdfinal = messageArray[0].toLowerCase().replace(prefix,'');
-  /*
-if(client.commands[cmdfinal].help.botperms){
-  client.commands[cmdfinal].help.botperms.forEach((p) => {
-    if(client.user.hasPermission(p)){
-      let commandfile = (client.commands.get(cmd.slice(prefix.length)) || client.commands.get(client.aliases.get(cmd.slice(prefix.length))))
-      if(commandfile) commandfile.run(client, message, args);
-    } else {
-      message.channel.send("🛑 | Oops: please add to me this permission for work correctly: `" + p + "`")
-    }
-  })
-}
 
-
-
-  let commandfile = (client.commands.get(cmd.slice(prefix.length)) || client.commands.get(client.aliases.get(cmd.slice(prefix.length))))
-  if(commandfile) await commandfile.run(client, message, args);
-
-
-}) */
 
 client.login(config.token);

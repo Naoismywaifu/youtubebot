@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/bot/youtube-bot#readme",
   "dependencies": {
+    "@keyv/mysql": "^1.1.4",
     "blague.xyz": "^2.0.4",
     "cheerio": "^1.0.0-rc.3",
     "dblapi.js": "^2.4.0",
@@ -30,6 +31,8 @@
     "ffmpeg-static": "^4.0.1",
     "fs": "0.0.1-security",
     "fs-extra": "^8.1.0",
+    "keyv": "^4.0.0",
+    "keyv-file": "^0.1.13",
     "moment": "^2.24.0",
     "ms": "^2.1.2",
     "ms-convert": "^1.0.1",

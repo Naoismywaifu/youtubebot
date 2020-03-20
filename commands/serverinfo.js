@@ -27,20 +27,30 @@ exports.run = async (bot, message, args) => {
             "russia": ":flag_ru: Russia",
             "southafrica": ":flag_za:  South Africa"
         };
+
+message.guild.members.fetch().then(fetchedMembers => {
+    const totalnobots = fetchedMembers.filter(member => !member.user.bot);
+    const totalbots = fetchedMembers.filter(member => member.user.bot);
+	// We now have a collection with all online member objects in the totalOnline variable
+
+
+
         const embed = new Discord.MessageEmbed()
             .setAuthor(message.guild.name, message.guild.IconURL)
             .addField("Name", message.guild.name, true)
             .addField("ID", message.guild.id, true)
             .addField("Owner", `${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`, true)
             .addField("Region", region[message.guild.region], true)
-            .addField("Total | Humans | Bots", `${message.guild.memberCount} | ${message.guild.members.cache.fetch(member => !member.user.bot).size} | ${message.guild.members.cache.fetch(member => member.user.bot).size}`, true)
+            .addField("Total | Humans | Bots", `${message.guild.memberCount} | ${totalnobots.size} | ${totalbots.size}`, true)
             .addField("Verification Level", message.guild.verificationLevel, true)
             .addField("Channels", message.guild.channels.cache.size, true)
             .addField("Roles", message.guild.roles.cache.size, true)
             .addField("Creation Date", `${message.channel.guild.createdAt.toUTCString().substr(0, 16)} (${checkDays(message.channel.guild.createdAt)})`, true)
             .setThumbnail(message.guild.iconURL)
+            .setColor("BLUE")
+            .setFooter("YouTube Bot")
         message.channel.send({embed});
-  
+    });  
 }
 
     module.exports.help = {
