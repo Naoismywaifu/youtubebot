@@ -11,7 +11,7 @@ exports.run = (client, guild) => {
         .setColor("RED")
         try {
         client.shard.broadcastEval(`
-            let aLogs = this.channels.cache.get('566523623683391498');
+            let aLogs = this.client.channels.cache.get('566523623683391498')
             if(aLogs) aLogs.send(${embed});
         `);
 } catch (e) {

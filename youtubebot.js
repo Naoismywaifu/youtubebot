@@ -104,7 +104,7 @@ client.aliases = new Discord.Collection();
 
 
 
-
+this.client = client
 
 
 fs.readdir("./commands/", (err, files) => {
