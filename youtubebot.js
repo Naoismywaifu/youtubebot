@@ -4,9 +4,9 @@ const Collection = require('discord.js')
 const client = new Discord.Client({
   disableEveryone: true
 });
+const Keyv = require('keyv');
+
 const fs = require("fs");
-//const Keyv = require('keyv');
-//const KeyvFile = require('keyv-file')
 const { GiveawaysManager } = require("discord-giveaways");
 const config = require("./config.json");
 const opusscript = require("node-opus")
@@ -22,19 +22,17 @@ const player = new Player(client, config.music.YT_API_KEY, {
   leaveOnEmpty: false
 });
 
+
+const sqlite3 = require('sqlite3').verbose();
+
+
+
+
 const dbl = new DBL(config.topgg, client);
 
-//const db = new Keyv({
-// store: new KeyvFile({
-//    filename: `../assets/premium.json`, // the file path to store the data
-//    expiredCheckDelay: 3600 * 1000, // ms, check and remove expired data in each ms
-//    writeDelay: 100, // ms, batch write to disk in a specific duration, enhance write performance.
-//    encode: JSON.stringify, // serialize function
-//    decode: JSON.parse // deserialize function
-//  })
-//})
+const db = new Keyv('sqlite://assets/db.sqlite');
 
-//db.on('error', err => console.log('Connection Error', err));
+
 
 const manager = new GiveawaysManager(client, {
     storage: "./assets/giveaways.json",
@@ -48,21 +46,7 @@ const manager = new GiveawaysManager(client, {
 })
 
 
-/*
-dbl.webhook.on('ready', hook => {
-  console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
-});
-dbl.webhook.on('vote', vote => {
-  console.log(`User with ID ${vote.user} just voted!`);
-  var votemenbed = new Discord.MessageEmbed()
-  .setDescription(`thanks to ${vote.user} for have voted for the bot ! you have automaticaly get your perks\n\n https://top.gg/bot/486948160124485642`)
-  .setColor("ORANGE")
-  .setFooter("Youtube Bot")
-  .setTimestamp()
-  client.channels.cache.get(659054396818063434).send(votemenbed)
 
-})
-*/
 
 dbl.on('posted', () => {
   console.log('Server count posted!');
@@ -77,7 +61,7 @@ dbl.on('error', e => {
 
 client.dbl = dbl;
 
-//client.db = db;
+client.db = db;
 
 client.player = player;
 
@@ -85,7 +69,9 @@ client.joker = joker
 
 client.giveawaysManager = manager;
 
-
+process.on('unhandledRejection', error => {
+	console.error('Unhandled promise rejection:', error);
+});
 
 if(!client.shard) return console.error("❌ | Please start the bot with the file sharder.js not index.js !")
 

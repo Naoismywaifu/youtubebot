@@ -3,7 +3,7 @@ const config = require("../config.json");
 const { premium } = require("../premium.js");
 
 exports.run = (client) => {
-  console.log(premium(593365281611448320, client))
+  //console.log(premium(593365281611448320, client))
 
 client.dbl.postStats(client.guilds.cache.size, client.shard.ids, client.shard.count);
 

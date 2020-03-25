@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const config = require("../config.json")
 const { EIL } = require("../EIL.js")
 const { premium } = require("../premium")
-
+const os = require("os")
 exports.run = async (client, message, args) => {
 
     if(message.author.id !== "355995885085392896") return;

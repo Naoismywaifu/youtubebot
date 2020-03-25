@@ -13,7 +13,12 @@ exports.run = async (client, message) => {
     let cmdfinal = messageArray[0].toLowerCase().replace(prefix,'');
     if(!message.content.startsWith(prefix)) return;
  
- 
+  let replypremium = await client.db.get(message.author.id)
+  if(replypremium === true){
+    message.author.premium = true;
+  } else {
+    message.author.premium = false;
+  }
  
 
 
