@@ -19,8 +19,9 @@ if(!message.author.id === 355995885085392896) return message.channel.send("❌ |
 if(args[1]){
 
 let timeinms = ms(args[1])
-message.channel.send("working...").then((m) => {
+message.channel.send("<a:loading:653279329022640128> | working...").then((m) => {
 client.db.set(user.id, true, timeinms)
+m.edit(`✅ this person is now premium for ${args[1]} !`)
 })
 
 
@@ -40,7 +41,7 @@ m.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 		const reaction = collected.first();
 
 		if (reaction.emoji.name === '✅') {
-            m.edit("Working...")
+            m.edit("<a:loading:653279329022640128> | Working...")
             client.db.set(user.id, true)
             m.edit("✅ | this person is premium right now !")
 		} else {

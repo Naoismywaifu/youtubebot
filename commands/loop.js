@@ -31,21 +31,21 @@ module.exports.run = async (client, message, args) => {
 
 
 
-    if(!client.player.getQueue(message.guild.id).repeatMode){
-
-
-        client.player.setRepeatMode(message.guild.id, true);
-
-        let song = await client.player.nowPlaying(message.guild.id);
-        message.channel.send(`✅ | the loop mode in enabled for the song \`${song.name}\``);
-
-        } else {
+    if(client.player.getQueue(message.guild.id).repeatMode){
 
 
         client.player.setRepeatMode(message.guild.id, false);
 
         let song = await client.player.nowPlaying(message.guild.id);
         message.channel.send(`✅ | the loop mode will no longer be activated for the song \`${song.name}\``);
+
+        } else {
+
+
+        client.player.setRepeatMode(message.guild.id, true);
+
+        let song = await client.player.nowPlaying(message.guild.id);
+        message.channel.send(`✅ | the loop mode in enabled for the song \`${song.name}\``);
 
         }
     }

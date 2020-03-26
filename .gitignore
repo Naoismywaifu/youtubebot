@@ -8,6 +8,9 @@ package-lock.json
 # Giveaways
 assets/giveaways.json
 
+# DB
+assets/db.sqlite
+
 # Mac OS files
 .DS_Store
 
