@@ -11,7 +11,7 @@ if(!message.author.id === 355995885085392896) return message.channel.send("❌ |
 
 
 
-    if(!user) return message.channel.send("❌ | Error please provide the id or mention of the user to be upgrade")
+    if(!user) return message.channel.send("❌ | Error please provide the id or mention of the user to downgrade")
 
     let checkpremium = await client.db.get(user.id)
     if(!checkpremium) return message.channel.send("❌ | this user is not premium !")
