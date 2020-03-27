@@ -23,7 +23,7 @@ let checkpremium = await client.db.get(message.author.id)
 
 
            if(!client.users.cache.get(message.author.id)) return message.channel.send("hmm verry strange... where are you ?? i can't get your user")
-           if(!message.guild.id === "372007536871866368") return message.channel.send(errguild)
+           if(message.guild.id !== "372007536871866368") return message.channel.send(errguild)
         if(message.guild.member(message.author).roles.cache.get("565938460737929226")){
           message.channel.send("<a:loading:653279329022640128> connecting to the database to check your authancity").then((m) => {
             if(checkpremium){
