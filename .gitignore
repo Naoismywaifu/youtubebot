@@ -10,6 +10,7 @@ assets/giveaways.json
 
 # DB
 assets/db.sqlite
+json.sqlite
 
 # Mac OS files
 .DS_Store

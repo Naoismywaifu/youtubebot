@@ -1,11 +1,14 @@
 const Discord = require('discord.js');
-
+const { premium } = require("../premium")
 module.exports.run = async (client, message, args) => {
     if(client.radiodb.get(message.guild.id)){
+        if(!message.member.voice.channel) return message.channel.send("❌ | First of all you must join the channel")
         if(!premium(message.author.id, client)) return message.channel.send("🛑 | leave a radio playing is only for premium users !")
-        client.radiodb.delete(message.guild.id)
         let channelid = client.radiodb.get(`${message.guild.id}.channel`)
-        client.channels.cache.get(channelid).leave()
+        if(message.member.voice.channel.id !== channelid) return message.channel.send("❌ | please join the correct channel")
+        let channel = client.channels.cache.get(channelid)
+        message.member.voice.channel.leave()
+        client.radiodb.delete(message.guild.id)
         message.channel.send("✅ | right i have stopped to play radio in this channel")
     } else {
     if(!client.player.isPlaying(message.guild.id)) return message.channel.send("❌ | no music playing in this server !")
