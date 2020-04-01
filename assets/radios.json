@@ -11,20 +11,16 @@
         "lang":"RUSSIAN",
         "url" : "https://play.sas-media.ru/play"
     },
-    "heartfm": {
-        "lang":"ENGLISH (UK)",
-        "url" : "http://www.heart.co.uk/peterborough/on-air/player/"
+    "tc13": {
+        "lang":"FRENCH",
+        "url" : "https://radio01.alls-heberg.fr:1145/stream"
     },
-    "kissfm": {
-        "lang":"ENGLISH (UK)",
-        "url" : "http://radioplayer.kissfmuk.com/live/"
+    "nrj-fr": {
+        "lang":"FRENCH",
+        "url":"http://cdn.nrjaudio.fm/audio1/fr/30001/mp3_128.mp3"
     },
-	"kisstory": {
-        "lang":"ENGLISH (UK)",
-        "url" : "http://kisstory.kissfmuk.com/live/"
-    },
-	"kissfresh": {
-        "lang":"ENGLISH (UK)",
-        "url" : "http://kissfresh.kissfmuk.com/live/"
+    "skyrock-fr": {
+        "lang":"FRENCH",
+        "url":"   http://www.skyrock.fm/stream.php/tunein16_128mp3.mp3"
     }
 }
