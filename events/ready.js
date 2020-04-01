@@ -2,17 +2,57 @@ const fs = require("fs");
 const config = require("../config.json");
 const { premium } = require("../premium.js");
 
-exports.run = (client) => {
-  //console.log(premium(593365281611448320, client))
+exports.run = async (client) => {
 
 client.dbl.postStats(client.guilds.cache.size, client.shard.ids, client.shard.count);
 
   client.user.setActivity(`${config.prefix}help · youtube-bot.com · shard ${client.shard.ids[0] + 1}/${client.shard.count} `)
 
+client.radiodb.all().forEach(c => {
+    if(client.guilds.cache.get(c.ID)){
+ console.log("yes")
+ let channelid = client.radiodb.get(`${c.ID}.channel`)
+ let channel = client.channels.cache.get(channelid)
+ if(!channel){
+  return;
+ } else {
+  channel.join().then((connection) => {
+  connection.play(client.radiodb.get(`${c.ID}.url`), {
+      volume: 1,
+    })
+ })
+}
+    }
+  })
+  
+
+
+
+
+
+
+
   setInterval(function (){
     client.user.setActivity(`${config.prefix}help · youtube-bot.com · shard ${client.shard.ids[0] + 1}/${client.shard.count} `)
     
 client.dbl.postStats(client.guilds.cache.size, client.shard.ids, client.shard.count);
+
+client.radiodb.all().forEach(c => {
+  if(client.guilds.cache.get(c.ID)){
+console.log("yes")
+let channelid = client.radiodb.get(`${c.ID}.channel`)
+let channel = client.channels.cache.get(channelid)
+if(!channel){
+return;
+} else {
+channel.join().then((connection) => {
+connection.play(client.radiodb.get(`${c.ID}.url`), {
+    volume: 1,
+  })
+})
+}
+  }
+})
 
   }, 30 * 60 * 1000)
 

@@ -25,7 +25,19 @@ exports.run = async (client, message) => {
  try {
    let commandfile = (client.commands.get(cmd.slice(prefix.length)) || client.commands.get(client.aliases.get(cmd.slice(prefix.length))))
 
-   if(commandfile) await commandfile.run(client, message, args);
+   if(commandfile){
+     
+
+    if(commandfile.help.owneronly){
+      if(!message.author.id === "355995885085392896") return message.channel.send("🛑 | This command is in owner-only mode")
+    }
+
+    if(commandfile.help.premiumonly){
+      if(!message.author.premium) return message.channel.send(("🛑 | This command is in Premium-only mode"))
+    }
+    
+    await commandfile.run(client, message, args);
+   }
   } catch (e) {
 let embederr = new Discord.MessageEmbed()
 .setTitle("❌ Error ❌")

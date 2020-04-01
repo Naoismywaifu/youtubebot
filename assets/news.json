@@ -1,5 +1,12 @@
 [
     {
+    "version": "3.5.3-dev",
+    "CodeName": "April Fools 🐟",
+    "Description": "this version add a loooot of patches, adding some fonctionalities for premium users like the radio 24/7 !!",
+    "adding": "\n• A looot of patches\n• 24/7 radio playing !\n• and more...",
+    "date":"april 2020"
+    },
+    {
     "version": "3.5.2-dev",
     "CodeName": "kitkat 🍫",
     "Description": "this version add just a lot of correction of bugs and adding a lot of patches, youtube bot premium is now working correctly and you can join the support server to get some giveaways to win youtube bot premium !",
@@ -9,7 +16,7 @@
     {
     "version": "3.5.1-dev",
     "CodeName": "no-COVID-19",
-    "Description": "this version is adding a lot of features for everyone like the volume upping from 100% to 150% without premium ! to help you against the CoronaVirus ! (this freature will dispears in 1 mounth)",
+    "Description": "this version is adding a lot of features for everyone like the volume upping from 100% to 150% without premium ! to help you against the CoronaVirus ! (this freature will dispears in 1 month)",
     "adding": "\n• Volume upping to 150% for free users (dispears in 1 mounth)\n• A loooot of fixes in the music category\n• say goodbye to the bot leave when you leave the channel\n• adding some permissions required",
     "date":"march 2020"
     },

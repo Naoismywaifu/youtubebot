@@ -18,6 +18,7 @@ if (!message.member.hasPermission('MANAGE_MESSAGES', { checkAdmin: false, checkO
 }
 */
 
+if(client.radiodb.get(message.guild.id)) return message.channel.send("❌ | I'm already playing radio in a chnnel please use yt*leave to make me leave them")
 
 if(client.player.getQueue(message.guild.id)){
     if(client.player.getQueue(message.guild.id).length >= 30 && !premium(message.author.id, client)) return message.channel.send("🛑 | Error: you can't add more than 30 music, please subscribe to the premium to increase this limit")
@@ -106,6 +107,24 @@ message.channel.send(embedok1)
 
 }
 
+client.player.getQueue(message.guild.id)
+.on('end', () => {
+  var embedok1 = new Discord.MessageEmbed()
+  .setTitle("**<:ytbot_stop:693854856057847820> Playback Finished <:ytbot_stop:693854856057847820>**")
+  .setDescription(`Title » \`${song.name}\`\nChannel » \`${song.author}\`\n\`\`\`⏹ ────────────────────────────🔘 ${hours}:${minutes}:${seconds}\`\`\``)
+  .setThumbnail(song.thumbnail)
+  .setURL(song.url)
+  .setFooter(`requested by ${message.author.tag}`, message.author.avatarURL)
+  .setTimestamp()
+  message.channel.send(embedok1)
+})
+.on('songChanged', (oldSong, newSong, skipped) => {
+  if(!skipped){
+    message.channel.send(`Now playing ${newSong.name}...`);
+  }
+  })
+
+  
 
 }
 

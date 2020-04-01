@@ -5,6 +5,7 @@ const client = new Discord.Client({
   disableEveryone: true
 });
 const Keyv = require('keyv');
+var radiodb = require('quick.db')
 
 const fs = require("fs");
 const { GiveawaysManager } = require("discord-giveaways");
@@ -62,6 +63,9 @@ dbl.on('error', e => {
 client.dbl = dbl;
 
 client.db = db;
+
+client.radiodb = radiodb;
+
 
 client.player = player;
 

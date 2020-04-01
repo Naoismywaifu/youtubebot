@@ -33,7 +33,7 @@ module.exports.run = async (client, message, args) => {
 
     if(client.player.getQueue(message.guild.id).repeatMode){
 
-
+        
         client.player.setRepeatMode(message.guild.id, false);
 
         let song = await client.player.nowPlaying(message.guild.id);

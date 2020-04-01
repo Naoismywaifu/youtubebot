@@ -1,6 +1,6 @@
 {
   "name": "youtube-bot",
-  "version": "3.5.2-dev",
+  "version": "3.5.3-dev",
   "description": "Youtube bot is a discord bot offering a lot of freatures on discord, add it to spice up your discord experiance",
   "main": "sharder.js",
   "scripts": {
@@ -39,6 +39,7 @@
     "node-fetch": "^2.6.0",
     "node-opus": "^0.3.3",
     "querystring": "^0.2.0",
+    "quick.db": "^7.0.0-b22",
     "random-puppy": "^1.1.0",
     "sqlite": "^3.0.6",
     "superagent": "^5.2.2",
