@@ -46,6 +46,9 @@ if(client.player.getQueue(message.guild.id)){
 
     let song = await client.player.addToQueue(message.guild.id, m);
 
+      if(!song) return message.channel.send("❌ | Oops something when wrong while the execution of the command ! please try again later !")
+
+
     if(song.rawVideo.duration.hours >= 10){
       var hours = song.rawVideo.duration.hours
     } else {
@@ -76,6 +79,8 @@ if(client.player.getQueue(message.guild.id)){
 message.channel.send(embedok)
 } else {
 let song = await client.player.play(message.member.voice.channel, m)
+
+if(!song) return message.channel.send("❌ | Oops something when wrong while the execution of the command ! please try again later !")
 
 if(song.rawVideo.duration.hours >= 10){
   var hours = song.rawVideo.duration.hours

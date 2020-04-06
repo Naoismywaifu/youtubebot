@@ -3,6 +3,10 @@ const { client } = require("discord.js")
 
 exports.run = (client, id) => {
 
+
+  client.user.setActivity(`${config.prefix}help · youtube-bot.com · shard ${client.shard.ids[0] + 1}/${client.shard.count} `)
+
+
   client.radiodb.all().forEach(c => {
     if(client.guilds.cache.get(c.ID)){
  console.log("yes")
