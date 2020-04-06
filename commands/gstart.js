@@ -43,8 +43,9 @@ if(args[1] > 50) return message.channel.send("🛑 | Oops you have reached the w
             time: ms(args[0]),
             prize: args.slice(2).join(" "),
             winnerCount: parseInt(args[1]),
+            hostedBy: message.author,
             messages: {
-                giveaway: "@everyone\n\n🎉 **GIVEAWAY** 🎉",
+                giveaway: "🎉 **GIVEAWAY** 🎉",
                 giveawayEnded: "@everyone\n\n🎉 **GIVEAWAY ENDED** 🎉",
                 timeRemaining: "Time remaining: **{duration}**!",
                 inviteToParticipate: "React with 🎉 to participate!",

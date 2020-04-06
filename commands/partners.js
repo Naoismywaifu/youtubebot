@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
 
     let embed = new Discord.MessageEmbed()
-    .setTitle("Youtube bot - Partners")
+    .setTitle("<:YouTubeBot:689789594496925736> Youtube bot - Partners")
     .setDescription("this is a list of project who they support us and we too !\n**projects with a 🌟 are projects who we love a lot**")
     partners.forEach(p => {
         if(p.LBU === "true"){

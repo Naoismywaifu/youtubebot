@@ -25,7 +25,7 @@
     "blague.xyz": "^2.0.4",
     "cheerio": "^1.0.0-rc.3",
     "dblapi.js": "^2.4.0",
-    "discord-giveaways": "3.2.1",
+    "discord-giveaways": "^3.2.1",
     "discord-player": "github:Androz2091/discord-player",
     "discord.js": "^12.0.2",
     "ffmpeg-static": "^4.0.1",

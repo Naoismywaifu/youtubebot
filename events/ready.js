@@ -37,22 +37,6 @@ client.radiodb.all().forEach(c => {
     
 client.dbl.postStats(client.guilds.cache.size, client.shard.ids, client.shard.count);
 
-client.radiodb.all().forEach(c => {
-  if(client.guilds.cache.get(c.ID)){
-console.log("yes")
-let channelid = client.radiodb.get(`${c.ID}.channel`)
-let channel = client.channels.cache.get(channelid)
-if(!channel){
-return;
-} else {
-channel.join().then((connection) => {
-connection.play(client.radiodb.get(`${c.ID}.url`), {
-    volume: 1,
-  })
-})
-}
-  }
-})
 
   }, 30 * 60 * 1000)
 

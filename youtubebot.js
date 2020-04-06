@@ -40,10 +40,10 @@ const manager = new GiveawaysManager(client, {
     updateCountdownEvery: config.giveaways.updatetimer,
     default: {
         botsCanWin: config.giveaways.allowbots,
-        exemptPermissions: [ "MANAGE_MESSAGES", "ADMINISTRATOR" ],
         embedColor: config.giveaways.embedcolor,
-        reaction: config.giveaways.reaction
-    }
+        reaction: config.giveaways.reaction,
+        embedColorEnd: '#00FF00'
+          }
 })
 
 
