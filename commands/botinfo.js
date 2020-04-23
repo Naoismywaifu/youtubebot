@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const config = require("../config.json")
 const package = require("../package.json")
-
+const os = require("os")
 exports.run = (client, message, args) => {
 
     const promises = [
@@ -22,42 +22,29 @@ exports.run = (client, message, args) => {
         .setColor("RED")
         .setDescription("Youtube bot is a Discord Bot developed with ❤ By HiiZun\nif you enjoy the bot you can vote for it be executing the command yt*vote and voting")
         .addField(`<:bot:653279330021015562> Bot's Statistics`, `
-        > Total of servers
-        » \`${totalGuilds}\` servers
-        > Shard's count of servers
-        » \`${client.guilds.cache.size}\` servers
-        > Total of members
-        » \`${totalMembers}\` users
-        > Shard's count of users
-        » \`${client.users.cache.size}\` users
+        > Total of servers ❱ \`${totalGuilds}\` servers
+        > ↳ shard ❱ \`${client.guilds.cache.size}\` servers
+
+        > Total of members ❱ \`${totalMembers}\` users
+        > ↳ shard ❱ \`${client.users.cache.size}\` users
         `, true)
         .addField(`<:computer:653279331564650496> Server's Statistics`, `
-        > Shards
-        » \`${config.shards}\` Shards
-        > Server Shard
-        » Shard \`#${client.shard.ids[0] + 1}\`
-        > Server's Operating System
-        » \`${process.platform}\`
-        > RAM usage
-        » \`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}\` MB`, true)
-        .addField(`<:computer:653279331564650496> Server's Statistics`, `
-        > Shards
-        » \`${config.shards}\` Shards
-        > Server Shard
-        » Shard \`#${client.shard.ids[0] + 1}\`
-        > Server's Operating System
-        » \`${process.platform}\`
-        > RAM usage
-        » \`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}\` MB`, true)
+        > Shards  ❱ \`${config.shards}\` Shards
+        > ↳ Server Shard ❱ \`#${client.shard.ids[0] + 1}\`
+
+        > OS ❱ \`${process.platform} Debian 10\`
+        > ↳ Arch ❱ \`${os.arch}\`
+
+        > RAM usage ❱ \`${totalRam}\` MB
+        > ↳ Shard ❱ \`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}\` MB`, true)
         .addField(`<:youtubebot:653322797421953047> Software informations`, `
-        > YouTube Bot
-        » \`YouTube Bot v${package.version}\`
-        > Bot's Library
-        » \`Discord.js v${Discord.version}\`
-        > Core version
-        » \`Node.JS ${process.version}\`
+        > YouTube Bot ❱ \`v${package.version}\`
+        
+        > Bot's Library ❱ \`Discord.js v${Discord.version}\`
+
+        > Core version ❱ \`Node.JS ${process.version}\`
         `, false)
-        .addField(`[Vote](https://top.gg/bot/486948160124485642/vote) for the bot or [become patreon](https://pateon.com/botyoutube) to support the bot and get some features in plus !`, config.footer)
+        .addField(`Vote for the bot or become patreon to support the bot and get some features in plus !`, config.footer)
 
 /*
         > Total of servers

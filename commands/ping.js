@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
         .setDescription("🏓 • Pong ! • 🏓")
         .addField("⚓ Bot ping", `» ${m.createdTimestamp - message.createdTimestamp} ms`)
         .addField("📥 Websocket ping", `» ${client.ws.ping} ms`)
-        .addField(`[Vote](https://top.gg/bot/486948160124485642/vote) for the bot or [become patreon](https://pateon.com/botyoutube) to support the bot and get some features in plus !`, config.footer)
+        .addField(`YouTube Bot`, config.footer)
         m.edit(embed)
     })
 }

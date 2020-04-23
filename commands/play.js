@@ -35,7 +35,7 @@ if(client.player.getQueue(message.guild.id)){
    // EIL("play", message.guild, message.author, client, `playing music: ${m}`)
   
 
-
+try {
 
     if(client.player.isPlaying(message.guild.id)){
 
@@ -74,7 +74,7 @@ if(client.player.getQueue(message.guild.id)){
 .setDescription(` » \`${song.name}\`\n » Author: \`${song.author}\`\n\`\`\`▶ 🔘──────────────────────────── ${hours}:${minutes}:${seconds}\`\`\``)
 .setThumbnail(song.thumbnail)
 .setURL(song.url)
-.setFooter(`requested by ${message.author.tag}`, message.author.avatarURL)
+.setFooter(`requested by ${message.author.tag}`, message.author.displayAvatarURL())
 .setTimestamp()
 message.channel.send(embedok)
 } else {
@@ -106,7 +106,7 @@ var embedok1 = new Discord.MessageEmbed()
 .setDescription(` » \`${song.name}\`\n » Author: \`${song.author}\`\n\`\`\`▶ 🔘──────────────────────────── ${hours}:${minutes}:${seconds}\`\`\``)
 .setThumbnail(song.thumbnail)
 .setURL(song.url)
-.setFooter(`requested by ${message.author.tag}`, message.author.avatarURL)
+.setFooter(`requested by ${message.author.tag}`, message.author.displayAvatarURL())
 .setTimestamp()
 message.channel.send(embedok1)
 
@@ -116,20 +116,35 @@ client.player.getQueue(message.guild.id)
 .on('end', () => {
   var embedok1 = new Discord.MessageEmbed()
   .setTitle("**<:ytbot_stop:693854856057847820> Playback Finished <:ytbot_stop:693854856057847820>**")
-  .setDescription(`Title » \`${song.name}\`\nChannel » \`${song.author}\`\n\`\`\`⏹ ────────────────────────────🔘 ${hours}:${minutes}:${seconds}\`\`\``)
-  .setThumbnail(song.thumbnail)
-  .setURL(song.url)
-  .setFooter(`requested by ${message.author.tag}`, message.author.avatarURL)
+  .setDescription(`\`\`\`⏹ ────────────────────────────🔘 00:00:00\`\`\``)
+  .setFooter(`Vote for youtube bot or become patreon to help the developement of youtube bot !`)
   .setTimestamp()
+  .setColor("DARK_RED")
   message.channel.send(embedok1)
 })
-.on('songChanged', (oldSong, newSong, skipped) => {
-  if(!skipped){
-    message.channel.send(`Now playing ${newSong.name}...`);
-  }
-  })
+.on('songChanged', (oldSong, newSong) => {
+  let emebehd = new Discord.MessageEmbed()
+  .setTitle("Now Playing...")
+  .setDescription(`i'm playing from <:youtube:684748153282625538> \`${newSong.name}\` by \`${newSong.author}\``)
+  .setThumbnail(newSong.thumbnail)
+  .setFooter("YouTube Bot")
+  .setColor("DARK_RED")
+  message.channel.send(emebehd);
+})
 
-  
+} catch (error) {
+  message.channel.send("❌ | Error: a error was producted during the execution of the command, probably due to a Youtube API rate limit please try again later !")
+  console.error(`Error: ${error}`)
+  return client.shard.broadcastEval(`
+			const channel = this.channels.cache.get('${args[0]}');
+		if (channel) {
+				channel.send('ERROR IN ${this.shard.id}: ${error} !');
+				true;
+			} else {
+				false;
+			}
+		`).then(console.log);
+}  
 
 }
 

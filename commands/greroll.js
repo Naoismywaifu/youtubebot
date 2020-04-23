@@ -30,6 +30,6 @@ exports.run = (client, message, args) => {
             owneronly: false,
             usage: "greroll (message id)",
             aliases: ["grrll", "reroll", "grroll"],
-            description: "Hmmm, the winner isn't happy/don't have requirements ? execute this command to re take someone"
+            description: "Hmmm, the winner don't have requirements ? execute this command to re take someone"
             }
 
