@@ -1,0 +1,8 @@
+/.idea
+/YouTubeBot-3.5.5.iml
+/config.json
+/eslintrc.json
+/json.sqlite
+/node_modules
+/yarn-error.log
+/yarn.lock
