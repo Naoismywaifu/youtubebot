@@ -30,6 +30,8 @@ module.exports = {
 let embed = new Discord.MessageEmbed()
 .setTitle("Info - YouTube Bot")
 .setDescription(`YouTube Bot is running on the version \`${version}\`.\n You're running in the shard \`#${client.shard.ids[0] + 1}\` with a total of \`${client.shard.count}\` shards\n thanks for using YouTube Bot ! \n i'm powering \`${totalGuilds}\` communities with a total of \`${totalMembers}\` users\n want to donate ? check [our patreon page](https://patreon.com/botyoutube)\nWant to vote ? check  our [vote page](https://top.gg/bot/486948160124485642/vote) to get a lot of freatures in plus !`)
+.setDescription(message.language.get("INFO_DESC", version, client.shard.ids[0] + 1, client.shard.count, totalGuilds, totalMembers))
+
 .setFooter("Youtube Bot")
 .setColor("ORANGE")
 message.channel.send(embed)

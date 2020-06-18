@@ -8,6 +8,7 @@ module.exports = {
         ownerOnly: false,
         args: false,
         enabled: true,
+        staffOnly: true,
         category: "Core",
         usage: '<set/reset>',
         aliases: ["conf"],
@@ -173,8 +174,20 @@ module.exports = {
                 message.channel.send(message.language.get("CONFIG_MUSIC_ENABLED", 'normalizer'))
             }
         break;
+        case "djrole":
+            let djrole = message.mentions.roles.first() || message.guild.roles.cache.get(args[2])
 
+            if(!djrole) return message.channel.send(message.language.get("CONFIG_NOMENTION"))
+            client.db.guildconf.set(`${message.guild.id}.djrole`, djrole.id)
+            return message.channel.send(message.language.get("CONFIG_DJROLE_SUCCESS"))
+        break;
+        case "staffrole":
+            let staffrole = message.mentions.roles.first() || message.guild.roles.cache.fetch(args[2])
 
+            if(!staffrole) return message.channel.send(message.language.get("CONFIG_NOMENTION"))
+            client.db.guildconf.set(`${message.guild.id}.staffrole`, staffrole.id)
+            return message.channel.send(message.language.get("CONFIG_STAFFROLE_SUCCESS"))
+        break;
     default:
     return message.channel.send(message.language.get("CONFIG_NO_INPUT"))
     break;
@@ -292,7 +305,8 @@ langugage   ::      ${message.language.getFullLang()}
 prefix      ::      ${client.db.guildconf.get(`${message.guild.id}.prefix`)||client.prefix}
 premium     ::      ${client.db.guildconf.get(`${message.guild.id}.premium`) ? message.language.get(`CONFIG_PREMIUM_TRUE`) : message.language.get(`CONFIG_PREMIUM_FALSE`)}
 telemetrics ::      ${client.db.guildconf.get(`${message.guild.id}.telemetrics`) ? message.language.get(`CHECK_DISABLED`) : message.language.get(`CHECK_ENABLED`)}
-
+djrole      ::      ${client.db.guildconf.get(`${message.guild.id}.djrole`) ? "@" + message.guild.roles.cache.get(client.db.guildconf.get(`${message.guild.id}.djrole`)).name : message.language.get("CHECK_DISABLED")}
+staffrole   ::      ${client.db.guildconf.get(`${message.guild.id}.staffrole`) ? "@" + message.guild.roles.cache.get(client.db.guildconf.get(`${message.guild.id}.staffrole`)).name : message.language.get("CHECK_DISABLED")}
 
 = ${message.language.get("CONFIG_NOTIFIER")} =
 youtuber      ::      ${client.db.notifier.get(`${message.guild.id}.youtuber`)||message.language.get("UTILS").UNDEFINED}

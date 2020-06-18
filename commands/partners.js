@@ -14,8 +14,8 @@ module.exports = {
     aliases: ["partenaires"],
     execute(client, message, args) {
     let embed = new Discord.MessageEmbed()
-    .setTitle("<:YouTubeBot:689789594496925736> Youtube bot - Partners")
-    .setDescription("this is a list of project who they support us and we too !\n**projects with a 🌟 are projects who we love a lot**")
+    .setTitle(" Youtube bot - Partners")
+    .setDescription(message.language.get("PARTNERS_DESC"))
     partners.forEach(p => {
         if(p.LBU === "true"){
             var name = `🌟 - ${p.name}`
@@ -23,7 +23,7 @@ module.exports = {
             var name = p.name
         }
 
-        embed.addField(name, `__Description__ **-** ${p.Description}\n__Type__ **-** ${p.Type}\n__Links__ **-** ${p.links}`, false);
+        embed.addField(name, `__${message.language.get("UTILS").DESCRIPTION}__ **-** ${p.Description}\n__${message.language.get("UTILS").TYPE}__ **-** ${p.Type}\n__${message.language.get("UTILS").LINKS}__ **-** ${p.links}`, false);
 
     });
 

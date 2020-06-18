@@ -1,6 +1,7 @@
-const Discord = require("discord.js")
 const config = require("../config.json")
-const db = require("quick.db")
+const db = require("quick.db");
+const { relativeTimeRounding } = require("moment");
+const { Message } = require("discord.js");
 
 
 module.exports = {
@@ -18,41 +19,61 @@ async prefix(message) {
     return db.guildconf.get(`${message.guild.id}.prefix`)
 },
 
-async premium(guild) {
-    if(!guild) 
+ premium(message) {
+    if(!message.guild) 
     return false;
 
-    if(!db.guildconf.get(`${guild.id}.premium`)){
+    if(!db.guildconf.get(`${message.guild.id}.premium`)){
     return false;
     } else {
     return true;
     }
 },
 
-
-    async isDJ(message) {
-        if (!message.member.hasPermission("MANAGE_MESSAGES")) {
-            if(message.client.db.guildconf.get(`${message.author.id}.djrole`) && message.member.roles.cache.some(role => role.name === 'DJ')){
+/**
+ * 
+ * @param {Message} message 
+ * @returns {Boolean} true or false
+ */
+ 
+    isStaff(message) {
+        if(message.client.db.guildconf.has(`${message.guild.id}.staffrole`)){
+            let roleto = message.client.db.guildconf.get(`${message.guild.id}.staffrole`)
+            console.log("check if he has the role")
+            if (message.member.roles.cache.has(roleto)) {
                 return true;
             } else {
-                if(!message.client.db.guildconf.get(`${message.author.id}.djrole`)){
-                    return true;
-                } else {
                 return false;
-                }
             }
         } else {
-            return true;
+            console.log("check if he has the permission")
+            if(message.member.hasPermission("MANAGE_GUILD")){
+                return true;
+            } else {
+                return false;
+            }
         }
-    },
-
-    async isStaff(message) {
-        return message.member.hasPermission("MANAGE_GUILD");
     },
 
     randomNum(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
-    }
+    },
 
+    async languages() {
+
+    },
+
+    isDJ(message) {
+        if(message.member.hasPermission("ADMINISTRATOR")) return true;
+        if(!message.client.db.guildconf.get(`${message.guild.id}.djrole`)){
+            return true;
+        } else {
+        if(message.member.roles.cache.some(role => role.name === "DJ") || message.member.roles.cache.has(message.client.db.guildconf.get(`${message.guild.id}.djrole`))){
+            return true;
+        } else {
+            return false;
+        }
+        }
+    },
     
 }

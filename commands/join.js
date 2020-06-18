@@ -8,6 +8,7 @@ module.exports = {
     guildOnly: false,
     ownerOnly: false,
     args: false,
+    DJOnly: true,
     enabled: true,
     category: "Music",
     usage: '',
@@ -15,10 +16,10 @@ module.exports = {
     execute(client, message, args) {
 
 if(!message.member.voice.channel) return message.channel.send(message.language.get("MUSIC_NO_CHANNEL"))
-if(client.queue.get(message.guild.id).playing) return message.channel.send("❌ | I'm already in a channel")
+if(client.queue.get(message.guild.id).playing) return message.channel.send(message.language.get("JOIN_ALREADY_CHANNEL"))
 
 message.member.voice.channel.join().then(connection => {
-    message.channel.send(`✅  Joined the channel ${message.member.voice.channel.name}`)
+    message.channel.send(message.language.get("JOIN_SUCCESS", message.member.voice.channel.name))
 })
 
 

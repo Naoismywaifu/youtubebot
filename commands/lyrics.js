@@ -1,6 +1,36 @@
-cheerio = require("cheerio"),
-fetch = require("node-fetch");
+const cheerio = require("cheerio");
+const axios = require('axios');
+const getArtistTitle = require('get-artist-title');
 const Discord = require('discord.js');
+const config = require("../config.json")
+
+const baseURL = `https://api.genius.com/search?access_token=${config.GENIUS_API}`;
+
+const scrapeLyrics = path => {
+  return axios.get(path)
+    .then(response => {
+      let $ = cheerio.load(response.data);
+      return [$('.header_with_cover_art-primary_info-title').text().trim(), $('.lyrics').text().trim()];
+    })
+    .catch(err => {
+      console.warn(err);
+    });
+};
+
+const searchLyrics = url => {
+  return Promise.resolve(axios.get(url, {'Authorization': `Bearer ${config.GENIUS_API}`})
+    .then(response => checkSpotify(response.data.response.hits))
+    .then(path => scrapeLyrics(path))
+    .catch(err => {
+      console.warn(err);
+    })
+  );
+};
+
+const checkSpotify = hits => {
+  return hits[0].result.primary_artist.name === 'Spotify' ? hits[1].result.url : hits[0].result.url;
+};
+
 module.exports = {
     name: 'lyrics',
     description: 'get lyrics of a song.',
@@ -14,46 +44,21 @@ module.exports = {
     aliases: ["paroles"],
     async execute(client, message, args) {
 
-    let songName = args.join(" ");
-    if(!songName){
-        return message.channel.send("🛑 | Please include the name of the music !");
-    }
-    
-    let embed = new Discord.MessageEmbed()
-        .setAuthor("Youtube Bot - Lyrics")
 
-    try {
-
-        let songNameFormated = songName
-        .toLowerCase()
-        .replace(/\(lyrics|lyric|official music video|audio|official|official video|official video hd|clip officiel|clip|extended|hq\)/g, "")
-        .split(" ").join("%20");
-
-        let res = await fetch(`https://www.musixmatch.com/search/${songName}`);
-        res = await res.text();
-        let $ = await cheerio.load(res);
-        let songLink = `https://musixmatch.com${$("h2[class=\"media-card-title\"]").find("a").attr("href")}`;
-
-        res = await fetch(songLink);
-        res = await res.text();
-        $ = await cheerio.load(res);
-
-        let lyrics = await $("p[class=\"mxm-lyrics__content \"]").text();
-
-        if(!lyrics.length) {
-            return message.channel.send("❌ | i can't find any lyrics for this music !")
-        }
-
-        embed.setDescription(lyrics.slice(0, 1024));
-        embed.setColor("RED")
-        embed.setFooter("Youtube bot")
-        embed.setTimestamp()
-        message.channel.send(embed);
-
-    } catch(e){
-        console.log(e)
-        return message.channel.send("❌ | i can't find any lyrics for this music !")
-    }
+      
+        const query = args.join(" ")
+        searchLyrics(`${baseURL}&q=${encodeURIComponent(query)}`)
+          .then(songData => {
+            const embed = new Discord.MessageEmbed()
+              .setColor(0x00AE86)
+              .setTitle(message.language.get("LYRICS_SUCCESS", songData[0]))
+              .setDescription(songData[1].slice(0, 2040));
+            return message.channel.send({embed});
+          })
+          .catch(err => {
+            message.channel.send(message.language.get("LYRICS_NOT_FOUND", query));
+            console.warn(err);
+          });
 
 }
 

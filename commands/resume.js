@@ -5,6 +5,7 @@ module.exports = {
   args: false,
   guildOnly: true,
   enabled: true,
+  DJOnly: true,
   category: "Music",
   usage: '',
   aliases: ["re-play", "unpause"],

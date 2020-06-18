@@ -1,6 +1,6 @@
 const config = require("../config.json")
 Youtube = require("simple-youtube-api"),
-youtube = new Youtube(config.YOUTUBE_API_KEY);
+youtube = new Youtube(config.YOUTUBE_API_KEY_NOTIFIER);
 
 
 module.exports = {
@@ -9,6 +9,7 @@ module.exports = {
     cooldown: 1,
     args: true,
     guildOnly: true,
+    staffOnly: true,
     enabled: true,
     category: "Notifier",
     usage: '<#channel> <youtuber>',
@@ -16,9 +17,9 @@ module.exports = {
     async execute(client, message, args) {
 
 
-      if(!args[0] && !message.mentions.channels.first()) return message.channel.send("please provide a valid channel mention")
+      if(!args[0] && !message.mentions.channels.first()) return message.channel.send(message.language.get("NOTIFY_NO_CHANNEL_MENTION"))
       if(!client.channels.cache.get(args[0]) && !message.mentions.channels.first()) 
-      return message.channel.send("please provide a valid channel mention")
+      return message.channel.send(message.language.get("NOTIFY_INVALID_CHANNEL"))
     
       async function getYoutubeChannelInfos(name){
         console.log(`[${name.length >= 10 ? name.slice(0, 10)+"..." : name}] | Resolving channel infos...`);
@@ -35,15 +36,15 @@ module.exports = {
 
       
       if(!args[1])
-      return message.channel.send(" please provide a valid youtube channel name !")
+      return message.channel.send(message.language.get("NOTIFY_INVALID_YT_CHANNEL"))
 
-      message.channel.send("checking the youtube channel name...").then((m) => {
+      message.channel.send(message.language.get("NOTIFY_CHECKING")).then((m) => {
        getYoutubeChannelInfos(args[1]).then((out) => {
          console.log(out)
         if(!out){
-        return m.edit("this user don't exist !")
+        return m.edit(message.language.get("NOTIFY_NOT_EXIST"))
         } else {
-        m.edit("yes ! ")
+        m.edit(message.language.get("NOTIFY_SUCCESS"))
 
           if(message.mentions.channels.first()){
             var channelid = message.mentions.channels.first().id

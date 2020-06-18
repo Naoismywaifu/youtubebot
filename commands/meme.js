@@ -23,10 +23,10 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor("RANDOM")
             .setImage(img)
-            .setTitle(`From /r/${random}`)
+            .setTitle(`${message.language.get("UTILS").FROM} /r/${random}`)
             .setURL(`https://reddit.com/r/${random}`)
 			.setFooter("YouTube Bot")
 
         message.channel.send(embed);
-    }
+    },
 }

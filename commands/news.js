@@ -18,16 +18,16 @@ module.exports = {
 
     let embed = new Discord.MessageEmbed()
     .setTitle("Youtube bot - News")
-    .setDescription("Every version take a lot of time to be developed but all versions are awesome !")
+    .setDescription(message.language.get("NEWS_DESC"))
     .setColor("ORANGE")
     news.forEach(p => {
         if(p.version === version){
-            var ver = `(\`Current\`) ${p.version}`
+            var ver = `(\`${message.language.get('UTILS').CURRENT}\`) ${p.version}`
         } else {
             var ver = p.version
         }
 
-        embed.addField(p.CodeName , `__Version__ **-** ${ver}\n__Description__ **-** ${p.Description}\n__Adding__ **-** ${p.adding}\nadded the: ${p.date}`, false);
+        embed.addField(p.CodeName , `__${message.language.get("UTILS").VERSION}__ **-** ${ver}\n__${message.language.get("UTILS").DESCRIPTION}__ **-** ${p.Description}\n__${message.language.get("UTILS").ADDING}__ **-** ${p.adding}\nadded the: ${p.date}`, false);
 
     });
 

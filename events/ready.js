@@ -3,17 +3,16 @@ const config = require("../config.json")
 const Parser = require("rss-parser");
 const parser = new Parser();
 Youtube = require("simple-youtube-api"),
-youtube = new Youtube(config.YOUTUBE_API_KEY);
+youtube = new Youtube(config.YOUTUBE_API_KEY_NOTIFIER);
 
 exports.run = async (client) => {
 	console.log(`${client.user.username} ready!`);
-    client.user.setActivity(`YouTube Bot ⋄ ${client.prefix}help ⋄ Shard ${client.shard.ids[0] + 1}/${client.shard.count}`);
+    client.user.setActivity(`YouTube Bot ⋄ ${client.prefix}help ⋄ Shard ${client.shard.ids[0] + 1}/${client.shard.count}`, { tyoe: "LISTENING" });
     
 
 
 const startAt = Date.now();
 const lastVideos = {};
-const premiumLastVideos = {};
 
 
 function formatDate(date) {
@@ -110,30 +109,42 @@ async function check(client){
     });
 }
 
-async function premiumcheck(client){
-    console.log("Checking...");
-    client.db.premiumnotifier.all().forEach(async (guild) => {
-        if(!client.guilds.cache.get(guild.ID)) return;
-        var youtuber = client.db.premiumnotifier.fetch(`${guild.ID}.youtuber`)
-        if(!youtuber) return client.db.premiumnotifier.delete(guild.ID);
-        console.log(`[${youtuber.length >= 10 ? youtuber.slice(0, 10)+"..." : youtuber}] | Start checking...`);
-        let channelInfos = await getYoutubeChannelInfos(youtuber);
-        if(!channelInfos) return console.log("[ERR] | Invalid youtuber provided: "+youtuber);
-        let video = await checkVideos(channelInfos.raw.snippet.title, "https://www.youtube.com/feeds/videos.xml?channel_id="+channelInfos.id);
-        if(!video) return console.log(`[${channelInfos.raw.snippet.title}] | No notification`);
-        let channel = client.channels.cache.get(client.db.premiumnotifier.get(`${guild.ID}.channel`));
-        if(!channel) return console.log("[ERR] | Channel not found");
-        channel.send(`<:youtube:684748153282625538> | Hey ! the youtuber **${video.author}** just posted a new video! **${video.title}** \n ${video.link} - posted the **${formatDate(new Date(video.pubDate))}**`)
-        console.log("Notification sent !");
-        lastVideos[channelInfos.raw.snippet.title] = video;
-    });
-}
-setTimeout(function premiumnotifier() {
-premiumcheck(client)
-}, 1000 * 60)
-setInterval(function notifier() {
-check(client)
-client.user.setActivity(`YouTube Bot ⋄ ${client.prefix}help ⋄ Shard ${client.shard.ids[0] + 1}/${client.shard.count}`);
 
-}, 5 * 1000 * 60)
+
+setInterval(async function notifier() {
+check(client)
+client.user.setActivity(`YouTube Bot ⋄ ${client.prefix}help ⋄ Shard ${client.shard.ids[0] + 1}/${client.shard.count}`, { tyoe: "LISTENING" });
+
+const guildsCounts = await client.shard.fetchClientValues("guilds.cache.size");
+const guildsCount = guildsCounts.reduce((p, count) => p + count);
+const usersCounts = await client.shard.broadcastEval('this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)');
+const usersCount = usersCounts.reduce((p, count) => p + count);
+
+
+
+if(client.channels.cache.get(config.stats_channels.shard)){
+   var chann = client.channels.cache.get(config.stats_channels.shard)
+   if(chann.name === `Shards • ${client.shard.count}`) return;
+   chann.setName(`Shards • ${client.shard.count}`) 
+}
+
+if(client.channels.cache.get(config.stats_channels.users)){
+    var chann = client.channels.cache.get(config.stats_channels.users)
+    if(chann.name === `Users • ${usersCount}`) return;
+    chann.setName(`Users • ${usersCount}`) 
+ }
+
+ if(client.channels.cache.get(config.stats_channels.guilds)){
+    var chann = client.channels.cache.get(config.stats_channels.guilds)
+    if(chann.name === `Servers • ${guildsCount}`) return;
+    chann.setName(`Servers • ${guildsCount}`) 
+ }
+
+ if(client.channels.cache.get(config.stats_channels.guilds)){
+    var chann = client.channels.cache.get(config.stats_channels.members)
+    if(chann.name === `Members • ${chann.guild.memberCount}`) return;
+    chann.setName(`Members • ${chann.guild.memberCount}`) 
+ }
+
+}, 30 * 1000 * 60)
 }

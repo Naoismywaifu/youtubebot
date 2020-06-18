@@ -3,11 +3,12 @@ module.exports = {
   description: 'stop the current playing song',
   cooldown: 10,
   args: false,
+  DJOnly: true,
   guildOnly: true,
   enabled: true,
   category: "Music",
   usage: '',
-  aliases: ["end", "clear"],
+  aliases: ["end", "clear", "leave", "dc", "disconnect"],
   execute(client, message) {
     const serverQueue = message.client.queue.get(message.guild.id);
 

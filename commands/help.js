@@ -65,11 +65,17 @@ client.commands.forEach((cretetrt) => {
 i++
 })
 
+if(!message.guild){
+var prefix = config.PREFIX
+} else {
+var prefix = client.db.guildconf.get(`${message.guild.id}.prefix`)||config.PREFIX
+}
+
 
 var embed = new MessageEmbed()
 .setTitle("YouTube Bot")
 //.setDescription(`there is all of my commands (\`${commands.array().length}\`)\n**pro's tip:** use \`${client.db.guildconf.get(`${message.guild.id}.prefix`)||client.prefix}help <command>\` to get informations about a command !`)
-.setDescription(message.language.get("HELP_DESC_TOP", commands.array().length, client.db.guildconf.get(`${message.guild.id}.prefix`)||client.prefix))
+.setDescription(message.language.get("HELP_DESC_TOP", commands.array().length, prefix))
 .setColor("DARK_RED")
 
 temparray.forEach((c) => {

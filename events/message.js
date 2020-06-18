@@ -1,19 +1,31 @@
 const Discord = require("discord.js")
-
+const { isDJ, isStaff } = require("../util/functions")
 exports.run = async (client, message) => {
     if (message.author.bot) return;
-  
-    if (message.content.startsWith(client.db.guildconf.get(`${message.guild.id}.prefix`)||client.prefix)) {
-        const args = message.content.slice(client.db.guildconf.has(`${message.guild.id}.prefix`) ? client.db.guildconf.get(`${message.guild.id}.prefix`).length : client.prefix.length).split(/ +/);
+
+    if(message.guild){
+  var prefix = client.db.guildconf.get(`${message.guild.id}.prefix`)||client.prefix
+     } else {
+  var prefix = client.prefix
+     }
+    if (message.content.startsWith(prefix)) {
+        if(message.guild){
+        var args = message.content.slice(client.db.guildconf.has(`${message.guild.id}.prefix`) ? client.db.guildconf.get(`${message.guild.id}.prefix`).length : client.prefix.length).split(/ +/);
+        } else {
+            var args = message.content.slice(client.prefix.length).split(/ +/);
+        }
         const commandName = args.shift().toLowerCase();
 
         	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
         
             if (!command) return;
-            
-        let language = new(require(`../languages/${client.db.guildconf.has(`${message.guild.id}.language`) ? client.db.guildconf.get(`${message.guild.id}.language`) : client.config.defaultLanguage}.js`));
-        message.language = language;
-
+            if(message.guild){
+             let language = new(require(`../languages/${client.db.guildconf.has(`${message.guild.id}.language`) ? client.db.guildconf.get(`${message.guild.id}.language`) : client.config.defaultLanguage}.js`));
+            message.language = language;
+            } else {
+                let language = new(require(`../languages/${client.config.defaultLanguage}.js`));
+                message.language = language;
+            }
 
         if (command.guildOnly && message.channel.type !== 'text') {
             return message.reply('I can\'t execute that command inside DMs!');
@@ -23,11 +35,24 @@ exports.run = async (client, message) => {
             return message.channel.send(message.language.get("MESSAGE_ERROR_DISABLED"))
         }
 
+
+        if(command.staffOnly){
+            if(!isStaff(message))
+            return message.channel.send(message.language.get("CORE_ISNT_STAFF"))
+        }
+
+        if(command.DJOnly){
+            if(!isDJ(message))
+            return message.channel.send(message.language.get("CORE_ISNT_DJ"))
+        }
+
+
+
         if (command.args && !args.length) {
                     let reply = message.language.get("MESSAGE_ERROR_ARGS");
             
                     if (command.usage) {
-                        reply += `\n${message.language.get("MESSAGE_ERROR_ARGS_CRRECT", client.db.guildconf.get(`${message.guild.id}.prefix`)||client.prefix, command.name, command.usage)}`;
+                        reply += `\n${message.language.get("MESSAGE_ERROR_ARGS_CORRECT", client.db.guildconf.get(`${message.guild.id}.prefix`)||client.prefix, command.name, command.usage)}`;
                     }
             
                     return message.channel.send(reply);            	
@@ -60,8 +85,11 @@ timestamps.set(message.author.id, now);
 
 
 setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
+if(message.guild){
 if(!client.db.guildconf.get(`${message.guild.id}.telemetrics`)){
 require("../TL.js").TL(message)
+}
 }
 
 

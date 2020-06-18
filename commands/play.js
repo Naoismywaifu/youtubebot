@@ -10,6 +10,7 @@ module.exports = {
   cooldown: 4,
   args: true,
   guildOnly: true,
+  DJOnly: true,
   enabled: true,
   category: "Music",
   usage: '<query | url | playlist query | playlist url>',
@@ -24,6 +25,9 @@ module.exports = {
       return message.channel.send(message.language.get("PLAY_PERM_CONNECT"));
     if (!permissions.has("SPEAK"))
       return message.channel.send(message.language.get("PLAY_PERM_SPEAK"));
+
+
+    
 
     const search = args.join(" ");
     const videoPattern = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/gi;
@@ -85,6 +89,9 @@ module.exports = {
     } else {
       try {
         const results = await youtube.searchVideos(search, 1);
+        if(!results[0]) return message.channel.send(message.language.get("MUSIC_QUERY_NOT_EXIST"))
+
+
         songInfo = await ytdl.getInfo(results[0].url);
         var uploaddate = new Date(songInfo.published)
         song = {
@@ -113,6 +120,11 @@ module.exports = {
     }
 
     if (serverQueue) {
+
+      if(serverQueue.connection.dispatcher.paused){
+        return message.channel.send(message.language.get("PLAY_ERR_PAUSED"))
+      }
+
       serverQueue.songs.push(song);
       return serverQueue.textChannel
         .send(message.language.get("PLAY_ADDED_QUEUE", song.title, message.author.tag))

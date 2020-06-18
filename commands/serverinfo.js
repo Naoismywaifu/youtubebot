@@ -1,6 +1,5 @@
 const Discord = require('discord.js')
 const config = require("../config.json")
-const package = require("../package.json")
 
 module.exports = {
     name: 'serverinfo',
@@ -19,7 +18,7 @@ module.exports = {
             let diff = now.getTime() - date.getTime();
             let days = Math.floor(diff / 86400000);
             return days + (days == 1 ? " day" : " days") + " ago";
-        };
+        }
         let verifLevels = ["None", "Low", "Medium", "(╯°□°）╯︵  ┻━┻", "┻━┻ミヽ(ಠ益ಠ)ノ彡┻━┻"];
         let region = {
             "brazil": ":flag_br: Brazil",
@@ -44,8 +43,20 @@ message.guild.members.fetch().then(fetchedMembers => {
     const totalnobots = fetchedMembers.filter(member => !member.user.bot);
     const totalbots = fetchedMembers.filter(member => member.user.bot);
 	// We now have a collection with all online member objects in the totalOnline variable
+    var premium;
+        if(client.db.guildconf.get(`${message.guild.id}.premium`)){
+            premium = true;
+        } else {
+            premium = false;
+        }
 
-
+        const queue = message.client.queue.get(message.guild.id);
+        let playing = false;
+        if(queue){
+           if(queue.playing){
+               playing = true
+           } 
+        }
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(message.guild.name, message.guild.IconURL)
@@ -56,7 +67,10 @@ message.guild.members.fetch().then(fetchedMembers => {
             .addField(`${message.language.get("UTILS").TOTAL} | ${message.language.get("UTILS").HUMANS} | ${message.language.get("UTILS").BOTS}`, `${message.guild.memberCount} | ${totalnobots.size} | ${totalbots.size}`, true)
             .addField(message.language.get("UTILS").VERIFLEVEL, message.guild.verificationLevel, true)
             .addField(message.language.get("UTILS").CHANNELS, message.guild.channels.cache.size, true)
-            .addField(message.language.get("UTILS").ROLES, message.guild.roles.cache.size, true)
+            .addField(message.language.get("UTILS").PREMIUM, client.db.guildconf.get(`${message.guild.id}.premium`) ? message.language.get("CONFIG_PREMIUM_TRUE") : message.language.get("CONFIG_PREMIUM_FALSE"), true)
+            .addField(message.language.get("SERVERINFO_PLAYING"), playing ? message.language.get("UTILS").YES : message.language.get("UTILS").NO, true)
+
+            .addField(message.language.get("UTILS").ROLES, message.guild.roles.cache.size, false)
             .addField(message.language.get("UTILS").CREATIONDATE, `${message.channel.guild.createdAt.toUTCString().substr(0, 16)} (${checkDays(message.channel.guild.createdAt)})`, true)
             .setThumbnail(message.guild.iconURL)
             .setColor("BLUE")

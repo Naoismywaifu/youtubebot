@@ -34,7 +34,7 @@ const embed = new Discord.MessageEmbed()
 .setTitle("Shard - Youtube bot")
 .setDescription(message.language.get("SHARD_WHATS", guildsCount, usersCount))
 results.forEach((shard) => {
-        embed.addField(`<:online:653279333842157589> - Shard \`#${shard[2] + 1}\` ${client.shard.ids[0] === shard[2] ? `(\`${message.language.get("UTILS").CURRENT}\`)` : ""}`, `> ${message.language.get("UTILS").SERVERS}: \`${shard[1]}\`\n> ${message.language.get("UTILS").USER}: \`${shard[4]}\`\n> ${message.language.get("UTILS").CHANNELS}: \`${shard[5]}\`\n> RAM: \`${shard[0]} mb\`\n> Ping: \`${shard[3]} ms\`\n`, true);
+        embed.addField(`<:check:719323012972675093> - Shard \`#${shard[2] + 1}\` ${client.shard.ids[0] === shard[2] ? `(\`${message.language.get("UTILS").CURRENT}\`)` : ""}`, `> ${message.language.get("UTILS").SERVERS}: \`${shard[1]}\`\n> ${message.language.get("UTILS").USER}: \`${shard[4]}\`\n> ${message.language.get("UTILS").CHANNELS}: \`${shard[5]}\`\n> RAM: \`${shard[0]} mb\`\n> Ping: \`${shard[3]} ms\`\n`, true);
     });
 embed.setFooter("YouTube Bot")
 embed.setColor("RED")

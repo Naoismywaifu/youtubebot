@@ -15,7 +15,6 @@ module.exports = {
         usage: '<command>',
         aliases: ["evaluation"],
         execute(client, message, args) {
-            if(message.author.id !== "355995885085392896") return;
 
             function clean(text) {
                 if (typeof(text) === "string")

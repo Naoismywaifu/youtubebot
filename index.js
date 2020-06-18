@@ -16,6 +16,8 @@ db.notifier = new db.table('notifier')
 db.guildconf = new db.table('guildconf')
 db.stats = new db.table('stats')
 db.premiumnotifier = new db.table("premiumnotifier")
+db.users = new db.table("users")
+db.codes = new db.table("codes")
 
 client.commands = new discord.Collection();
 client.cooldowns = new discord.Collection();
@@ -65,5 +67,6 @@ process.on("uncaughtException", err => {
 process.on("unhandledRejection", err => {
   console.error("Uncaught Promise Error: ", err);
 });
+
 
 client.login(config.TOKEN);

@@ -1,7 +1,18 @@
 const Discord = require('discord.js')
 const config = require("../config.json")
 
-exports.run = (client, message, args) => {
+module.exports = {
+    name: 'userinfo',
+    description: 'Get informations about the mentionned user or you',
+    cooldown: 10,
+    args: false,
+    DJOnly: false,
+    guildOnly: false,
+    enabled: true,
+    category: "Core",
+    usage: '<@user#0000>',
+    aliases: ["user-info", "infouser", "info-user", "ui"],
+    execute(client, message, args) {
 
     let toFind = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author;
 
@@ -34,12 +45,4 @@ exports.run = (client, message, args) => {
   
 }
 
-    module.exports.help = {
-        name: "userinfo",
-        group: "Core",
-        botperms: [],
-        usrperm: [],
-        owneronly: false,
-        aliases: ["info-user", "user-info", "uinfo", "whois", "who"],
-        description: "Get some informations about you or someone."
-        }
+}

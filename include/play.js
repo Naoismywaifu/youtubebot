@@ -1,6 +1,7 @@
 const ytdlDiscord = require("discord-ytdl-core");
 const { DiscordAPIError, MessageEmbed } = require("discord.js");
-
+const { isDJ, isStaff } = require("../util/functions")
+const Discord = require("discord.js")
 module.exports = {
   async play(song, message) {
 
@@ -45,12 +46,24 @@ module.exports = {
       if(effectfinal.length === 0){
         var stream = await ytdlDiscord(song.url, { highWaterMark: 1 << 25, 
           filter: "audioonly"
-                });
+                }).on("error", err => {
+                  if(err.code === "403"){
+                    message.channel
+                    .send(message.language.get("MUSIC_ERR_QUOTA"))
+                    .catch(console.error);
+                  }
+                })
       } else {
       var stream = await ytdlDiscord(song.url, { highWaterMark: 1 << 25, 
         filter: "audioonly",
         encoderArgs: ['-af', `${effectfinal.length > 0 ? effectfinal.join(",") : ""}`]
-      });
+      }).on("error", err => {
+        if(err.code === "403"){
+          message.channel
+          .send(message.language.get("MUSIC_ERR_QUOTA"))
+          .catch(console.error);
+        }
+      })
       }
     } catch (error) {
       if (queue) {
@@ -60,11 +73,11 @@ module.exports = {
 
       if (error.message.includes("copyright")) {
         return message.channel
-          .send("⛔ | This video could not be played due to copyright protection")
+          .send(message.language.get("MUSIC_ERR_COPYRIGHT"))
           .catch(console.error);
       } else if (error.code === "403") {
         return message.channel
-          .send("⛔ | I cannot play this video because I have exceeded the quota authorized by youtube! please try again after 0h00 (pacific time)")
+          .send(message.language.get("MUSIC_ERR_QUOTA"))
           .catch(console.error);
       } else {
 
@@ -90,7 +103,7 @@ module.exports = {
       .on("error", err => {
         if(err.code === "403"){
           message.channel
-          .send("⛔ | I cannot play this video because I have exceeded the quota authorized by youtube! please try again after 0h00 (pacific time)")
+          .send(message.language.get("MUSIC_ERR_QUOTA"))
           .catch(console.error);
         } else if(err){
         console.error(err);
@@ -103,7 +116,6 @@ module.exports = {
     try {
 
       if(!message.client.db.guildconf.get(`${message.guild.id}.compact`) && !song.playlist){
-        let d = new Date(song.upload)
 /*       \`\`\`asciidoc
 = ${message.language.get("MUSIC_SHORT_DESC")} =
 ${song.shortDesc}
@@ -113,11 +125,10 @@ ${song.shortDesc}
       var embed = new MessageEmbed()
       .setThumbnail(song.thumbnail)
       embed.addField(`🎶 ${message.language.get("MUSIC_NOWPLAYING")} 🎶`, `
-      <a:disk:719524203983929375> ❱ ${song.title} ${song.underrage ? " 🔞" : ""} ${song.live ? " **[🔴 live]**" : ""}
+      <a:disk:719524203983929375> ❱ ${song.title} ${song.underrage ? " [🔞 Restricted]" : ""} ${song.live ? " **[🔴 live]**" : ""}
       <:plus:719323001677676575> ❱ ${song.author} ${song.verified ? "<:verified:719526360703434862>" : ""}
       <:date:719524185407225876> ❱ ${message.language.get("MUSIC_PUBLISHED", message.language.printDate(song.upload), true)}
       `, false)
-
 
       embed.addField(message.language.get("UTILS").LIKES, `${song.likes} <:like:719487585881423953>`, true)
       embed.addField(message.language.get("UTILS").DISLIKES, `${song.dislikes} <:dislike:719487584031735879>`, true)
@@ -148,14 +159,20 @@ var embed = new MessageEmbed()
       // Stop if there is no queue on the server
       if (!queue) return;
 
+
+
+
       switch (reaction.emoji.name) {
         case "⏭":
+          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER"))
           queue.connection.dispatcher.end();
           queue.textChannel.send(message.language.get("SKIP_SKIPPED", message.author)).catch(console.error);
           collector.stop();
           break;
 
         case "⏸":
+          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER"))
+
           if (!queue.playing) break;
           queue.playing = false;
           queue.connection.dispatcher.pause();
@@ -164,6 +181,8 @@ var embed = new MessageEmbed()
           break;
 
         case "▶":
+          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER"))
+
           if (queue.playing) break;
           queue.playing = true;
           queue.connection.dispatcher.resume();
@@ -172,14 +191,18 @@ var embed = new MessageEmbed()
           break;
 
         case "🔁":
+          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER"))
+
           queue.loop = !queue.loop;
           queue.textChannel
-            .send(message.language.get("LOOP_LOOP"), queue.loop ? message.language.get("UTILS").ON : message.language.get("UTILS").OFF)
+            .send(message.language.get("LOOP_LOOP", queue.loop ? message.language.get("UTILS").ON : message.language.get("UTILS").OFF))
             .catch(console.error);
           reaction.users.remove(user);
           break;
 
         case "⏹":
+          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER"))
+
           queue.songs = [];
           queue.textChannel.send(message.language.get("STOP_STOPPED", message.author)).catch(console.error);
           try {

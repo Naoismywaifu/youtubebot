@@ -1,4 +1,3 @@
-// https://discordapp.com/api/webhooks/718471078086705222/rmU-tdLyOcYLwEaYPohYOjauyiDStKGbck4QVtxmD8MFxWmO-tID70M0P3ZB38klAdPT
 const Discord = require("discord.js")
 /**
  * 
@@ -32,6 +31,7 @@ if(!dm && !message.client.db.guildconf.get(`${message.guild.id}.telemetrics`)){
     `)
     if(!dm){
     embed.addField("Guild infos", `> ${message.guild.name} (${message.guild.id})
+    > SHARD ID: ${shardid}
     > Owner: ${message.guild.owner.user.tag} (id: ${message.guild.ownerID})
     > Created at: ${message.guild.createdAt}
     > icon: ${message.guild.iconURL({ dynamic:true })}

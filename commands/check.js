@@ -1,26 +1,30 @@
-const Discord = require("discord.js")
-const config = require("../config.json")
-const functions = require("../util/functions")
+const  Discord = require("discord.js")
 
 module.exports = {
-        name: 'check',
-        description: 'make tests !',
-        cooldown: 5,
-        guildOnly: true,
-        ownerOnly: false,
-        args: false,
-        enabled: true,
-        category: "Core",
-        usage: '',
-        aliases: [],
-        execute(client, message, args) {
+    name: 'check',
+    description: 'invite the bot on your server.',
+    cooldown: 15,
+    guildOnly: true,
+    ownerOnly: false,
+    args: false,
+    enabled: true,
+    category: "Core",
+    usage: '',
+    aliases: ["checdfdf"],
+    execute(client, message, args) {
+        if(require("../util/functions.js").isStaff(message)){
+            message.reply("is staff")
+        } else {
+            message.reply("is NOT staff")
+        }
 
 
-            message.channel.send(functions.isStaff(message))
-
-
-            
-            }
+        if(require("../util/functions.js").isDJ(message)){
+            message.reply("is DJ")
+        } else {
+            message.reply("is NOT DJ")
+        }
+}
 
 
         }

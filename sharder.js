@@ -1,6 +1,6 @@
 const { ShardingManager } = require('discord.js');
 const config = require("./config.json")
-moment = require("moment"), 
+const moment = require("moment"), 
 shards = new ShardingManager("./index.js", {
     token: config.TOKEN, 
     totalShards: "auto",
@@ -22,4 +22,4 @@ function get_date (date) { //get_date function allows you to see the shards laun
 	const time = `[${moment().format("DD/MM/YYYY HH:mm:ss")}]`;
 
 	return time;
-};
+}

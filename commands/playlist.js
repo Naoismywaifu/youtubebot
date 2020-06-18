@@ -1,9 +1,9 @@
 const { play } = require("../include/play");
-const { YOUTUBE_API_KEY, MAX_PLAYLIST_SIZE } = require("../config.json");
+const { YOUTUBE_API_KEY, MAX_PLAYLIST_SIZE, MAX_PREMIUM_PLAYLIST_SIZE } = require("../config.json");
 const YouTubeAPI = require("simple-youtube-api");
-const { Message } = require("discord.js");
+const { Message, MessageEmbed } = require("discord.js");
 const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
-
+const Discord = require("discord.js")
 module.exports = {
   name: 'playlist',
   description: 'play a playlist from youtube to your discord channel !',
@@ -11,6 +11,7 @@ module.exports = {
   args: true,
   guildOnly: true,
   enabled: true,
+  DJOnly: true,
   category: "Music", 
   usage: '<Query | Url>',
   aliases: ["play-playlist", "play-list"],
@@ -48,15 +49,16 @@ module.exports = {
     if (urlValid) {
       try {
         playlist = await youtube.getPlaylist(url, { part: "snippet" });
-        videos = await playlist.getVideos(MAX_PLAYLIST_SIZE || 10, { part: "snippet" });
+        videos = await playlist.getVideos(client.db.guildconf.get(`${message.guild.id}.premium`) ? MAX_PREMIUM_PLAYLIST_SIZE : MAX_PLAYLIST_SIZE || 10, { part: "snippet" });
       } catch (error) {
         console.error(error);
       }
     } else {
       try {
         const results = await youtube.searchPlaylists(search, 1, { part: "snippet" });
+        if(!results[0]) return message.channel.send(message.language.get("MUSIC_QUERY_NOT_EXIST"))
         playlist = results[0];
-        videos = await playlist.getVideos(MAX_PLAYLIST_SIZE || 10, { part: "snippet" });
+        videos = await playlist.getVideos(client.db.guildconf.get(`${message.guild.id}.premium`) ? MAX_PREMIUM_PLAYLIST_SIZE : MAX_PLAYLIST_SIZE || 10, { part: "snippet" });
       } catch (error) {
         console.error(error);
       }
@@ -81,11 +83,11 @@ module.exports = {
         queueConstruct.songs.push(song);
       }
     });
+let embed = new Discord.MessageEmbed()
+.setDescription(message.language.get("PLAYLIST_ADDED_PLAYLIST", playlist, message.author, queueConstruct, client.db.guildconf.get(`${message.guild.id}.premium`) ? true : false))
+.setColor("RED")
 
-    message.channel
-      .send(message.language.get("PLAYLIST_ADDED_PLAYLIST", playlist, message.author, queueConstruct),
-        { split: true }
-      )
+message.channel.send(embed)
       .catch(console.error);
 
     if (!serverQueue) message.client.queue.set(message.guild.id, queueConstruct);
