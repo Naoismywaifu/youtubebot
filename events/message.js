@@ -46,6 +46,11 @@ exports.run = async (client, message) => {
             return message.channel.send(message.language.get("CORE_ISNT_DJ"))
         }
 
+        if(command.premiumOnly){
+            if(!client.db.guildconf.get(`${message.guild.id}.premium`))
+            return message.channel.send(message.language.get("CORE_ISNT_PREMIUM"))
+        }
+
 
 
         if (command.args && !args.length) {

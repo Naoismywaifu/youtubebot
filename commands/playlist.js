@@ -16,6 +16,10 @@ module.exports = {
   usage: '<Query | Url>',
   aliases: ["play-playlist", "play-list"],
   async execute(client, message, args) {
+
+    if(client.radiomanager.get(`${message.guild.id}.playing`)) return message.channel.send(message.language.get("MUSIC_RADIO_PLAYING"))
+
+
     const { channel } = message.member.voice;
 
     if (!channel) return message.channel.send(message.language.get("MUSIC_NO_CHANNEL")).catch(console.error);

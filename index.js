@@ -15,9 +15,10 @@ db.radio = new db.table('radio')
 db.notifier = new db.table('notifier')
 db.guildconf = new db.table('guildconf')
 db.stats = new db.table('stats')
-db.premiumnotifier = new db.table("premiumnotifier")
 db.users = new db.table("users")
 db.codes = new db.table("codes")
+client.radiomanager = new db.table("radiomanager")
+
 
 client.commands = new discord.Collection();
 client.cooldowns = new discord.Collection();
@@ -27,6 +28,7 @@ client.queue = new Map();
 client.db = db;
 
 client.funct = require("./util/functions.js")
+
 
 
 fs.readdir("./events/", (err, files) => {
@@ -67,6 +69,7 @@ process.on("uncaughtException", err => {
 process.on("unhandledRejection", err => {
   console.error("Uncaught Promise Error: ", err);
 });
+
 
 
 client.login(config.TOKEN);

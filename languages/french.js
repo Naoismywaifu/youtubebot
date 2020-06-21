@@ -17,6 +17,9 @@ module.exports = class {
 
 			CORE_ISNT_DJ: `${e.no} | Vous ne pouvez pas executer cette commande, vous devez être DJ !`,
 			CORE_ISNT_STAFF: `${e.no} | Vous ne pouvez pas executer cette commande, vous devez avoir le role personalisé s'il est configuré ou avoir la permission de gèrer le serveur !`,
+			CORE_ISNT_PREMIUM: `${e.no} | Oh non ! Cette commande est reservé aux serveurs ayant une licence YouTube Bot Premium, envisagez de payer YouTube Bot Premium.`,
+
+			
 			// Utils
 			PREFIX_INFO: (prefix) => `le préfixe de ce serveur est \`${prefix}\``,
 			UTILS: {
@@ -130,7 +133,10 @@ module.exports = class {
 			MUSIC_SHORT_DESC: `Description courte`,
 			MUSIC_QUERY_NOT_EXIST: `${e.no} | Oups... je crois n'avoir rien trouvé qui corresponde avec votre requête, re-esseyez avec une requête plus pertinente`,
 			MUSIC_ISNOT_INVOKER: `${e.no} | Vous devez être l'invoquateur de la commande pour faire cela !`,
-            /* LOOP */
+			MUSIC_SEARCHING: (search) => `${e.search} | Recherche pour \`${search}\` en cours...`,
+			MUSIC_RADIO_PLAYING: `${e.no} | Vous ne pouvez pas me faire jouer de la musique quand je joue de la radio 24/7 dans un salon, faites moi quitter avant de faire cela !`,
+			
+			/* LOOP */
 
             LOOP_LOOP: (status) => `🔂 | Le mode répétition est désormais **${status}**`,
 
@@ -189,6 +195,7 @@ module.exports = class {
 			/* STOP */
 
 			STOP_STOPPED: (user) => `⏹ | ${user} vient de faire arrêter la musique.`,
+			STOP_RADIO: `⏹ | J'arrête de jouer la radio 24/7 dans ce serveur !`,
 
 			/* VOLUME */
 
@@ -340,6 +347,20 @@ Envie de voter ? votez juste [ici](https://top.gg/bot/486948160124485642/vote)`,
 			BOTINFO_BOT_CORE: `Language`,
 			BOTINFO_PLAYING_COUNT: "Joue sur",
 			BOTINFO_PREMIUM_COUNT: `Premium sur`,
+
+			/* URBAN */
+			URBAN_NOTFOUND: (query) => `${e.no} | Pas de résultats pour ${query}`,
+			URBAN_DEF: `Définition`,
+			URBAN_EXAMPLE: `Exemple`,
+			URBAN_RATING: `Avis`,
+
+
+			/* RADIO */
+			RADIO_EXPL: `Pour jouer une musique listé ici executez \`${c.prefix}radio iLoveMusic\` par exemple`,
+			RADIO_EXISTNO: `${e.no} | Cette radio n'existe pas !`,
+			RADIO_SUCCESS: (radio) => `${e.enabled} | Maintenant je vais jouer la radio ${radio} 24/7 dans ce salon !`,
+
+
 
 		}
     }

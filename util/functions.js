@@ -39,14 +39,12 @@ async prefix(message) {
     isStaff(message) {
         if(message.client.db.guildconf.has(`${message.guild.id}.staffrole`)){
             let roleto = message.client.db.guildconf.get(`${message.guild.id}.staffrole`)
-            console.log("check if he has the role")
             if (message.member.roles.cache.has(roleto)) {
                 return true;
             } else {
                 return false;
             }
         } else {
-            console.log("check if he has the permission")
             if(message.member.hasPermission("MANAGE_GUILD")){
                 return true;
             } else {

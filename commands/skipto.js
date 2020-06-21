@@ -15,6 +15,9 @@ module.exports = {
         aliases: [],
         execute(client, message, args) {
 
+            if(client.radiomanager.get(`${message.guild.id}.playing`)) return message.channel.send(message.language.get("MUSIC_RADIO_PLAYING"))
+
+
             const queue = message.client.queue.get(message.guild.id);
             if (!queue) return message.channel.send(message.language.get("SKIPTO_NOQUEUE")).catch(console.error);
             

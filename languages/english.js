@@ -17,6 +17,8 @@ module.exports = class {
 		this.language = {
 			CORE_ISNT_DJ: `${e.no} | You can't execute this command, you're not DJ !`,
 			CORE_ISNT_STAFF: `${e.no} | You can't execute thix command, you need to have the STAFF permission if configured or have the manage server permission !`,
+			CORE_ISNT_PREMIUM: `${e.no} | Oh no ! this command is only usable by premium servers, consider buying YouTube Bot Premium!`,
+			
 			// Utils
 			PREFIX_INFO: (prefix) => `The prefix of this server is \`${prefix}\``,
 			UTILS: {
@@ -131,7 +133,8 @@ module.exports = class {
 			MUSIC_SHORT_DESC: `Short description`,
 			MUSIC_QUERY_NOT_EXIST: `${e.no} | Oops ... I don't think I found anything that matches your query, try again with a more relevant query`,
 			MUSIC_ISNOT_INVOKER: `${e.no} | You need to be the invoker of the command to make that !`,
-
+			MUSIC_SEARCHING: (search) => `${e.search} | Searching for \`${search}\`...`,
+			MUSIC_RADIO_PLAYING: `${e.no} | You can't play music while i am playing radio 24/7 in a channel, please make me leaving before executing this command !`,
             /* LOOP */
 
             LOOP_LOOP: (status) => `🔂 | The loop mode is now **${status}**`,
@@ -190,6 +193,7 @@ module.exports = class {
 			/* STOP */
 
 			STOP_STOPPED: (user) => `⏹ | ${user} just stopped the music.`,
+			STOP_RADIO: `⏹ | I stop playing radio 24/7 in this server !`,
 
 			/* VOLUME */
 
@@ -333,7 +337,20 @@ Want to vote ? check  our [vote page](https://top.gg/bot/486948160124485642/vote
 			BOTINFO_BOT_CORE: `Language`,
 			BOTINFO_PLAYING_COUNT: "Playing on",
 			BOTINFO_PREMIUM_COUNT: `Premium on`,
-}
+
+			/* URBAN */
+			URBAN_NOTFOUND: (query) => `${e.no} | No results for ${query}`,
+			URBAN_DEF: `Definition`,
+			URBAN_EXAMPLE: `Example`,
+			URBAN_RATING: `Rating`,
+
+			/* RADIO */
+			RADIO_EXPL: `To play a radio listed here, execute \`${prefix}radio iLoveMusic\` for example`,
+			RADIO_EXISTNO: `${e.no} | This radio don't exist !`,
+			RADIO_SUCCESS: (radio) => `${e.enabled} | Now i will play the radio ${radio} 24/7 in this channel !`,
+
+
+		}		
     }
 
     /**

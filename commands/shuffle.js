@@ -14,6 +14,9 @@ module.exports = {
         aliases: ["melanger"],
         execute(client, message, args) {
 
+          if(client.radiomanager.get(`${message.guild.id}.playing`)) return message.channel.send(message.language.get("MUSIC_RADIO_PLAYING"))
+
+
             let queue = client.queue.get(message.guild.id);
             if (!queue) return message.channel.send(message.language.get("MUSIC_NO_PLAYING"));
             if (!message.member.voice.channel)

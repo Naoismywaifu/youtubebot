@@ -10,6 +10,20 @@ module.exports = {
   usage: '',
   aliases: ["end", "clear", "leave", "dc", "disconnect"],
   execute(client, message) {
+
+    if(client.radiomanager.get(`${message.guild.id}.playing`)){
+
+      if(message.guild.voice.channel){
+      message.guild.voice.channel.leave()
+      }
+
+      client.radiomanager.delete(message.guild.id)
+
+      message.channel.send(message.language.get("STOP_RADIO"))
+
+    } else {
+
+
     const serverQueue = message.client.queue.get(message.guild.id);
 
     if (!message.member.voice.channel)
@@ -19,5 +33,6 @@ module.exports = {
     serverQueue.songs = [];
     serverQueue.connection.dispatcher.end();
     serverQueue.textChannel.send(message.language.get("STOP_STOPPED", message.author)).catch(console.error);
+    }
   }
 };

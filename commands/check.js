@@ -7,10 +7,10 @@ module.exports = {
     guildOnly: true,
     ownerOnly: false,
     args: false,
-    enabled: true,
-    category: "Core",
+    enabled: false,
+    category: "Owner",
     usage: '',
-    aliases: ["checdfdf"],
+    aliases: [],
     execute(client, message, args) {
         if(require("../util/functions.js").isStaff(message)){
             message.reply("is staff")

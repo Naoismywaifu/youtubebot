@@ -4,7 +4,8 @@ const moment = require("moment"),
 shards = new ShardingManager("./index.js", {
     token: config.TOKEN, 
     totalShards: "auto",
-	respawn: true
+	respawn: true,
+	
 	
 });
 

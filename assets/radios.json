@@ -1,0 +1,26 @@
+{
+    "funradio": {
+        "lang":"FRENCH",
+        "url":"http://streaming.radio.funradio.fr/fun-1-48-192"
+    },
+    "iLoveRadio":{
+        "lang":"GERMAN",
+        "url":"http://stream01.ilovemusic.de/iloveradio1.mp3"
+    },
+    "noisefm": {
+        "lang":"RUSSIAN",
+        "url" : "https://play.sas-media.ru/play"
+    },
+    "tc13": {
+        "lang":"FRENCH",
+        "url" : "https://radio01.alls-heberg.fr:1145/stream"
+    },
+    "nrj-fr": {
+        "lang":"FRENCH",
+        "url":"http://cdn.nrjaudio.fm/audio1/fr/30001/mp3_128.mp3"
+    },
+    "skyrock-fr": {
+        "lang":"FRENCH",
+        "url":"http://www.skyrock.fm/stream.php/tunein16_128mp3.mp3"
+    }
+}

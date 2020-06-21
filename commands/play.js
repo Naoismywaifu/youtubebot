@@ -13,9 +13,13 @@ module.exports = {
   DJOnly: true,
   enabled: true,
   category: "Music",
-  usage: '<query | url | playlist query | playlist url>',
+  usage: '<query | video url | playlist url>',
   aliases: ["jouer", "youtube"],
   async execute(client, message, args) {
+
+    if(client.radiomanager.get(`${message.guild.id}.playing`)) return message.channel.send(message.language.get("MUSIC_RADIO_PLAYING"))
+
+
     const { channel } = message.member.voice;
 
     if (!channel) return message.channel.send(message.language.get("MUSIC_NO_CHANNEL")).catch(console.error);
@@ -53,7 +57,6 @@ module.exports = {
 
     let songInfo = null;
     let song = null;
-
     if (urlValid) {
       try {
         songInfo = await ytdl.getInfo(url);
@@ -88,8 +91,12 @@ module.exports = {
       }
     } else {
       try {
+        message.channel.send(message.language.get("MUSIC_SEARCHING", search))
+
+        
         const results = await youtube.searchVideos(search, 1);
         if(!results[0]) return message.channel.send(message.language.get("MUSIC_QUERY_NOT_EXIST"))
+
 
 
         songInfo = await ytdl.getInfo(results[0].url);

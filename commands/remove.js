@@ -10,6 +10,10 @@ module.exports = {
   usage: '<Queue number>',
   aliases: ["remqueue"],
   async execute(client, message, args) {
+
+    if(client.radiomanager.get(`${message.guild.id}.playing`)) return message.channel.send(message.language.get("MUSIC_RADIO_PLAYING"))
+
+
     const serverQueue = message.client.queue.get(message.guild.id);
     if (!serverQueue) return message.channel.send(message.language.get("MUSIC_NO_PLAYING")).catch(console.error);
 

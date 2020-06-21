@@ -12,6 +12,10 @@ module.exports = {
   usage: '<0 - 100>',
   aliases: ["aide"],
   execute(client, message, args) {
+
+    if(client.radiomanager.get(`${message.guild.id}.playing`)) return message.channel.send(message.language.get("MUSIC_RADIO_PLAYING"))
+
+
     const serverQueue = message.client.queue.get(message.guild.id);
 
     if (!message.member.voice.channel)

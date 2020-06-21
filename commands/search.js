@@ -15,6 +15,10 @@ module.exports = {
   usage: '<music>',
   aliases: ["rechercher", "searchmusic"],
   async execute(client, message, args) {
+
+    if(client.radiomanager.get(`${message.guild.id}.playing`)) return message.channel.send(message.language.get("MUSIC_RADIO_PLAYING"))
+
+
     if (message.channel.activeCollector)
       return message.channel.send(message.language.get("SEARCH_COLLECTOR_ALREADY"));
     if (!message.member.voice.channel)

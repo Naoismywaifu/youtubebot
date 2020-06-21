@@ -10,6 +10,10 @@ module.exports = {
   usage: '',
   aliases: [],
   execute(client, message) {
+
+    if(client.radiomanager.get(`${message.guild.id}.playing`)) return message.channel.send(message.language.get("MUSIC_RADIO_PLAYING"))
+
+
     if (!message.member.voice.channel)
       return message.reply(message.language.get("MUSIC_NO_CHANNEL")).catch(console.error);
 
