@@ -345,7 +345,7 @@ Want to vote ? check  our [vote page](https://top.gg/bot/486948160124485642/vote
 			URBAN_RATING: `Rating`,
 
 			/* RADIO */
-			RADIO_EXPL: `To play a radio listed here, execute \`${prefix}radio iLoveMusic\` for example`,
+			RADIO_EXPL: `To play a radio listed here, execute \`${c.PREFIX}radio iLoveMusic\` for example`,
 			RADIO_EXISTNO: `${e.no} | This radio don't exist !`,
 			RADIO_SUCCESS: (radio) => `${e.enabled} | Now i will play the radio ${radio} 24/7 in this channel !`,
 

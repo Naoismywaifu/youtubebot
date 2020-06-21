@@ -19,6 +19,17 @@ db.users = new db.table("users")
 db.codes = new db.table("codes")
 client.radiomanager = new db.table("radiomanager")
 
+const DBL = require("dblapi.js");
+const dbl = new DBL(config.TOPGG, client);
+
+
+dbl.on('posted', () => {
+  console.log('Server count posted!');
+})
+
+dbl.on('error', e => {
+ console.log(`Oops! ${e}`);
+})
 
 client.commands = new discord.Collection();
 client.cooldowns = new discord.Collection();

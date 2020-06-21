@@ -356,7 +356,7 @@ Envie de voter ? votez juste [ici](https://top.gg/bot/486948160124485642/vote)`,
 
 
 			/* RADIO */
-			RADIO_EXPL: `Pour jouer une musique listé ici executez \`${c.prefix}radio iLoveMusic\` par exemple`,
+			RADIO_EXPL: `Pour jouer une musique listé ici executez \`${c.PREFIX}radio iLoveMusic\` par exemple`,
 			RADIO_EXISTNO: `${e.no} | Cette radio n'existe pas !`,
 			RADIO_SUCCESS: (radio) => `${e.enabled} | Maintenant je vais jouer la radio ${radio} 24/7 dans ce salon !`,
 
