@@ -24,12 +24,13 @@ module.exports = {
                 client.shard.fetchClientValues('queue.size'),
 
             ];
-            
+
+            const usersCount = usersCounts.reduce((p, count) => p + count);
             Promise.all(promises)
                 .then(results => {
                     const totalGuilds = results[0].reduce((prev, guildCount) => prev + guildCount, 0);
-                    const totalChannels = results[1].reduce((prev, channelCount) => prev + channelCount, 0);
-                    const totalMembers = results[2].reduce((prev, memberCount) => prev + memberCount, 0);
+                    const totalMembers = results[1].reduce((prev, memberCount) => prev + memberCount, 0);
+                    const totalChannels = results[2].reduce((prev, channelCount) => prev + channelCount, 0);
                     const bruttotalRam = results[3].reduce((prev, ramcount) => prev + ramcount, 0);
                     const totalRam = (bruttotalRam / 1024 / 1024).toFixed(2);
                     const totalplaying = results[4].reduce((prev, playCount) => prev + playCount, 0);

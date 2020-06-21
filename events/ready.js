@@ -9,9 +9,6 @@ exports.run = async (client) => {
 	console.log(`${client.user.username} ready!`);
     client.user.setActivity(`YouTube Bot ⋄ ${client.prefix}help ⋄ Shard ${client.shard.ids[0] + 1}/${client.shard.count}`, { tyoe: "LISTENING" });
     
-    setInterval(() => {
-        dbl.postStats(client.guilds.cache.size, client.shard.ids[0], client.shard.count);
-    }, 1800000);
 
 const startAt = Date.now();
 const lastVideos = {};
