@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const { YOUTUBE_API_KEY } = require("../config.json");
 const YouTubeAPI = require("simple-youtube-api");
+const config = require("./config");
 const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
 
 module.exports = {
@@ -45,7 +46,7 @@ module.exports = {
 
       message.channel.activeCollector = true;
       const response = await message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ["time"] });
-      const choice = resultsEmbed.fields[parseInt(response.first()) - 1].name;
+      const choice = resultsEmbed.fields[parseInt(response.first()) - 1].name.replace(config.emojis.arrow, "");
       
       message.channel.activeCollector = false;
       message.client.commands.get("play").execute(client, message, [choice]);
