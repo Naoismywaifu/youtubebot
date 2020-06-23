@@ -167,11 +167,7 @@ if(client.channels.cache.get(config.stats_channels.users)){
     chann.setName(`Servers • ${guildsCount}`) 
  }
 
- if(client.channels.cache.get(config.stats_channels.guilds)){
-    var chann = client.channels.cache.get(config.stats_channels.members)
-    if(chann.name === `Members • ${chann.guild.memberCount}`) return;
-    chann.setName(`Members • ${chann.guild.memberCount}`) 
- }
+
 
 
 

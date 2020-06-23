@@ -24,8 +24,6 @@ module.exports = {
                 client.shard.fetchClientValues('queue.size'),
 
             ];
-
-            const usersCount = usersCounts.reduce((p, count) => p + count);
             Promise.all(promises)
                 .then(results => {
                     const totalGuilds = results[0].reduce((prev, guildCount) => prev + guildCount, 0);

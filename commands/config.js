@@ -301,7 +301,7 @@ switch (client.db.guildconf.get(`${message.guild.id}.bassboost`)||0) {
         = ${message.language.get("UTILS").SERVER_SETTINGS} =
 
 = ${message.language.get("CONFIG_GLOBAL")} =
-langugage   ::      ${message.language.getFullLang()}
+language    ::      ${message.language.getFullLang()}
 prefix      ::      ${client.db.guildconf.get(`${message.guild.id}.prefix`)||client.prefix}
 premium     ::      ${client.db.guildconf.get(`${message.guild.id}.premium`) ? message.language.get(`CONFIG_PREMIUM_TRUE`) : message.language.get(`CONFIG_PREMIUM_FALSE`)}
 telemetrics ::      ${client.db.guildconf.get(`${message.guild.id}.telemetrics`) ? message.language.get(`CHECK_DISABLED`) : message.language.get(`CHECK_ENABLED`)}

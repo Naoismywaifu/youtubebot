@@ -8,6 +8,7 @@ module.exports = {
         ownerOnly: false,
         args: false,
         DJOnly: true,
+        premiumOnly: true,
         enabled: true,
         category: "Filters",
         usage: '',
