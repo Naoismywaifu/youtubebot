@@ -34,7 +34,7 @@ module.exports = {
 
     try {
       const results = await youtube.searchVideos(search, 10);
-      results.map((video, index) => resultsEmbed.addField(`${client.config.emojis.arrow} ${video.title} - ${video.channel.title}`, `[ **${index + 1}** ] ${video.title}`));
+      results.map((video, index) => resultsEmbed.addField(`${video.title} - ${video.channel.title}`, `[ **${index + 1}** ] ${video.title}`));
 
 
       var resultsMessage = await message.channel.send(resultsEmbed);
@@ -46,7 +46,7 @@ module.exports = {
 
       message.channel.activeCollector = true;
       const response = await message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ["time"] });
-      const choice = resultsEmbed.fields[parseInt(response.first()) - 1].name.replace(config.emojis.arrow, "");
+      const choice = resultsEmbed.fields[parseInt(response.first()) - 1].name
       
       message.channel.activeCollector = false;
       message.client.commands.get("play").execute(client, message, [choice]);
