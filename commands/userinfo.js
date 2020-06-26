@@ -25,7 +25,7 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
         .setColor("RED")
         .setDescription(`Informations about ${toFind.username}`)
-        .setFooter(toFind.username, toFind.displayAvatarURL)
+        .setFooter(toFind.username, toFind.displayAvatarURL({ dynamic: true}))
         .addField('Member information:', `> Display name: ${toFind.username}
         > Joined at: ${joined}`, true)
 
@@ -36,9 +36,7 @@ module.exports = {
         .setThumbnail(toFind.displayAvatarURL)
         .setTimestamp()
 
-    if (toFind.presence.game) 
-        embed.addField('Currently playing', `> Name: ${toFind.presence.game.name}`);
-    
+
     message.channel.send(embed)
 
 

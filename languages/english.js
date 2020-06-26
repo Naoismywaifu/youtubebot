@@ -250,7 +250,7 @@ module.exports = class {
 			CONFIG_PREMIUM_NEED: `${e.no} | You need to join the YouTube Bot's support to subscribe to YouTube Bot Premium`,
 			CONFIG_COMPACT_DISABLED: `${e.disabled} | The compact mode is now disabled.`,
 			CONFIG_BASSBOOST_OPTIONS: `${e.no} | Valid Options: \`off\`, \`low\`, \`medium\`, \`high\` & \`hard\`.`,
-			CONFIG_BASSBOOST_SUCCESS: (mode) => `${e.yes} | BassBoost set to \`${mode}\``,
+			CONFIG_BASSBOOST_SUCCESS: (mode) => `${e.yes} | BassBoost set to \`${mode}\`\n⚠ | Changes will be applied on the next music !`,
 			CONFIG_MUSIC_ENABLED: (filter) => `${e.enabled} | The Filter \`${filter}\` is now **enabled** !\n⚠ | Changes will be applied on the next music`,
 			CONFIG_MUSIC_DISABLED: (filter) => `${e.disabled} | The Filter \`${filter}\` is now **disabled** !\n⚠ | Changes will be applied on the next music !`,
 			CONFIG_RESET_SUCCESS: (key) => `${e.yes} | The key **${key}** was been reset !`,
@@ -349,6 +349,8 @@ Want to vote ? check  our [vote page](https://top.gg/bot/486948160124485642/vote
 			RADIO_EXISTNO: `${e.no} | This radio don't exist !`,
 			RADIO_SUCCESS: (radio) => `${e.enabled} | Now i will play the radio ${radio} 24/7 in this channel !`,
 
+			/* USERINFO */
+			
 
 		}		
     }

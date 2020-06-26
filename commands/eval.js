@@ -16,39 +16,45 @@ module.exports = {
         aliases: ["evaluation"],
         execute(client, message, args) {
 
-            function clean(text) {
-                if (typeof(text) === "string")
-                  return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-                else
-                    return text;
+          let start = Date.now()
+
+
+          const content = message.content.split(" ").slice(1).join(" ");
+          const result = new Promise((resolve, reject) => resolve(eval(content)));
+          
+          return result.then((output) => {
+              if(typeof output !== "string"){
+                  output = require("util").inspect(output, { depth: 0 });
+              }
+              if(output.includes(message.client.token)){
+                  output = output.replace(message.client.token, "T0K3N");
               }
 
-              try {
+              let end = Date.now()
 
-                const code = args.join(" ");
-                let evaled = eval(code);
+              let timeelipsed = end - start
 
+              let emb = new Discord.MessageEmbed()
+              .setDescription(`\`\`\`${output}\`\`\``)
+              .addField("executed in", `${timeelipsed} ms`, true)
+              .addField("Type", typeof output, true)
+              .setColor("GREEN")
 
-
-
-                if (typeof evaled !== "string")
-                  evaled = require("util").inspect(evaled);
-                var embed = new Discord.MessageEmbed()
-                .setTitle("Evaluation")
-                .addField("input", code, {code:"xl"})
-                .addField("output", clean(evaled), {code:"xl"})
-                .setColor("GREEN")
-                message.channel.send(embed);
-              } catch (err) {
-                const code = args.join(" ");
-                var embed = new Discord.MessageEmbed()
-                .setTitle(`Evaluation - ${message.language.get("UTILS").ERROR}`)
-                .addField("input", code, {code:"xl"})
-                .addField("error", clean(err), {code:"xl"})
-                .setColor("RED")
-                message.channel.send(embed);
+              message.channel.send(emb)
+          }).catch((err) => {
+              err = err.toString();
+              if(err.includes(message.client.token)){
+                  err = err.replace(message.client.token, "T0K3N");
               }
-            }
+
+              let emberr = new Discord.MessageEmbed()
+              .setDescription(`\`\`\`${err}\`\`\``)
+              .setColor("RED")
+
+              message.channel.send(emberr);
+          });
+
+        }
 
 
         }

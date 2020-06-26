@@ -16,10 +16,10 @@ module.exports = {
 
             fs.readdir(`${__dirname}/../languages/`, (err, files) => {
                     console.log(files)
-                    for (const file of files) {
+                    files.forEach((file) => {
                         delete require.cache[require.resolve(`./${file}`)];
                 
-            }
+            })
         })
                 
             

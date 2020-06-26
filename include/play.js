@@ -181,7 +181,9 @@ var embed = new MessageEmbed()
           break;
 
         case "▶":
-          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER"))
+          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER")).then(msg => {
+            msg.delete(10000)
+          })
 
           if (queue.playing) break;
           queue.playing = true;
@@ -202,7 +204,6 @@ var embed = new MessageEmbed()
 
         case "⏹":
           if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER"))
-
           queue.songs = [];
           queue.textChannel.send(message.language.get("STOP_STOPPED", message.author)).catch(console.error);
           try {

@@ -256,7 +256,7 @@ module.exports = class {
 			CONFIG_COMPACT_ENABLED: `${e.enabled} | Le mode compact a bien été activé.`,
 			CONFIG_COMPACT_DISABLED: `${e.disabled} | Le mode compact a bien été désactivé.`,
 			CONFIG_BASSBOOST_OPTIONS: `${e.no} | Options valides: \`off\`, \`low\`, \`medium\`, \`high\` & \`hard\`.`,
-			CONFIG_BASSBOOST_SUCCESS: (mode) => `${e.yes} | BassBoost mis à \`${mode}\``,
+			CONFIG_BASSBOOST_SUCCESS: (mode) => `${e.yes} | BassBoost mis à \`${mode}\`\n⚠ | Les changements seront appliqués à la prochaine musique !`,
 			CONFIG_MUSIC_ENABLED: (filter) => `${e.enabled} | Le filtre \`${filter}\` a bien été **activé** !\n⚠ | Les changements seront appliqués à la prochaine musique !`,
 			CONFIG_MUSIC_DISABLED: (filter) => `${e.disabled} | Le filtre \`${filter}\` a bien été **désactivé**\n⚠ | Les changements seront appliqués à la prochaine musique !`,
 			CONFIG_RESET_SUCCESS: (key) => `${e.yes} | La clé **${key}** a bien été reinitialisé !`,
@@ -287,7 +287,7 @@ module.exports = class {
 Vous êtes dans le shard \`#${shardid}\` avec un total de \`${shardcount}\` shards
 thanks for using YouTube Bot !
 Je propulse \`${totalGuilds}\` communautées pour un total de \`${totalMembers}\` membres
-Envie de faire un don ? regardez [notre page patreon](https://patreon.com/botyoutube)
+Envie de faire un don ou acheter YouTube Bot Premium ? utilisez [Ce site](https://donatebot.io/checkout/718419838145527910)
 Envie de voter ? votez juste [ici](https://top.gg/bot/486948160124485642/vote)`,
 		
 			/* INVITE */
