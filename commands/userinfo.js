@@ -25,7 +25,7 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
         .setColor("RED")
         .setDescription(`Informations about ${toFind.username}`)
-        .setFooter(toFind.username, toFind.displayAvatarURL({ dynamic: true}))
+        .setFooter(toFind.username, toFind.displayAvatarURL())
         .addField('Member information:', `> Display name: ${toFind.username}
         > Joined at: ${joined}`, true)
 
@@ -33,7 +33,7 @@ module.exports = {
         > Username: ${toFind.username}
         > Tag: ${toFind.tag}
         > Created at: ${created}`, true)
-        .setThumbnail(toFind.displayAvatarURL)
+        .setThumbnail(toFind.displayAvatarURL())
         .setTimestamp()
 
 
