@@ -10,7 +10,7 @@ var embed = new Discord.MessageEmbed()
 .setColor("BLACK")
 hook.send(embed)
 
-client.shard.broadcastEval(`if (this.shard.id === ${shard}) process.exit(0);`);
+client.shard.broadcastEval(`if (this.shard.ids[0] === ${shard}) process.exit(0);`);
 
 
 }
