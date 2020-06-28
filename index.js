@@ -9,6 +9,7 @@ const { readdirSync } = require("fs");
 const { join } = require("path");
 const config = require("./config.json");
 const db = require("quick.db")
+const Sentry = require('@sentry/node');
 
 db.premium = new db.table('premium')
 db.radio = new db.table('radio')
@@ -21,6 +22,9 @@ client.radiomanager = new db.table("radiomanager")
 
 const DBL = require("dblapi.js");
 const dbl = new DBL(config.TOPGG, client);
+
+Sentry.init({ dsn: config.SENTRY_DSN });
+
 
 
 dbl.on('posted', () => {
