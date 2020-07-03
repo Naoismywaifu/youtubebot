@@ -30,9 +30,18 @@ module.exports = {
                   output = output.replace(message.client.token, "T0K3N");
               }
 
+
+              if(output.length >= 1024){
+                console.log(`Eval output: ${output}`)
+                output = "The output is too long, the output is logged in console"
+            }
+
+
               let end = Date.now()
 
               let timeelipsed = end - start
+
+
 
               let emb = new Discord.MessageEmbed()
               .setDescription(`\`\`\`${output}\`\`\``)

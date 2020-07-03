@@ -1,12 +1,18 @@
 const { ShardingManager } = require('discord.js');
 const config = require("./config.json")
-const moment = require("moment"), 
+moment = require("moment"), 
 shards = new ShardingManager("./index.js", {
     token: config.TOKEN, 
     totalShards: "auto",
-	respawn: true,
-	
-	
+	respawn: true
+});
+
+shards.on('shardCreate', (shard) => {
+    shard.on('message', (message) => {
+        if(message === 'reboot'){
+            shard.respawn();
+        }
+    });
 });
 
 
@@ -23,4 +29,4 @@ function get_date (date) { //get_date function allows you to see the shards laun
 	const time = `[${moment().format("DD/MM/YYYY HH:mm:ss")}]`;
 
 	return time;
-}
+};

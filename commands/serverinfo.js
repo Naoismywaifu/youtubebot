@@ -69,6 +69,7 @@ message.guild.members.fetch().then(fetchedMembers => {
             .addField(message.language.get("UTILS").CHANNELS, message.guild.channels.cache.size, true)
             .addField(message.language.get("UTILS").PREMIUM, client.db.guildconf.get(`${message.guild.id}.premium`) ? message.language.get("CONFIG_PREMIUM_TRUE") : message.language.get("CONFIG_PREMIUM_FALSE"), true)
             .addField(message.language.get("SERVERINFO_PLAYING"), playing ? message.language.get("UTILS").YES : message.language.get("UTILS").NO, true)
+            .addField(message.language.get("SERVERINFO_CMDS_EXECUTED"), client.db.stats.get(`guild_${message.guild.id}`), true)
 
             .addField(message.language.get("UTILS").ROLES, message.guild.roles.cache.size, false)
             .addField(message.language.get("UTILS").CREATIONDATE, `${message.channel.guild.createdAt.toUTCString().substr(0, 16)} (${checkDays(message.channel.guild.createdAt)})`, true)

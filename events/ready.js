@@ -51,16 +51,6 @@ async function checkVideos(youtubeChannelName, rssURL){
 /**
  * Get the youtube channel id from an url
  * @param {string} url The URL of the youtube channel
- * @returns The channel ID || null
- */
-function getYoutubeChannelIdFromURL(url) {
-    let id = null;
-    url = url.replace(/(>|<)/gi, "").split(/(\/channel\/|\/user\/)/);
-    if(url[2]) {
-      id = url[2].split(/[^0-9a-z_-]/i)[0];
-    }
-    return id;
-}
 
 /**
  * Get infos for a youtube channel
@@ -70,18 +60,12 @@ function getYoutubeChannelIdFromURL(url) {
 async function getYoutubeChannelInfos(name){
     console.log(`[${name.length >= 10 ? name.slice(0, 10)+"..." : name}] | Resolving channel infos...`);
     let channel = null;
-    /* Try to search by ID */
-    let id = getYoutubeChannelIdFromURL(name);
-    if(id){
-        channel = await youtube.getChannelByID(id);
-    }
-    if(!channel){
-        /* Try to search by name */
-        let channels = await youtube.searchChannels(name);
+
+        let channels = await youtube.searchChannels(name, 2);
         if(channels.length > 0){
             channel = channels[0];
         }
-    }
+    
     console.log(`[${name.length >= 10 ? name.slice(0, 10)+"..." : name}] | Title of the resolved channel: ${channel.raw ? channel.raw.snippet.title : "err"}`);
     return channel;
 }
@@ -93,6 +77,8 @@ async function check(client){
     console.log("Checking...");
     client.db.notifier.all().forEach(async (guild) => {
         if(!client.guilds.cache.get(guild.ID)) return;
+        if(!client.db.notifier.has(`${guild.ID}.youtuber`)) return;
+        if(!client.db.notifier.has(`${guild.ID}.channel`)) return;
         var youtuber = client.db.notifier.fetch(`${guild.ID}.youtuber`)
         if(!youtuber) return client.db.notifier.delete(guild.ID);
         console.log(`[${youtuber.length >= 10 ? youtuber.slice(0, 10)+"..." : youtuber}] | Start checking...`);
@@ -102,7 +88,29 @@ async function check(client){
         if(!video) return console.log(`[${channelInfos.raw.snippet.title}] | No notification`);
         let channel = client.channels.cache.get(client.db.notifier.get(`${guild.ID}.channel`));
         if(!channel) return console.log("[ERR] | Channel not found");
-        channel.send(`<:youtube:684748153282625538> | Hey ! the youtuber **${video.author}** just posted a new video! **${video.title}** \n ${video.link} - posted the **${formatDate(new Date(video.pubDate))}**`)
+        let msg;
+        if(client.db.notifier.has(`${guild.ID}.message`)){
+            msg = client.db.notifier.get(`${guild.ID}.message`)
+        } else {
+            msg = "<:youtube:684748153282625538> | Hey ! the youtuber **{youtuber.name}** just posted a new video! **{video.title}** \n {video.url} - posted the **{video.date}**"
+        }
+
+        let g = client.guilds.cache.get(guild.ID)
+
+console.log(video)
+        msg = msg.replace("{youtuber.name}", video.author)
+        .replace("{video.title}", video.title)
+        .replace("{video.url}", video.link)
+        .replace("{video.date}", formatDate(new Date(video.pubDate)))
+        .replace("{emojis.youtube}", config.emojis.youtube)
+        .replace("{guild.name}", g.name)
+        .replace("{guild.id}", g.id)
+        .replace("{guild.owner}", g.owner.displayName)
+
+
+
+
+        channel.send(msg)
         console.log("Notification sent !");
         lastVideos[channelInfos.raw.snippet.title] = video;
     });
@@ -177,5 +185,5 @@ if(client.channels.cache.get(config.stats_channels.users)){
 
 
 
-}, 30 * 1000 * 60)
+}, 60 * 1000 * 60)
 }

@@ -29,10 +29,12 @@ module.exports = {
         .addField('Member information:', `> Display name: ${toFind.username}
         > Joined at: ${joined}`, true)
 
-        .addField('User information:', `> ID: ${toFind.id}
-        > Username: ${toFind.username}
-        > Tag: ${toFind.tag}
-        > Created at: ${created}`, true)
+        .addField(message.language.get("USERINFO_USERINFO"), `> ID: ${toFind.id}
+        > ${message.language.get("USERINFO_UNAME", toFind.username)}
+        > ${message.language.get("USERINFO_TAG", toFind.tag)}
+        > ${message.language.get("USERINFO_CREATEDAD", created)}
+        > ${message.language.get("USERINFO_CMDS_EXECUTED", client.db.stats.get(`user_${message.author.id}`))}
+        > ${message.language.get("USERINFO_PREMIUM_LICENCES", client.db.users.get(`${toFind.id}.premiums`)||"0")}`, true)
         .setThumbnail(toFind.displayAvatarURL())
         .setTimestamp()
 

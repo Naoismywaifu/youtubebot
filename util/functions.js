@@ -2,6 +2,7 @@ const config = require("../config.json")
 const db = require("quick.db");
 const { relativeTimeRounding } = require("moment");
 const { Message } = require("discord.js");
+const { readdir } = require("fs");
 
 
 module.exports = {
@@ -58,7 +59,25 @@ async prefix(message) {
     },
 
     async languages() {
+        let files = await readdir("../languages/")
 
+let langs = []
+
+        files.forEach((file) => {
+            let finfo = file.langinfos
+
+            let constructor = {
+                lang: finfo.lang,
+                name: finfo.name,
+                contributors: finfo.contributors,
+                enabled: finfo.enabled
+            }
+
+            langs.push(constructor)
+
+        })
+
+        return langs;
     },
 
     isDJ(message) {

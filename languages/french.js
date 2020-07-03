@@ -272,7 +272,7 @@ module.exports = class {
 			NOTIFY_INVALID_CHANNEL: `${e.no} | Le salon n'est pas valide !`,
 			NOTIFY_INVALID_YT_CHANNEL: `${e.no} | Merci de définir le nom de la chaine youtube à surveiller`,
 			NOTIFY_NOT_EXIST: `${e.no} | Je n'ais pas trouvé de chaine youtube avec ce nom, merci de bien vérifier le nom !`,
-			NOTIFY_SUCCESS: `${e.yes} | La chaine youtube a bien été mise en place, maintenant dès que vous allez `,
+			NOTIFY_SUCCESS: `${e.yes} | La chaine youtube a bien été mise en place, maintenant dès que le youtubeur va poster une video vous serez informé ! `,
 			NOTIFY_CHECKING: `${e.loading} | Résolution...`,
 
 			/* NP */
@@ -306,7 +306,9 @@ Envie de voter ? votez juste [ici](https://top.gg/bot/486948160124485642/vote)`,
 
 			/* SERVERINFO */
 			SERVERINFO_ISPREMIUM: `Est Premium`,
-			SERVERINFO_PREMIUM: (bool) => `${bool ? `` : ``}`,
+			SERVERINFO_PREMIUM: (bool) => `${bool ? `Oui` : `Non`}`,
+			SERVERINFO_CMDS_EXECUTED: `Commandes executées`,
+
 
 			/* PREMIUM */
 
@@ -335,6 +337,8 @@ Envie de voter ? votez juste [ici](https://top.gg/bot/486948160124485642/vote)`,
 			BOTINFO_SERVER_STATS: `<a:debian:719323036242935908> Informations serveur`,
 			BOTINFO_SOFTWARE_STATS: `<:configuration:718448486458327070> Informations logiciel`,
 			BOTINFO_SHARD: `Shard`,
+			BOTINFO_GUILD: `Serveur`,
+			BOTINFO_COMMANDS_EXECUTED: `Commandes executées`,
 			BOTINFO_TOTAL_SERVERS: `Nombre de serveurs`,
 			BOTINFO_TOTAL_USERS: `Nombre de Membres`,
 			BOTINFO_SHARD_NUMBER: `Nombre de shards`,
@@ -360,6 +364,44 @@ Envie de voter ? votez juste [ici](https://top.gg/bot/486948160124485642/vote)`,
 			RADIO_EXISTNO: `${e.no} | Cette radio n'existe pas !`,
 			RADIO_SUCCESS: (radio) => `${e.enabled} | Maintenant je vais jouer la radio ${radio} 24/7 dans ce salon !`,
 
+			/* USERINFO */
+			
+			USERINFO_INFOABOUT: (user) => `informations sur ${user}`,
+			USERINFO_MEMBERINFO: `Informations du membre`,
+			USERINFO_DISPLAYNAME: (disname) => `Nom affiché: ${disname}`,
+			USERINFO_JOINEDAT: (jdate) => `Rejoint le ${jdate}`,
+			USERINFO_USERINFO: `Informations Utilisateur`,
+			USERINFO_UNAME: (uname) => `Nom: ${uname}`,
+			USERINFO_TAG: (tag) => `Tag: ${tag}`,
+			USERINFO_CREATEDAD: (cdate) => `Crée le ${cdate}`,
+			USERINFO_PREMIUM_LICENCES: (nblicences) => `Licences Premium: ${nblicences}`,
+			USERINFO_CMDS_EXECUTED: (cmds) => `Commandes executées: ${cmds}`,
+
+
+
+			/* NOTIFIER_MESSAGE */
+			NOTIFIER_MESSAGE_PROVIDE: "Bon, Veuillez envoyer un message dans **CE** salon avec le message à dire quand le youtubeur postera une nouvelle vidéo\n\n\nNote: Si vous voulez annuler cette operation dites juste 'cancel'",
+			NOTIFIER_MESSAGE_INFO: `Informations`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS: `Placeholders`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_YTBER_NAME: `Nom du Youtuber`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_YTBER_URL: `Lien`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_YTBER_UPLOADDATE: `Date d'upload`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_YTBER_TITLE: `Titre`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_EMOJIS_YOUTUBE: `Logo de youtube`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_NAME: `Nom du serveur`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_ID: `ID du serveur`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_OWNER: `Créateur du serveur`,
+			NOTIFIER_MESSAGE_EXAPLE: `Exemple`,
+			NOTIFIER_MESSAGE_EXAPLE_EXAPLE: `Hey @everyone le youtubeur **{youtuber.name}** vient de sortir la vidéo \`{video.title}\`\nlien: {video.url} - Posté le {video.date}`,
+			NOTIFIER_MESSAGE_CANCELED: `${e.no} | Annulé car vous avez pris trop de temps a répondre`,
+			NOTIFIER_MESSAGE_CANCELED_REQUESTED: `${e.no} | Annulé`,
+			NOTIFIER_MESSAGE_SUCCESS: `${e.yes} | Le message a bien été sauvegardé !`,
+
+			
+			REBOOT_SHARD_INVALID_NB: `${e.no} | Le nombre est pas valide !`,
+			REBOOT_SHARD_REBOOTING: `${e.loading} | Redémarrage...`,
+			REBOOT_SHARD_SUCCESS: (id) => `${e.yes} | Le shard ${id} a bien redémarré !`,
+
 
 
 		}
@@ -372,8 +414,18 @@ Envie de voter ? votez juste [ici](https://top.gg/bot/486948160124485642/vote)`,
 	 * @returns {string|Function}
 	 */
 	get(term, ...args) {
-		//if (!this.enabled && this !== this.store.default) return this.store.default.get(term, ...args);
+		if (!langinfos.enabled){
+			if(!c.defaultLanguage === langinfos.name){
+				require(`./${c.defaultLanguage}`).get(term, ...args)
+			}
+		}
 		const value = this.language[term];
+
+		if(!value || value === undefined){
+			let deflang = new(require(`./${c.defaultLanguage}.js`));
+			return deflang.get(term, ...args)
+		}
+		
 		/* eslint-disable new-cap */
 		switch (typeof value) {
 			case "function": return value(...args);

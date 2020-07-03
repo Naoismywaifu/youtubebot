@@ -76,6 +76,10 @@ module.exports = {
             return message.channel.send(message.language.get("CONFIG_NOTIFIER_CMD"))
             break;
 
+            case "notif_message":
+                return message.channel.send(message.language.get("CONFIG_NOTIFIER_CMD"))
+                break;
+
         case "music_compact_mode":
             if(client.db.guildconf.get(`${message.guild.id}.compact`)){
                 client.db.guildconf.delete(`${message.guild.id}.compact`)
@@ -311,7 +315,7 @@ staffrole   ::      ${client.db.guildconf.get(`${message.guild.id}.staffrole`) ?
 = ${message.language.get("CONFIG_NOTIFIER")} =
 youtuber      ::      ${client.db.notifier.get(`${message.guild.id}.youtuber`)||message.language.get("UTILS").UNDEFINED}
 notif_channel ::      ${client.channels.cache.get(client.db.notifier.get(`${message.guild.id}.channel`)) ? client.channels.cache.get(client.db.notifier.get(`${message.guild.id}.channel`)).name : message.language.get("UTILS").UNDEFINED}
-                    
+notif_message       ::      ${client.db.notifier.get(`${message.guild.id}.message`)||message.language.get("UTILS").UNDEFINED}                  
 = ${message.language.get("CONFIG_MUSIC")} =
 music_compact_mode  ::      ${client.db.guildconf.get(`${message.guild.id}.compact`) ? message.language.get(`CHECK_ENABLED`) : message.language.get(`CHECK_DISABLED`)}
 

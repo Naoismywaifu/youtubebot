@@ -6,7 +6,7 @@ youtube = new Youtube(config.YOUTUBE_API_KEY_NOTIFIER);
 module.exports = {
     name: 'notify',
     description: 'notify in a discord channel when your favorite youtuber upload a new video',
-    cooldown: 1,
+    cooldown: 15,
     args: true,
     guildOnly: true,
     staffOnly: true,
@@ -39,7 +39,7 @@ module.exports = {
       return message.channel.send(message.language.get("NOTIFY_INVALID_YT_CHANNEL"))
 
       message.channel.send(message.language.get("NOTIFY_CHECKING")).then((m) => {
-       getYoutubeChannelInfos(args[1]).then((out) => {
+       getYoutubeChannelInfos(args.slice(1).join(" ")).then((out) => {
          console.log(out)
         if(!out){
         return m.edit(message.language.get("NOTIFY_NOT_EXIST"))

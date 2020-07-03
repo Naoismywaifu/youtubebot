@@ -221,8 +221,7 @@ var embed = new MessageEmbed()
     });
 
     collector.on("end", () => {
-      playingMessage.reactions.removeAll();
-      playingMessage.delete();
+      playingMessage.reactions.removeAll().then(playingMessage.delete());
     });
   }
 };

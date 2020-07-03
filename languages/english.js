@@ -102,7 +102,7 @@ module.exports = class {
 
 			/* MESSAGE ERRORS */
 
-			MESSAGE_ERROR_DISABLED: `${e.no} | This command is disabled !`,
+			MESSAGE_ERROR_DISABL00ED: `${e.no} | This command is disabled !`,
 			MESSAGE_ERROR_ARGS: `${e.no} | You don't have provided all arguments !`,
 			MESSAGE_ERROR_ARGS_CORRECT: (prefix, command, usage) => `${e.arrow} | Correct usage: ${prefix}${command} ${usage}`,
 			MESSAGE_ERROR_OWNERONLY: `${e.no} | This command is only usable by the bot's staff`,
@@ -317,6 +317,8 @@ Want to vote ? check  our [vote page](https://top.gg/bot/486948160124485642/vote
 
 			/* SERVERINFO */
 			SERVERINFO_PLAYING: `Playing`,
+			SERVERINFO_PREMIUM: (bool) => `${bool ? `Yes` : `No`}`,
+			SERVERINFO_CMDS_EXECUTED: `Commands executed`,
 
 			/* BOTINFO */
 
@@ -329,6 +331,8 @@ Want to vote ? check  our [vote page](https://top.gg/bot/486948160124485642/vote
 			BOTINFO_TOTAL_USERS: `Number of members`,
 			BOTINFO_SHARD_NUMBER: `Number of shards`,
 			BOTINFO_SHARD_CURRENT: `Current shard`,
+			BOTINFO_GUILD: `Server`,
+			BOTINFO_COMMANDS_EXECUTED: `Commands executed`,
 			BOTINFO_OS: `OS`,
 			BOTINFO_ARCH: `Arch`,
 			BOTINFO_RAM: `RAM usage`,
@@ -351,7 +355,44 @@ Want to vote ? check  our [vote page](https://top.gg/bot/486948160124485642/vote
 
 			/* USERINFO */
 			
+			USERINFO_INFOABOUT: (user) => `informations about ${user}`,
+			USERINFO_MEMBERINFO: `Member informations`,
+			USERINFO_DISPLAYNAME: (disname) => `Display name: ${disname}`,
+			USERINFO_JOINEDAT: (jdate) => `Joined at ${jdate}`,
+			USERINFO_USERINFO: `User informations`,
+			USERINFO_UNAME: (uname) => `Username: ${uname}`,
+			USERINFO_TAG: (tag) => `Tag: ${tag}`,
+			USERINFO_CREATEDAD: (cdate) => `Created at ${cdate}`,
+			USERINFO_PREMIUM_LICENCES: (nblicences) => `Premium licences: ${nblicences}`,
+			USERINFO_CMDS_EXECUTED: (cmds) => `Commands executed: ${cmds}`,
 
+
+
+			/* NOTIFIER_MESSAGE */
+			NOTIFIER_MESSAGE_PROVIDE: "Alright, please send a message in **THIS** channel the message which will be send if the youtuber send a new video\n\n\nNote: if you want cancel this operation, just tell 'cancel'",
+			NOTIFIER_MESSAGE_INFO: `Information`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS: `Placeholders`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_YTBER_NAME: `YouTuber Name`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_YTBER_URL: `Video URL`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_YTBER_UPLOADDATE: `Video Upload Date`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_YTBER_TITLE: `Video Title`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_EMOJIS_YOUTUBE: `Youtube's logo`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_NAME: `server's name`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_ID: `server's id`,
+			NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_OWNER: `server's owner`,
+			NOTIFIER_MESSAGE_EXAPLE: `Example`,
+			NOTIFIER_MESSAGE_EXAPLE_EXAPLE: `Hey @everyone the youtuber **{youtuber.name}** just posted a new video nammed \`{video.title}\`\nlink: {video.url} - uploaded the {video.date}`,
+			NOTIFIER_MESSAGE_CANCELED: `${e.no} | Canceled because you have taked too much time to reply`,
+			NOTIFIER_MESSAGE_CANCELED_REQUESTED: `${e.no} | Canceled`,
+			NOTIFIER_MESSAGE_SUCCESS: `${e.yes} | Correctly saved the message !`,
+
+			
+			REBOOT_SHARD_INVALID_NB: `${e.no} | The specified number is not valid !`,
+			REBOOT_SHARD_REBOOTING: `${e.loading} | Rebooting...`,
+			REBOOT_SHARD_SUCCESS: (id) => `${e.yes} | The shard ${id} correctly rebooted !`,
+
+
+			EXEMPLE_TRANSLATE: "HELLO WORLD",
 		}		
     }
 

@@ -46,6 +46,9 @@ module.exports = {
                 > ${message.language.get("BOTINFO_PLAYING_COUNT")} ❱ \`${totalplaying}\` ${message.language.get("UTILS").SERVERS}
                 > ↳ ${message.language.get("BOTINFO_SHARD")} ❱ \`${client.queue.size}\` ${message.language.get("UTILS").SERVERS}
 
+                > ${message.language.get("BOTINFO_COMMANDS_EXECUTED")} ❱ \`${client.db.stats.get("global")}\`
+                > ↳ ${message.language.get("BOTINFO_GUILD")} ❱ \`${client.db.stats.get(`guild_${message.guild.id}`)}\`
+        
                 > ${message.language.get("BOTINFO_PREMIUM_COUNT")} ❱ \`${client.db.guildconf.all().filter(guild => guild.data.premium === true).length}\` ${message.language.get("UTILS").SERVERS}
                 `, true)
                 .addField(message.language.get("BOTINFO_SERVER_STATS"), `
