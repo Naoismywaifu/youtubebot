@@ -135,7 +135,8 @@ module.exports = class {
 			MUSIC_ISNOT_INVOKER: `${e.no} | Vous devez être l'invoquateur de la commande pour faire cela !`,
 			MUSIC_SEARCHING: (search) => `${e.search} | Recherche pour \`${search}\` en cours...`,
 			MUSIC_RADIO_PLAYING: `${e.no} | Vous ne pouvez pas me faire jouer de la musique quand je joue de la radio 24/7 dans un salon, faites moi quitter avant de faire cela !`,
-			
+			MUSIC_LIVE_PREMIUM_ONLY: `${e.no} | Oups jouer des lives est une fonctionalité YouTube Bot Premium !`,
+
 			/* LOOP */
 
             LOOP_LOOP: (status) => `🔂 | Le mode répétition est désormais **${status}**`,

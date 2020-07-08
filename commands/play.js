@@ -126,6 +126,13 @@ module.exports = {
       }
     }
 
+if(song.live){
+  if(!client.db.guildconf.get(`${message.guild.id}.premium`)){
+    return message.channel.send(message.language.get("MUSIC_LIVE_PREMIUM_ONLY"));
+  }
+}
+
+
     if (serverQueue) {
 
       if(serverQueue.connection.dispatcher.paused){

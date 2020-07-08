@@ -135,7 +135,9 @@ module.exports = class {
 			MUSIC_ISNOT_INVOKER: `${e.no} | You need to be the invoker of the command to make that !`,
 			MUSIC_SEARCHING: (search) => `${e.search} | Searching for \`${search}\`...`,
 			MUSIC_RADIO_PLAYING: `${e.no} | You can't play music while i am playing radio 24/7 in a channel, please make me leaving before executing this command !`,
-            /* LOOP */
+			MUSIC_LIVE_PREMIUM_ONLY: `${e.no} | Oops playing lives can only do with YouTube Bot Premium !`,
+			
+			/* LOOP */
 
             LOOP_LOOP: (status) => `🔂 | The loop mode is now **${status}**`,
 		
@@ -266,7 +268,7 @@ module.exports = class {
 			NOTIFY_INVALID_CHANNEL: `${e.no} | The channel isn't valid !`,
 			NOTIFY_INVALID_YT_CHANNEL: `${e.no} | Please provide the channel name to check`,
 			NOTIFY_NOT_EXIST: `${e.no} | I couldn't fetch the youtube channel provided please try again !`,
-			NOTIFY_SUCCESS: `${e.yes} | Success ! the youtube channel was been saved, take note a notification can take up 30 minuts to be sended`,
+			NOTIFY_SUCCESS: `${e.yes} | Success ! the youtube channel was been saved, take note a notification can take up 30 minuts to be sent`,
 			NOTIFY_CHECKING: `${e.loading} | Recherche en cours...`,
 			/* NP */
 			NP_CURRENT: (title, author, url) => `${e.youtube} | I'm playing **${title}** by **${author}** from **YouTube**\n[Link](${url})`,

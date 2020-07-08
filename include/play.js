@@ -44,7 +44,9 @@ module.exports = {
 
     try {
       if(effectfinal.length === 0){
-        var stream = await ytdlDiscord(song.url, { highWaterMark: 1 << 25, 
+        if(!song.live){
+        var stream = await ytdlDiscord(song.url, { 
+          highWaterMark: 1 << 25, 
           filter: "audioonly"
                 }).on("error", err => {
                   if(err.code === "403"){
@@ -53,7 +55,24 @@ module.exports = {
                     .catch(console.error);
                   }
                 })
+              } else {
+                var stream = await ytdlDiscord(song.url, { 
+                  highWaterMark: 100,
+                  fec: true,
+                  plp: 30,
+                  quality: 'lowestaudio',
+                  bitrate: 64,
+                  filter: "audioonly"
+                        }).on("error", err => {
+                          if(err.code === "403"){
+                            message.channel
+                            .send(message.language.get("MUSIC_ERR_QUOTA"))
+                            .catch(console.error);
+                          }
+                        })
+              }
       } else {
+        if(!song.live){
       var stream = await ytdlDiscord(song.url, { highWaterMark: 1 << 25, 
         filter: "audioonly",
         encoderArgs: ['-af', `${effectfinal.length > 0 ? effectfinal.join(",") : ""}`]
@@ -64,6 +83,23 @@ module.exports = {
           .catch(console.error);
         }
       })
+    } else {
+      var stream = await ytdlDiscord(song.url, { 
+        highWaterMark: 100,
+        fec: true,
+        plp: 30,
+        quality: 'lowestaudio',
+        bitrate: 64,
+        filter: "audioonly",
+        encoderArgs: ['-af', `${effectfinal.length > 0 ? effectfinal.join(",") : ""}`]
+      }).on("error", err => {
+        if(err.code === "403"){
+          message.channel
+          .send(message.language.get("MUSIC_ERR_QUOTA"))
+          .catch(console.error);
+        }
+      })
+    }
       }
     } catch (error) {
       if (queue) {

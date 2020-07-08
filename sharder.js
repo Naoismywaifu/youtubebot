@@ -3,7 +3,7 @@ const config = require("./config.json")
 moment = require("moment"), 
 shards = new ShardingManager("./index.js", {
     token: config.TOKEN, 
-    totalShards: "auto",
+    totalShards: config.shards,
 	respawn: true
 });
 
