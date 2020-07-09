@@ -26,8 +26,11 @@ module.exports = {
                     let channels = await youtube.searchChannels(name, 1)
                       console.log(channels)
               if(channels.length > 0){
-                  
-                return channels[0].raw.snippet.title;
+                  out = {
+                          title: channels[0].raw.snippet.title,
+                          id: channels[0].id 
+                        }
+                return out;
               } else {
                 return false;
               }
@@ -53,9 +56,9 @@ module.exports = {
           }
 
 
-
+          client.db.notifier.set(`${message.guild.id}.channelid`, out.id)
           client.db.notifier.set(`${message.guild.id}.channel`, channelid)
-          client.db.notifier.set(`${message.guild.id}.youtuber`, out)
+          client.db.notifier.set(`${message.guild.id}.youtuber`, out.title)
 
 
         }

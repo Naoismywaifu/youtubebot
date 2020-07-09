@@ -269,7 +269,7 @@ module.exports = class {
 			NOTIFY_INVALID_CHANNEL: `${e.no} | The channel isn't valid !`,
 			NOTIFY_INVALID_YT_CHANNEL: `${e.no} | Please provide the channel name to check`,
 			NOTIFY_NOT_EXIST: `${e.no} | I couldn't fetch the youtube channel provided please try again !`,
-			NOTIFY_SUCCESS: `${e.yes} | Success ! the youtube channel was been saved, take note a notification can take up 30 minuts to be sent`,
+			NOTIFY_SUCCESS: `${e.yes} | Success ! the youtube channel was been saved, take note a notification can take up 5 minuts to be sent`,
 			NOTIFY_CHECKING: `${e.loading} | Recherche en cours...`,
 			/* NP */
 			NP_CURRENT: (title, author, url) => `${e.youtube} | I'm playing **${title}** by **${author}** from **YouTube**\n[Link](${url})`,
