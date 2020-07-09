@@ -161,7 +161,7 @@ ${song.shortDesc}
       var embed = new MessageEmbed()
       .setThumbnail(song.thumbnail)
       embed.addField(`🎶 ${message.language.get("MUSIC_NOWPLAYING")} 🎶`, `
-      <a:disk:719524203983929375> ❱ ${song.title} ${song.underrage ? " [🔞 Restricted]" : ""} ${song.live ? " **[🔴 live]**" : ""}
+      <a:disk:719524203983929375> ❱ ${song.title} ${song.underrage ? ` **[🔞 ${message.language.get("UTILS").RESTRICTED}]**` : ""} ${song.live ? " **[🔴 live]**" : ""}
       <:plus:719323001677676575> ❱ ${song.author} ${song.verified ? "<:verified:719526360703434862>" : ""}
       <:date:719524185407225876> ❱ ${message.language.get("MUSIC_PUBLISHED", message.language.printDate(song.upload), true)}
       `, false)
@@ -200,14 +200,14 @@ var embed = new MessageEmbed()
 
       switch (reaction.emoji.name) {
         case "⏭":
-          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER"))
+          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username))
           queue.connection.dispatcher.end();
           queue.textChannel.send(message.language.get("SKIP_SKIPPED", message.author)).catch(console.error);
           collector.stop();
           break;
 
         case "⏸":
-          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER"))
+          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username))
 
           if (!queue.playing) break;
           queue.playing = false;
@@ -217,7 +217,7 @@ var embed = new MessageEmbed()
           break;
 
         case "▶":
-          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER")).then(msg => {
+          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username)).then(msg => {
             msg.delete(10000)
           })
 
@@ -229,7 +229,7 @@ var embed = new MessageEmbed()
           break;
 
         case "🔁":
-          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER"))
+          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username))
 
           queue.loop = !queue.loop;
           queue.textChannel
@@ -239,7 +239,7 @@ var embed = new MessageEmbed()
           break;
 
         case "⏹":
-          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER"))
+          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username))
           queue.songs = [];
           queue.textChannel.send(message.language.get("STOP_STOPPED", message.author)).catch(console.error);
           try {
