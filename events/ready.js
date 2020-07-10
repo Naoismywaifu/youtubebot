@@ -147,7 +147,6 @@ for (let i=0; i < client.radiomanager.all().length; i++){
 check247()
 
 setInterval(async function notifier() {
-check(client)
 client.user.setActivity(`YouTube Bot ⋄ ${client.prefix}help ⋄ Shard ${client.shard.ids[0] + 1}/${client.shard.count}`, { tyoe: "LISTENING" });
 
 const guildsCounts = await client.shard.fetchClientValues("guilds.cache.size");
@@ -185,5 +184,11 @@ if(client.channels.cache.get(config.stats_channels.users)){
 
 
 
+}, 30 * 1000 * 60)
+
+setInterval(async function ddfsf() {
+check(client)
 }, 5 * 1000 * 60)
+
+
 }

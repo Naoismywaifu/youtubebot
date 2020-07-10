@@ -39,7 +39,7 @@ module.exports = {
     ownerOnly: false,
     args: true,
     enabled: true,
-    category: "Core",
+    category: "Music",
     usage: '<song>',
     aliases: ["paroles"],
     async execute(client, message, args) {
