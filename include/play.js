@@ -122,7 +122,7 @@ module.exports = {
     }
 
     const dispatcher = queue.connection
-      .play(stream, { type: "opus" })
+      .play(stream, { type: "converted" })
       .on("finish", () => {
         if (queue.loop) {
           // if loop is on, push the song back at the end of the queue
