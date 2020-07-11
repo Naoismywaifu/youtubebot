@@ -73,7 +73,8 @@ module.exports = {
               }
       } else {
         if(!song.live){
-      var stream = await ytdlDiscord(song.url, { highWaterMark: 1 << 25, 
+      var stream = await ytdlDiscord(song.url, { 
+        highWaterMark: 1 << 25, 
         filter: "audioonly",
         encoderArgs: ['-af', `${effectfinal.length > 0 ? effectfinal.join(",") : ""}`]
       }).on("error", err => {
@@ -152,11 +153,7 @@ module.exports = {
     try {
 
       if(!message.client.db.guildconf.get(`${message.guild.id}.compact`) && !song.playlist){
-/*       \`\`\`asciidoc
-= ${message.language.get("MUSIC_SHORT_DESC")} =
-${song.shortDesc}
-\`\`\`
-*/
+
 
       var embed = new MessageEmbed()
       .setThumbnail(song.thumbnail)
@@ -176,7 +173,6 @@ var embed = new MessageEmbed()
 .setFooter(message.language.get("FOOTER_REQUESTEDBY", message.author.tag), message.author.displayAvatarURL({ dynamic: true }))
     }
       var playingMessage = await queue.textChannel.send(embed)
-      // var playingMessage = await queue.textChannel.send(` Started playing: **${song.title}** ${song.url} by ${song.author} id: ${song.id} verified ? : ${song.verified}, thumbnail: ${song.thumbnail}, author : ${song.author_channel}\nLikes: ${song.likes} | Dislikes ${song.dislikes} | Underrage ? ${song.underrage}`);
       await playingMessage.react("⏭");
       await playingMessage.react("⏸");
       await playingMessage.react("▶");

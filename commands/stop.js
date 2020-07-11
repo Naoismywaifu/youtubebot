@@ -13,7 +13,7 @@ module.exports = {
 
     if(client.radiomanager.get(`${message.guild.id}.playing`)){
 
-      if(message.guild.voice.channel){
+      if(message.guild.me.voice.channel){
       message.guild.voice.channel.leave()
       }
 
