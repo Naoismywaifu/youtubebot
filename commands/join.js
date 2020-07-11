@@ -15,7 +15,7 @@ module.exports = {
     aliases: [],
     execute(client, message, args) {
 
-        if(client.radiomanager.get(`${message.guild.id}.playing`)) return message.channel.send(message.language.get("MUSIC_RADIO_PLAYING"))
+        if(client.radiomanager.get(message.guild.id)) return message.channel.send(message.language.get("MUSIC_RADIO_PLAYING"))
 
 
 if(!message.member.voice.channel) return message.channel.send(message.language.get("MUSIC_NO_CHANNEL"))
