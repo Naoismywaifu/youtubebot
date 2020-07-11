@@ -73,7 +73,7 @@ async function check(client){
         if(!client.db.notifier.has(`${guild.ID}.channel`)) return;
 
         if(!client.db.notifier.has(`${guild.ID}.youtuberid`)){
-           let ch = await getYoutubeChannelInfos(client.db.notifier.has(`${guild.ID}.youtuber`))
+           let ch = await getYoutubeChannelInfos(client.db.notifier.get(`${guild.ID}.youtuber`))
         
             client.db.notifier.set(`${guild.ID}.youtuberid`, ch.id)
         
