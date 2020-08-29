@@ -30,27 +30,33 @@ async function getLastVideo(youtubeChannelName, rssURL){
         let bPubDate = new Date(b.pubDate || 0).getTime();
         return bPubDate - aPubDate;
     });
-    //console.log(`[${youtubeChannelName}]  | The last video is "${tLastVideos[0] ? tLastVideos[0].title : "err"}"`);
+    console.log(`[${youtubeChannelName}]  | The last video is "${tLastVideos[0] ? tLastVideos[0].title : "err"}"`);
     return tLastVideos[0];
 }
 
 
 async function checkVideos(youtubeChannelName, rssURL){
-    //console.log(`[${youtubeChannelName}] | Get the last video..`);
+    console.log(`[${youtubeChannelName}] | Get the last video..`);
     let lastVideo = await getLastVideo(youtubeChannelName, rssURL);
     // If there isn't any video in the youtube channel, return
     if(!lastVideo) return console.log("[ERR] | No video found for "+lastVideo);
     // If the date of the last uploaded video is older than the date of the bot starts, return 
+
+
     if(new Date(lastVideo.pubDate).getTime() < startAt) return console.log(`[${youtubeChannelName}] | Last video was uploaded before the bot starts`);
+
     let lastSavedVideo = lastVideos[youtubeChannelName];
+
+    console.log(lastSavedVideo)
+    console.log(lastVideo)
     // If the last video is the same as the last saved, return
     if(lastSavedVideo && (lastSavedVideo.id === lastVideo.id)) return console.log(`[${youtubeChannelName}] | Last video is the same as the last saved`);
+
     return lastVideo;
 }
 
 
 async function getYoutubeChannelInfos(name){
-  //  console.log(`[${name.length >= 10 ? name.slice(0, 10)+"..." : name}] | Resolving channel infos...`);
     let channel = null;
 
         let channels = await youtube.searchChannels(name, 2);
@@ -58,7 +64,6 @@ async function getYoutubeChannelInfos(name){
             channel = channels[0];
         }
     
-   // console.log(`[${name.length >= 10 ? name.slice(0, 10)+"..." : name}] | Title of the resolved channel: ${channel.raw ? channel.raw.snippet.title : "err"}`);
     return channel;
 }
 
@@ -81,14 +86,16 @@ async function check(client){
 
         var youtuber = client.db.notifier.fetch(`${guild.ID}.youtuber`)
         if(!youtuber) return client.db.notifier.delete(guild.ID);
-       // console.log(`[${youtuber.length >= 10 ? youtuber.slice(0, 10)+"..." : youtuber}] | Start checking...`);
-      //  let channelInfos = await getYoutubeChannelInfos(youtuber);
-      //  if(!channelInfos) return console.log("[ERR] | Invalid youtuber provided: "+youtuber);
-        let video = await checkVideos(client.db.notifier.get(`${guild.ID}.youtuber`), "https://www.youtube.com/feeds/videos.xml?channel_id="+client.db.notifier.get(`${guild.ID}.youtuberid`));
-        if(!video) return console.log(`[${client.db.notifier.get(`${guild.ID}.youtuber`)}] | No notification`);
+
+        let video = await checkVideos(client.db.notifier.get(`${guild.ID}.youtuberid`), "https://www.youtube.com/feeds/videos.xml?channel_id="+client.db.notifier.get(`${guild.ID}.youtuberid`));
+        if(!video) return console.log(`No notification`);
         let channel = client.channels.cache.get(client.db.notifier.get(`${guild.ID}.channel`));
-        if(!channel) return console.log("[ERR] | Channel not found");
-        let msg;
+        if(!channel){
+            client.db.notifier.delete(guild.ID)
+            return console.log("[ERR] | Channel not found");
+            }
+        
+             let msg;
         if(client.db.notifier.has(`${guild.ID}.message`)){
             msg = client.db.notifier.get(`${guild.ID}.message`)
         } else {
@@ -109,10 +116,9 @@ async function check(client){
 
 
 
-
+        lastVideos[client.db.notifier.get(`${guild.ID}.youtuberid`)] = video;
         channel.send(msg)
         console.log("Notification sent !");
-        lastVideos[client.db.notifier.get(`${guild.id}.youtuber`)] = video;
     });
 }
 

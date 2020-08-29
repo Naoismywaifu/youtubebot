@@ -196,47 +196,75 @@ var embed = new MessageEmbed()
 
       switch (reaction.emoji.name) {
         case "⏭":
-          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username))
+          if(user.id !== message.author.id){
+            message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username)).then(msg => {
+              reaction.users.remove(user);
+          return msg.delete({ timeout: 10000 });
+         })
+       } else {
           queue.connection.dispatcher.end();
           queue.textChannel.send(message.language.get("SKIP_SKIPPED", message.author)).catch(console.error);
           collector.stop();
+       }
           break;
 
         case "⏸":
-          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username))
-
+          if(user.id !== message.author.id){
+            message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username)).then(msg => {
+              reaction.users.remove(user);
+              return msg.delete({ timeout: 10000 });
+            
+         })
+       } else {
           if (!queue.playing) break;
           queue.playing = false;
           queue.connection.dispatcher.pause();
           queue.textChannel.send(message.language.get("PAUSE_PAUSED", message.author)).catch(console.error);
           reaction.users.remove(user);
+       }
           break;
 
         case "▶":
-          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username)).then(msg => {
-            msg.delete(10000)
+          if(user.id !== message.author.id){
+             message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username)).then(msg => {
+              reaction.users.remove(user);
+           return msg.delete({ timeout: 10000 });
+             
           })
-
+        } else {
           if (queue.playing) break;
           queue.playing = true;
           queue.connection.dispatcher.resume();
           queue.textChannel.send(message.language.get("RESUME_RESUMED", message.author)).catch(console.error);
           reaction.users.remove(user);
+        }
           break;
 
         case "🔁":
-          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username))
-
+          if(user.id !== message.author.id){
+            message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username)).then(msg => {
+              reaction.users.remove(user);
+            return msg.delete({ timeout: 10000 });
+            
+         })
+       } else {
           queue.loop = !queue.loop;
           queue.textChannel
             .send(message.language.get("LOOP_LOOP", queue.loop ? message.language.get("UTILS").ON : message.language.get("UTILS").OFF))
             .catch(console.error);
           reaction.users.remove(user);
+       }
           break;
 
         case "⏹":
-          if(user.id !== message.author.id) return message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username))
-          queue.songs = [];
+          if(user.id !== message.author.id){
+            message.channel.send(message.language.get("MUSIC_ISNOT_INVOKER", user.username)).then(msg => {
+            reaction.users.remove(user);
+           return msg.delete({ timeout: 10000 });
+            
+         })
+       } else {
+                 queue.songs = [];
           queue.textChannel.send(message.language.get("STOP_STOPPED", message.author)).catch(console.error);
           try {
             queue.connection.dispatcher.end();
@@ -245,6 +273,7 @@ var embed = new MessageEmbed()
             queue.connection.disconnect();
           }
           collector.stop();
+        }
           break;
 
         default:

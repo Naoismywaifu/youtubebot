@@ -22,5 +22,21 @@
     "skyrock-fr": {
         "lang":"FRENCH",
         "url":"http://www.skyrock.fm/stream.php/tunein16_128mp3.mp3"
+    },
+    "lessentielRadio": {
+        "lang":"FRENCH / LUXEMBOURG",
+        "url":"http://lessentielradio.ice.infomaniak.ch/lessentielradio-128.mp3"
+    },
+    "funradio-sk": {
+    "lang":"SLOVAKIAN",
+    "url":"http://stream.funradio.sk:8000/fun192.mp3"
+    },
+    "nrj-ru": {
+    "lang":"RUSSIAN",
+    "url":"http://ic4.101.ru:8000/v1_1"
+    },
+    "nrj-de": {
+    "lang":"GERMAN / DEUTSCH",
+    "url":"http://cdn.nrjaudio.fm/adwz1/de/33001/mp3_128.mp3"
     }
 }
