@@ -108,7 +108,7 @@ module.exports = class {
 			MESSAGE_ERROR_ARGS_CORRECT: (prefix, command, usage) => `${e.arrow} | Correct usage: ${prefix}${command} ${usage}`,
 			MESSAGE_ERROR_OWNERONLY: `${e.no} | This command is only usable by the bot's staff`,
 			MESSAGE_ERROR_WAIT: (time, command) => `${e.no} | Please wait more ${time} second(s) before ran the command ${command.name}`,
-			MESSAGE_ERROR_CMDEXEC: `${e.no} | Something whent wrong during the execution of the command, try again later.`,
+			MESSAGE_ERROR_CMDEXEC: (errid) => `${e.no} | Something whent wrong during the execution of the command, try again later.\nError code: **${errid}**, please give this error on our support server to be helped https://discord.gg/stUcGXw`,
 			
 			
 			/* HELP */
@@ -393,6 +393,12 @@ Want to vote ? check  our [vote page](https://top.gg/bot/486948160124485642/vote
 			REBOOT_SHARD_INVALID_NB: `${e.no} | The specified number is not valid !`,
 			REBOOT_SHARD_REBOOTING: `${e.loading} | Rebooting...`,
 			REBOOT_SHARD_SUCCESS: (id) => `${e.yes} | The shard ${id} correctly rebooted !`,
+
+			/* GETERROR */
+
+			GETERROR_INVALID_ID: `${e.no} | The error's id isn't valid please provide a valid error id !`,
+			GETERROR_ERROR: `error`,
+			GETERROR_IDS: (guildid, userid, date) => `User id: **${userid}**\nserver id: **${guildid}**\nDate: **${date}**`,
 
 
 			EXEMPLE_TRANSLATE: "HELLO WORLD",

@@ -222,11 +222,20 @@ module.exports = {
                         break;
                 
                         case "youtuber":
-                        return message.channel.send(message.language.get("CONFIG_NOTIFIER_CMD"))
+                        client.db.notifier.delete(message.guild.id)
+                        return message.channel.send(message.language.get("CONFIG_RESET_SUCCESS", "notifier (depends of youtuber)"))
                         break;
-                
                         case "notif_channel":
-                            return message.channel.send(message.language.get("CONFIG_NOTIFIER_CMD"))
+                            client.db.notifier.delete(message.guild.id)
+                            return message.channel.send(message.language.get("CONFIG_RESET_SUCCESS", "notifier (depends of notif channel)"))
+                            break;
+                
+                        case "notif_message":
+                            case "notif_channel":
+                                client.db.notifier.delete(message.guild.id)
+                                return message.channel.send(message.language.get("CONFIG_RESET_SUCCESS", "notifier (depends of notif message)"))
+                                break;                            
+                            
                             break;
                 
                         case "music_compact_mode":

@@ -7,7 +7,6 @@ const client = new discord.Client({
   allowedMentions: { parse: [] }
  });
 const fs = require("fs")
-const { readdirSync } = require("fs");
 const { join } = require("path");
 const config = require("./config.json");
 const db = require("quick.db")
@@ -18,6 +17,7 @@ db.radio = new db.table('radio')
 db.notifier = new db.table('notifier')
 db.guildconf = new db.table('guildconf')
 db.stats = new db.table('stats')
+db.errors = new db.table('errors')
 db.users = new db.table("users")
 db.codes = new db.table("codes")
 client.radiomanager = new db.table("radiomanager")
@@ -72,7 +72,7 @@ Array.prototype.shuffle = function() {
 /**
  * Import all commands
  */
-const commandFiles = readdirSync(join(__dirname, "commands")).filter(file => file.endsWith(".js"));
+const commandFiles = fs.readdirSync(join(__dirname, "commands")).filter(file => file.endsWith(".js"));
 for (const file of commandFiles) {
   const command = require(join(__dirname, "commands", `${file}`));
   client.commands.set(command.name, command);

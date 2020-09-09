@@ -108,7 +108,7 @@ module.exports = class {
 			MESSAGE_ERROR_ARGS_CORRECT: (prefix, command, usage) => `${e.arrow} | Utilisation correcte: ${prefix}${command} ${usage}`,
 			MESSAGE_ERROR_OWNERONLY: `${e.no} | Cette commande est réservée uniquement au staff du bot !`,
 			MESSAGE_ERROR_WAIT: (time, command) => `${e.no} | Veillez attendre ${time} seconde(s) avant de pouvoir effectuer la commande ${command.name}`,
-			MESSAGE_ERROR_CMDEXEC: `${e.no} | Quelquechose ne s'est pas bien passé durant l'execution de la commande, essayez de contacter mon créateur.`,
+			MESSAGE_ERROR_CMDEXEC: (errid) => `${e.no} | Quelquechose ne s'est pas bien passé durant l'execution de la commande, essayez de contacter mon créateur.\n Code d'erreur: **${errid}**, Si vous voulez de l'aide venez sur notre serveur de support https://discord.gg/stUcGXw`,
 			
 			
 			/* HELP */
@@ -133,7 +133,7 @@ module.exports = class {
 			MUSIC_PUBLISHED: (date) => `Publiée le ${date}`,
 			MUSIC_SHORT_DESC: `Description courte`,
 			MUSIC_QUERY_NOT_EXIST: `${e.no} | Oups... je crois n'avoir rien trouvé qui corresponde avec votre requête, re-esseyez avec une requête plus pertinente`,
-			MUSIC_ISNOT_INVOKER: (user) => `${e.no} | ${user}, Vous devez être l'invoquateur de la commande pour faire cela !`,
+			MUSIC_ISNOT_INVOKER: (user) => `${e.no} | ${user}, Vous devez être l'invocateur de la commande pour faire cela !`,
 			MUSIC_SEARCHING: (search) => `${e.search} | Recherche pour \`${search}\` en cours...`,
 			MUSIC_RADIO_PLAYING: `${e.no} | Vous ne pouvez pas me faire jouer de la musique quand je joue de la radio 24/7 dans un salon, faites moi quitter avant de faire cela !`,
 			MUSIC_LIVE_PREMIUM_ONLY: `${e.no} | Oups jouer des lives est une fonctionalité YouTube Bot Premium !`,
@@ -404,7 +404,11 @@ Envie de voter ? votez juste [ici](https://top.gg/bot/486948160124485642/vote)`,
 			REBOOT_SHARD_REBOOTING: `${e.loading} | Redémarrage...`,
 			REBOOT_SHARD_SUCCESS: (id) => `${e.yes} | Le shard ${id} a bien redémarré !`,
 
+			/* GETERROR */
 
+			GETERROR_INVALID_ID: `${e.no} | L'id n'est pas valide merci de me donner un identifiant d'errur valide`,
+			GETERROR_ERROR: `erreur`,
+			GETERROR_IDS: (guildid, userid, date) => `ID utilisateur: **${userid}**\nID serveur: **${guildid}**\nDate: **${date}**`
 
 		}
     }

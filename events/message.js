@@ -101,8 +101,10 @@ require("../TL.js").TL(message)
 try {
 await command.execute(client, message, args);
 } catch (error) {
+    let err = error;
+let callback = require("../util/errorHandler").handle(message, err)
 console.error(error);
-message.reply(message.language.get("MESSAGE_ERROR_CMDEXEC"));
+message.reply(message.language.get("MESSAGE_ERROR_CMDEXEC", callback));
 }
 
     }

@@ -5,7 +5,7 @@ module.exports = {
     description: 'invite the bot on your server.',
     cooldown: 15,
     guildOnly: true,
-    ownerOnly: false,
+    ownerOnly: true,
     args: false,
     enabled: false,
     category: "Owner",

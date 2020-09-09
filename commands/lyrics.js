@@ -48,7 +48,7 @@ module.exports = {
         const query = args.join(" ")
         searchLyrics(`${baseURL}&q=${encodeURIComponent(query)}`)
           .then(songData => {
-            if(songData[0] === query) 
+            if(songData[0] === query || !songData[0]) 
             return message.channel.send(message.language.get("LYRICS_NOT_FOUND", query));
             const embed = new Discord.MessageEmbed()
               .setColor(0x00AE86)
