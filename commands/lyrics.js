@@ -1,6 +1,5 @@
 const cheerio = require("cheerio");
 const axios = require('axios');
-const getArtistTitle = require('get-artist-title');
 const Discord = require('discord.js');
 const config = require("../config.json")
 
@@ -49,6 +48,8 @@ module.exports = {
         const query = args.join(" ")
         searchLyrics(`${baseURL}&q=${encodeURIComponent(query)}`)
           .then(songData => {
+            if(songData[0] === query) 
+            return message.channel.send(message.language.get("LYRICS_NOT_FOUND", query));
             const embed = new Discord.MessageEmbed()
               .setColor(0x00AE86)
               .setTitle(message.language.get("LYRICS_SUCCESS", songData[0]))

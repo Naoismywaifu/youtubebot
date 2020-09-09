@@ -26,16 +26,16 @@ module.exports = {
     .setColor("RED")
 
     
-    message.channel.send(embed)
+    message.channel.send(embed, { disableMentions: "all" })
       .catch(console.error);
   } else {
     var embed = new Discord.MessageEmbed()
     message.channel.send(`📃 **${message.language.get("QUEUE_SONGQUEUE")}**
 
-${serverQueue.songs.map((song, index) => `[ **${index + 1}** ] \`${song.title}\` | \`${song.author}\``).join("\n")}
+${serverQueue.songs.map((song, index) => `[ **${index + 1}** ] **${song.title}** | **${song.author}**`).join("\n")}
     
 ${message.language.get("QUEUE_NOWPLAYING")}: **${serverQueue.songs[0].title}**
-    `, { split: true })
+    `, { split: true, disableMentions: "everyone" })
 
   }
   }

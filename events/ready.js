@@ -1,6 +1,7 @@
 const Discord = require("discord.js")
 const config = require("../config.json")
 const Parser = require("rss-parser");
+const { split } = require("ffmpeg-static");
 const parser = new Parser();
 Youtube = require("simple-youtube-api"),
 youtube = new Youtube(config.YOUTUBE_API_KEY_NOTIFIER);
@@ -110,7 +111,7 @@ async function check(client){
 
 
 
-        channel.send(msg)
+        channel.send(msg, { disableMentions: "none", split: true })
         console.log("Notification sent !");
         lastVideos[client.db.notifier.get(`${guild.id}.youtuber`)] = video;
     });

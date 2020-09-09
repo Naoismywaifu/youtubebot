@@ -2,7 +2,9 @@
 const discord = require("discord.js");
 const client = new discord.Client({ 
   disableEveryone: true, 
-  disabledEvents: ["TYPING_START"]
+  disableMentions: "everyone",
+  disabledEvents: ["TYPING_START"],
+  allowedMentions: { parse: [] }
  });
 const fs = require("fs")
 const { readdirSync } = require("fs");
