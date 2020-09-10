@@ -15,7 +15,7 @@ module.exports = {
 let embed = new Discord.MessageEmbed()
 .setTitle("Youtube Bot")
 .setDescription(message.language.get("INVITE_DESC"))
-.addField(message.language.get("INVITE_ALL_PERM"), `[${message.language.get("INVITE_CLICK_ALL")}]](https://discordapp.com/oauth2/authorize?client_id=486948160124485642&scope=bot&permissions=2146958847)`, false)
+.addField(message.language.get("INVITE_ALL_PERMS"), `[${message.language.get("INVITE_CLICK_ALL")}](https://discordapp.com/oauth2/authorize?client_id=486948160124485642&scope=bot&permissions=2146958847)`, false)
 .addField(message.language.get("INVITE_NO_PERMS"), `[${message.language.get("INVITE_CLICK_NONE")}](https://discordapp.com/oauth2/authorize?client_id=486948160124485642&scope=bot&permissions=0)`, false)
 .setFooter("Youtube Bot")
 .setColor("ORANGE")

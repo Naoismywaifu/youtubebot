@@ -288,7 +288,7 @@ Want to vote ? check  our [vote page](https://top.gg/bot/486948160124485642/vote
 		
 
 			/* INVITE */
-			INVITE_DESC: `YouTube Bot is a Disord bot completly Free with a lot of freatures.`,
+			INVITE_DESC: `YouTube Bot is a Disord bot completly Free with a lot of features.`,
 			INVITE_ALL_PERMS: `Invite with all permissions (recommanded)`,
 			INVITE_NO_PERMS: `Invite without permssions (not recommanded)`,
 			INVITE_CLICK_ALL: `Invite`,
