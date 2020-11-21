@@ -122,7 +122,7 @@ module.exports = {
         };
       } catch (error) {
         console.error(error);
-        message.chnnel.send(message.language.get("MUSIC_NO_EXIST"))
+        return message.chnnel.send(message.language.get("MUSIC_NO_EXIST"))
       }
     }
 

@@ -30,19 +30,17 @@ if(!dm && !message.client.db.guildconf.get(`${message.guild.id}.telemetrics`)){
     \`\`\`
     `)
     if(!dm){
-    embed.addField("Guild infos", `> ${message.guild.name} (${message.guild.id})
-    > SHARD ID: ${shardid}
-    > Owner: ${message.guild.owner.user.tag} (id: ${message.guild.ownerID})
-    > Created at: ${message.guild.createdAt}
-    > icon: ${message.guild.iconURL({ dynamic:true })}
+    embed.addField("Guild infos", `> ${message.guild.name||null} (${message.guild.id||null})
+    > SHARD ID: ${shardid||null}
+    > Owner: ${message.guild.owner.user.tag||"unavailable"} (id: ${message.guild.ownerID||"Unavailable"})
+    > Created at: ${message.guild.createdAt||"Unfetchable"}
+    > icon: ${message.guild.iconURL({ dynamic:true })||"None"}
     `, true)
     embed.addField("Guild Config", `
 \`\`\`asciidoc
 langugage   ::      ${message.language.getFullLang()}
 prefix      ::      ${client.db.guildconf.get(`${message.guild.id}.prefix`)||client.prefix}
 premium     ::      ${client.db.guildconf.get(`${message.guild.id}.premium`) ? message.language.get(`CONFIG_PREMIUM_TRUE`) : message.language.get(`CONFIG_PREMIUM_FALSE`)}
-telemetrics ::      ${client.db.guildconf.get(`${message.guild.id}.telemetrics`) ? message.language.get(`CHECK_DISABLED`) : message.language.get(`CHECK_ENABLED`)}
-
 
 = ${message.language.get("CONFIG_NOTIFIER")} =
 youtuber      ::      ${client.db.notifier.get(`${message.guild.id}.youtuber`)||message.language.get("UTILS").UNDEFINED}
