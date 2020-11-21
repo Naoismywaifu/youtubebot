@@ -382,7 +382,6 @@ Want to vote ? check  our [vote page](https://top.gg/bot/486948160124485642/vote
 			NOTIFIER_MESSAGE_PLACEHOLDERS_EMOJIS_YOUTUBE: `Youtube's logo`,
 			NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_NAME: `server's name`,
 			NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_ID: `server's id`,
-			NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_OWNER: `server's owner`,
 			NOTIFIER_MESSAGE_EXAPLE: `Example`,
 			NOTIFIER_MESSAGE_EXAPLE_EXAPLE: `Hey @everyone the youtuber **{youtuber.name}** just posted a new video nammed \`{video.title}\`\nlink: {video.url} - uploaded the {video.date}`,
 			NOTIFIER_MESSAGE_CANCELED: `${e.no} | Canceled because you have taked too much time to reply`,

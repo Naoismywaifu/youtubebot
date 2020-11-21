@@ -113,7 +113,7 @@ async function check(client){
         .replace("{emojis.youtube}", config.emojis.youtube)
         .replace("{guild.name}", g.name)
         .replace("{guild.id}", g.id)
-        .replace("{guild.owner}", g.owner.displayName)
+      //  .replace("{guild.owner}", g.owner.displayName) REMOVED
 
 
 

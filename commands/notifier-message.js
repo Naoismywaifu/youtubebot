@@ -29,7 +29,6 @@ module.exports = {
 {emojis.youtube}::  ${message.language.get("NOTIFIER_MESSAGE_PLACEHOLDERS_EMOJIS_YOUTUBE")}
 {guild.name}    ::  ${message.language.get("NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_NAME")}
 {guild.id}      ::  ${message.language.get("NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_ID")}
-{guild.owner}   ::  ${message.language.get("NOTIFIER_MESSAGE_PLACEHOLDERS_GUILD_OWNER")}
 \`\`\``, true)
 .addField(message.language.get("NOTIFIER_MESSAGE_EXAPLE"), `\`\`\`${message.language.get("NOTIFIER_MESSAGE_EXAPLE_EXAPLE")}\`\`\``, false)
 
