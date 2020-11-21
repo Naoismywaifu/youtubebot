@@ -27,6 +27,7 @@
     "simple-youtube-api": "^5.2.1",
     "utf-8-validate": "^5.0.3",
     "ytdl-core": "^4.0.5",
+    "ytsr": "git://github.com/TimeForANinja/node-ytsr.git#wip-api-adjustments",
     "zlib-sync": "^0.1.7"
   },
   "scripts": {

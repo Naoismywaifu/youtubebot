@@ -1,7 +1,9 @@
 const { play } = require("../include/play");
 const { YOUTUBE_API_KEY } = require("../config.json");
 const ytdl = require("ytdl-core");
+const ytsr = require('ytsr');
 const YouTubeAPI = require("simple-youtube-api");
+const { codePointAt } = require("ffmpeg-static");
 const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
 
 module.exports = {
@@ -59,26 +61,28 @@ module.exports = {
     let song = null;
     if (urlValid) {
       try {
+
         songInfo = await ytdl.getInfo(url);
-        var uploaddate = Date(songInfo.published)
+        console.log(songInfo)
+        var uploaddate = Date(songInfo.videoDetails.publishDate)
         song = {
-          title: songInfo.title,
-          url: songInfo.video_url,
-          id: songInfo.video_id,
-          underrage: songInfo.age_restricted,
-          likes: songInfo.likes||0,
           playlist: false,
-          live: songInfo.player_response.videoDetails.isLiveContent,
-          dislikes: songInfo.dislikes||0,
-          views: songInfo.player_response.videoDetails.viewCount,
-          shortDesc: songInfo.player_response.videoDetails.shortDescription.slice(0,512), 
-          upload: uploaddate,
-          tags: songInfo.player_response.videoDetails.keywords,
-          author: songInfo.author.name,
-          verified: songInfo.author.verified,
-          author_channel: songInfo.author.channel_url,
-          thumbnail: `https://i.ytimg.com/vi/${songInfo.video_id}/hqdefault.jpg`,
-          duration: songInfo.length_seconds
+          title: songInfo.videoDetails.title,
+          url: songInfo.videoDetails.video_url,
+          id: songInfo.videoDetails.videoId,
+          underrage: songInfo.videoDetails.age_restricted,
+          likes: songInfo.videoDetails.likes||0,
+          dislikes: songInfo.videoDetails.dislikes||0,
+          views: songInfo.player_response.videoDetails.viewCount||0,
+          live: songInfo.player_response.videoDetails.isLiveContent||false,
+          shortDesc: songInfo.player_response.videoDetails.shortDescription.slice(0,512)||"Unavailable", 
+          upload: uploaddate||0,
+          tags: songInfo.player_response.videoDetails.keywords||"none",
+          author: songInfo.videoDetails.author.name||"unavailable",
+          verified: songInfo.videoDetails.author.verified||false,
+          author_channel: songInfo.videoDetails.author.channel_url||"unavailable",
+          thumbnail: `https://i.ytimg.com/vi/${songInfo.videoDetails.videoId||null}/hqdefault.jpg`,
+          duration: songInfo.videoDetails.lengthSeconds||null
         };
       } catch (error) {
         if (error.message.includes("copyright")) {
@@ -93,32 +97,42 @@ module.exports = {
       try {
         message.channel.send(message.language.get("MUSIC_SEARCHING", search))
 
+        //const results = await youtube.searchVideos(search, 1);
         
-        const results = await youtube.searchVideos(search, 1);
-        if(!results[0]) return message.channel.send(message.language.get("MUSIC_QUERY_NOT_EXIST"))
+        let videourl;
+
+        let filters = await ytsr.getFilters(search)
+          const filter = filters.get('Type').find(o => o.name === 'Video');
+          const options = {
+            limit: 2,
+            nextpageRef: filter.ref
+          }
+          const searchResults = await ytsr(search, options);
+
+          videourl = searchResults.items[1].link;
+
+          if(!videourl) return message.channel.send(message.language.get("MUSIC_QUERY_NOT_EXIST"))
 
 
-
-        songInfo = await ytdl.getInfo(results[0].url);
-        var uploaddate = new Date(songInfo.published)
+        songInfo = await ytdl.getInfo(videourl);
+        var uploaddate = new Date(songInfo.videoDetails.publishDate)
         song = {
-          title: songInfo.title,
-          url: songInfo.video_url,
-          id: songInfo.video_id,
-          underrage: songInfo.age_restricted,
-          likes: songInfo.likes||0,
-
-          dislikes: songInfo.dislikes||0,
-          views: songInfo.player_response.videoDetails.viewCount,
-          live: songInfo.player_response.videoDetails.isLiveContent,
-          shortDesc: songInfo.player_response.videoDetails.shortDescription.slice(0,512), 
-          upload: uploaddate,
-          tags: songInfo.player_response.videoDetails.keywords,
-          author: songInfo.author.name,
-          verified: songInfo.author.verified,
-          author_channel: songInfo.author.channel_url,
-          thumbnail: `https://i.ytimg.com/vi/${songInfo.video_id}/hqdefault.jpg`,
-          duration: songInfo.length_seconds
+          title: songInfo.videoDetails.title,
+          url: songInfo.videoDetails.video_url,
+          id: songInfo.videoDetails.videoId,
+          underrage: songInfo.videoDetails.age_restricted,
+          likes: songInfo.videoDetails.likes||0,
+          dislikes: songInfo.videoDetails.dislikes||0,
+          views: songInfo.player_response.videoDetails.viewCount||0,
+          live: songInfo.player_response.videoDetails.isLiveContent||false,
+          shortDesc: songInfo.player_response.videoDetails.shortDescription.slice(0,512)||"Unavailable", 
+          upload: uploaddate||0,
+          tags: songInfo.player_response.videoDetails.keywords||"none",
+          author: songInfo.videoDetails.author.name||"unavailable",
+          verified: songInfo.videoDetails.author.verified||false,
+          author_channel: songInfo.videoDetails.author.channel_url||"unavailable",
+          thumbnail: `https://i.ytimg.com/vi/${songInfo.videoDetails.videoId||null}/hqdefault.jpg`,
+          duration: songInfo.videoDetails.lengthSeconds||null
         };
       } catch (error) {
         console.error(error);
@@ -145,13 +159,10 @@ if(song.live){
         .catch(console.error);
     } else {
       queueConstruct.songs.push(song);
-    }
-
-    if (!serverQueue) message.client.queue.set(message.guild.id, queueConstruct);
-
-    if (!serverQueue) {
+      message.client.queue.set(message.guild.id, queueConstruct);
       try {
         queueConstruct.connection = await channel.join();
+        console.log(queueConstruct.songs[0])
         play(queueConstruct.songs[0], message);
       } catch (error) {
         console.error(`❌ | Could not join voice channel: ${error}`);
@@ -160,5 +171,6 @@ if(song.live){
         return message.channel.send(message.language.get("MUSIC_JOIN_ERROR", error)).catch(console.error);
       }
     }
+
   }
 };
