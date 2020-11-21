@@ -31,7 +31,7 @@ function chart(length) {
      "nameerr": err.name||null,
      "date": Date.now(),
      "user": message.author.id||null,
-     "guild": message.guild.id||null
+     "guild": message.guild ? message.guild.id||null : null
  }
 
 db.errors.set(errid, constructor)
