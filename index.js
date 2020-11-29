@@ -1,10 +1,4 @@
-////////////////////////////////////////////
-/////         Create Discord App       /////
-////////////////////////////////////////////
-
-require("dotenv").config();
-
-const Client = require("./Base/Client");
+const Client = require("./Base/YouTubeBot");
 const client = new Client();
 
 client.login(client.config.TOKEN);

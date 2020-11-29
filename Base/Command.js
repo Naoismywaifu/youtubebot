@@ -5,10 +5,18 @@ class Command {
         this._patch(ops);
     }
 
+	setT(t) {
+		this.t = t
+	}
+
+	getT() {
+		return this.t
+	}
+
     _patch(ops = {}) {
         this.help = {
             name: ops.name || null,
-            description: ops.description || "No description provided!",
+            description: ops.category|| "No description provided!",
             aliases: ops.aliases || [],
             category: "Others"
         };

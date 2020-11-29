@@ -53,6 +53,12 @@ class Client extends DiscordClient {
         });
     }
 
+	loadLocales() {
+		const Locales = require("../Util/LangManager")
+		const locales = new Locales(this)
+		locales.load()
+	}
+
     getCommand(name) {
         return this.commands.get(name) || this.commands.get(this.aliases.get(name));
     }
@@ -60,6 +66,7 @@ class Client extends DiscordClient {
     login(token = null) {
         this.registerCommands();
         this.registerEvents();
+        this.loadLocales()
 
         return super.login(token);
     }

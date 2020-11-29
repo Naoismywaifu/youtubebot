@@ -6,6 +6,8 @@ class Ready {
 
     run() {
         console.log("Bot is online!");
+
+        
     }
 
 }

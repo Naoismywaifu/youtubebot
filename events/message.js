@@ -1,3 +1,7 @@
+const i18next = require("i18next");
+const Command = require("../Base/Command");
+
+
 class Message {
 
     constructor(client) {
@@ -11,11 +15,26 @@ class Message {
 
         if (message.content.indexOf(prefix) !== 0) return;
 
+		let t
+		const setFixedT = function (translate) {
+			t = translate
+		}
+
+		const language = "english"
+		setFixedT(i18next.getFixedT(language))
+
+        
+
         const args = message.content.slice(prefix.length).trim().split(" ");
         const cmd = args.shift().toLowerCase();
 
         const command = this.client.getCommand(cmd);
         if (!command) return;
+
+        command.setT(t)
+
+
+
 
         try {
             await command.run(message, args);

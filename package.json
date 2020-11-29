@@ -14,6 +14,7 @@
     },
     "dependencies": {
         "discord.js": "^12.4.1",
-        "dotenv": "^8.2.0"
+        "i18next": "^19.8.4",
+        "i18next-node-fs-backend": "^2.1.3"
     }
 }

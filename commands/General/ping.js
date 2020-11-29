@@ -6,18 +6,23 @@ class Ping extends Command {
         super(client, {
             name: "ping",
             aliases: ["pong"],
-            description: "Shows bot ping"
         });
+
     }
 
     async run(message, args) {
+
+
         const initial = message.createdTimestamp;
 
-        message.channel.send("Pinging...")
+        message.channel.send(this.t("commands:General.ping.pinging"))
+
             .then(m => {
                 const latency = m.createdTimestamp - initial;
 
-                return m.edit(`Pong! Took \`${latency}ms\`.`);
+                return m.edit(this.t("commands:General.ping.success", {
+                    latency: latency
+                }));
             });
     }
 
