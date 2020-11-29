@@ -1,3 +1,25 @@
 {
-    "hello": "Hello world !"
+    "Fun": {
+        "reverse": {
+            "description": "Reverse your message.",
+            "noMessage": "Please specify a message to reverse!"
+        }
+    },
+    "General": {
+        "ping": {
+            "description": "Get latence of the bot.",
+            "pinging": "Pinging...",
+            "success": "Pong ! ({{latency}} ms)"
+        },
+        "help": {
+            "description": "Get help about the bot.",
+            "specific": {
+                "NoDesc": "No description provided!",
+                "NoName": "No name provided!",
+                "NoCategory": "No category provided!",
+                "NoAliases": "No aliases provided!"
+            }
+        }
+    },
+    "hello": "hello world!"
 }
