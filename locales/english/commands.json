@@ -18,8 +18,19 @@
                 "NoName":"No name provided!",
                 "NoCategory":"Other",
                 "NoAliases":"No aliases provided"
+            },
+            "global": {
+                "Title":"**Help - YouTube Bot**",
+                "Desc":"You can find **{{cmdslength}}** commands in **{{categorieslength}}** categories"
             }
         
+        }
+    },
+    "Music": {
+        "play": {
+            "description":"Play a music, playlist from YouTube.",
+            "pinging":"pinging...",
+            "success":"Pong ! ({{latency}} ms)"
         }
     }
 }

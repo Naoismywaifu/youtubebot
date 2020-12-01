@@ -5,7 +5,7 @@ class Ready {
     }
 
     run() {
-        console.log("Bot is online!");
+        this.client.logger.log(`${this.client.user.tag} is online on shard #${this.client.shard.ids[0]||0}`)
 
         
     }

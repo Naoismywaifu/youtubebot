@@ -59,12 +59,18 @@ class Help extends Command {
 
 
 		const embed = new Discord.MessageEmbed()
-			.setDescription(`**Help - Dancefloor**\nYou can find **${commands.size||0}** commands in **${categories.length||0}** categories`)
-			.setColor("BLUE")
+			.setDescription(`${this.t("commands:General.help.global.Title")}\n${this.t("commands:General.help.global.Desc", {
+                cmdslength: commands.size||0,
+                categorieslength: categories.length||0
+            })}`)
+			.setColor("RED")
 			.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true }))
 		categories.sort().forEach((cat) => {
 			const tCommands = commands.filter((cmd) => cmd.help.category === cat);
-			embed.addField(cat+" - ("+tCommands.size+")", tCommands.map((cmd) => "`"+cmd.help.name+"`").join(", "));
+            embed.addField(cat+" - ("+tCommands.size+")", `\`\`\`diff
+- ${tCommands.map((cmd) => cmd.help.name).join(", ")}
+\`\`\``)
+            .setFooter("YouTube Bot").setThumbnail()
 		});
         
         return message.channel.send(embed);
