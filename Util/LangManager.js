@@ -5,7 +5,7 @@ const translationBackend = require("i18next-node-fs-backend")
 class LocaleStructure {
     constructor(client) {
         this.client = client
-        this.languages = ["french", "english"]
+        this.languages = ["en-US", "fr-FR"]
         this.ns = ["core", "commands"]
     }
 
@@ -23,7 +23,7 @@ class LocaleStructure {
             i18next.use(translationBackend).init({
                 ns: this.ns,
                 preload: await readdirSync("./locales/"),
-                fallbackLng: "english",
+                fallbackLng: "en-US",
                 backend: {
                     loadPath: "./locales/{{lng}}/{{ns}}.json"
                 },
@@ -33,7 +33,7 @@ class LocaleStructure {
                 returnEmpyString: false
             })
         } catch (err) {
-            console.error(err)            
+            console.error(err)
         }
     }
 
