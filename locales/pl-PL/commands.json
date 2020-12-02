@@ -1,0 +1,35 @@
+{
+    "Fun": {
+        "reverse": {
+            "description": "Reverse your message",
+            "noMessage": "Please specify a message to reverse!"
+        }
+    },
+    "General": {
+        "ping": {
+            "description": "Get latence of the bot.",
+            "pinging": "pinging...",
+            "success": "Pong ! ({{latency}} ms)"
+        },
+        "help": {
+            "description": "Get help about the bot.",
+            "specific": {
+                "NoDesc": "No description provided!",
+                "NoName": "No name provided!",
+                "NoCategory": "Other",
+                "NoAliases": "No aliases provided"
+            },
+            "global": {
+                "Title": "**Help - YouTube Bot**",
+                "Desc": "You can find **{{cmdslength}}** commands in **{{categorieslength}}** categories"
+            }
+        }
+    },
+    "Music": {
+        "play": {
+            "description": "Play a music, playlist from YouTube.",
+            "pinging": "pinging...",
+            "success": "Pong ! ({{latency}} ms)"
+        }
+    }
+}
