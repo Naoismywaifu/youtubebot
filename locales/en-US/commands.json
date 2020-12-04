@@ -1,4 +1,5 @@
 {
+    "unallowed": "Hey ! you're not allowed to use this command!",
     "Fun": {
         "reverse": {
             "description":"Reverse your message",
@@ -23,14 +24,18 @@
                 "Title":"**Help - YouTube Bot**",
                 "Desc":"You can find **{{cmdslength}}** commands in **{{categorieslength}}** categories"
             }
-        
+        }
+    },
+    "Owner": {
+        "eval": {
+            "description":"Evaluate some code"
         }
     },
     "Music": {
         "play": {
             "description":"Play a music, playlist from YouTube.",
-            "pinging":"pinging...",
-            "success":"Pong ! ({{latency}} ms)"
+            "novc":"You must join a voice channel to use this command!",
+            "error": "Ooops an error occured while i tried to search: {{err}}"
         }
     }
 }

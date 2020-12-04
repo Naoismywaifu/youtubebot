@@ -21,6 +21,7 @@ class Client extends DiscordClient {
         this.commands = new Collection();
         this.aliases = new Collection();
         this.db = db;
+        this.player = null;
         this.config = require("../config");
         this.logger = require("../Util/Logger")
         this.commandsDir = __dirname + "/../commands";

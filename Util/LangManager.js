@@ -6,7 +6,7 @@ class LocaleStructure {
     constructor(client) {
         this.client = client
         this.languages = ["en-US", "fr-FR"]
-        this.ns = ["core", "commands"]
+        this.ns = ["about", "commands"]
     }
 
     load() {

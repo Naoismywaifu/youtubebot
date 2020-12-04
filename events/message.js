@@ -20,7 +20,7 @@ class Message {
 			t = translate
 		}
 
-		const language = "english"
+		const language = "en-US"
 		setFixedT(i18next.getFixedT(language))
 
         
@@ -33,8 +33,8 @@ class Message {
 
         command.setT(t)
 
-
-
+        if(command.help.category == "Owner" && !this.client.config.OWNERS.includes(message.author.id))
+            return message.channel.send(t("commands:unallowed"))
 
         try {
             await command.run(message, args);
