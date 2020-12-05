@@ -1,20 +1,25 @@
 {
     "unallowed": "Hey ! you're not allowed to use this command!",
+    "requestedBy": "Requested by {{user}}",
     "Fun": {
         "reverse": {
             "description": "Reverse your message",
-            "noMessage": "Please specify a message to reverse!"
+            "noMessage": "{{emojis.no}} | Please specify a message to reverse!"
         }
     },
     "General": {
         "ping": {
-            "description": "Get latence of the bot.",
+            "description": "Get latency of the bot.",
             "pinging": "pinging...",
             "success": "Pong ! ({{latency}} ms)"
         },
         "help": {
             "description": "Get help about the bot.",
             "specific": {
+                "name": "Name",
+                "description": "Description",
+                "aliases": "aliases",
+                "category": "category",
                 "NoDesc": "No description provided!",
                 "NoName": "No name provided!",
                 "NoCategory": "Other",
@@ -23,7 +28,8 @@
             "global": {
                 "Title": "**Help - YouTube Bot**",
                 "Desc": "You can find **{{cmdslength}}** commands in **{{categorieslength}}** categories"
-            }
+            },
+            "failedSendEmbed": "{{emojis.no}} | Oops an error occurred while i tried to send the help embed: {{err}}"
         }
     },
     "Owner": {
@@ -34,8 +40,22 @@
     "Music": {
         "play": {
             "description": "Play a music, playlist from YouTube.",
-            "novc": "You must join a voice channel to use this command!",
-            "error": "Ooops an error occured while i tried to search: {{err}}"
-        }
+            "novc": "{{emojis.no}} | You must join a voice channel to use this command!",
+            "error": "{{emojis.no}} | Oops an error occurred while i tried to search: {{err}}"
+        },
+        "importing_playlist": "{{emojis.loading}} | Playlist detected! Importing **{{songs}}** tracks, please wait...",
+        "success_import_playlist": "{{emojis.yes}} | Imported **{{songs}}** tracks !",
+        "no_audio_nodes_online": "{{emojis.no}} | Oops there isn't any audio node available ! please try again later.",
+        "cannot_join_vc": "{{emojis.no}} | Oops i couldn't join your voice channel: {{err}}",
+        "reach_queue_limit": "{{emojis.no}} | Oh no ! you reached queue's limit of **{{limit}}** tracks, consider subscribing to youtube bot premium if isn't already done to be able to add more songs.",
+        "empty_queue": "{{emojis.no}} | Queue is empty ! Leaving voice channel...",
+        "added_queue": "{{emojis.plus}} | Added **{{length}}** tracks from a playlist to the queue",
+        "added_track": "{{emojis.plus}} | Added **{{title}}** by **{{author}}** to the queue",
+        "nowPlaying": "{{emojis.music_notes}} Now Playing {{emojis.music_notes}}",
+        "Title": "{{emojis.disk}} **❱** {{title}} {{attributes}}",
+        "Author": "{{emojis.upload}} **❱** {{author}} {{attributes}}",
+        "Live": "**[{{liveicon}} Live]**",
+        "Duration": "{{emojis.clock}} **❱** {{duration}}",
+        "AudioServer": "{{emojis.router}} **❱** {{serverID}} {{attributes}}"
     }
 }
