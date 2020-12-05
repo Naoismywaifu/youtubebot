@@ -14,10 +14,18 @@
         "help": {
             "description": "Ayez de l'aide sur le bot.",
             "specific": {
+                "name": "Nom",
+                "description": "Description",
+                "aliases": "allias",
+                "category": "catégorie",
                 "NoDesc": "Aucune description.",
                 "NoName": "Pas de nom.",
                 "NoCategory": "Aucune catégorie.",
                 "NoAliases": "Aucun alias."
+            },
+            "global": {
+                "Title":"**Aide - YouTube Bot**",
+                "Desc":"Trouvez **{{cmdslength}}** commandes dans **{{categorieslength}}** catégories"
             }
         }
     },

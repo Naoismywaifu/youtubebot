@@ -23,26 +23,31 @@ class Help extends Command {
 			// Creates the help embed
             const groupEmbed = new Discord.MessageEmbed()
                 .addField(
-                    "Name",
+                    this.t("commands:General.help.specific.name"),
                     cmd.help.name||this.t("commands:General.help.specific.NoName")
                 )
 				.addField(
-					"Description",
+					this.t("commands:General.help.specific.description"),
 					this.t(`commands:${cmd.help.category}.${cmd.help.name}.description`)||this.t("commands:General.help.specific.NoDesc")
                 )
 				.addField(
-					"Category",
+					this.t("commands:General.help.specific.category"),
 					cmd.help.category||this.t("commands:General.help.specific.NoCategory")
 				)
 				.addField(
-					"Aliases",
+					this.t("commands:General.help.specific.aliases"),
 					cmd.help.aliases.length > 0
 						? cmd.help.aliases.map(a => "`" + a + "`").join(", ")
 						: this.t("commands:General.help.specific.NoAliases")
 				)
 				.setColor("BLUE")
-
-			return message.channel.send(groupEmbed);
+	try {
+		return message.channel.send(groupEmbed);
+	} catch (e) {
+		return message.channel.send(this.t("commands:General.help.failedSendEmbed", {
+			err: e
+		}))
+			}
 		}
 
 		const categories = [];
@@ -70,7 +75,7 @@ class Help extends Command {
             embed.addField(cat+" - ("+tCommands.size+")", `\`\`\`diff
 - ${tCommands.map((cmd) => cmd.help.name).join(", ")}
 \`\`\``)
-            .setFooter("YouTube Bot").setThumbnail()
+            .setFooter(this.client.user.tag, this.client.user.displayAvatarURL({ dynamic: true, format: "gif", size:4096})).setTimestamp()
 		});
         
         return message.channel.send(embed);

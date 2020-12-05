@@ -27,7 +27,7 @@ class Client extends DiscordClient {
         this.commandsDir = __dirname + "/../commands";
         this.eventsDir = __dirname + "/../events";
         
-        if(this.config.ENV == "PRODUCTION") {
+        if(this.config.ENV === "PRODUCTION") {
             Sentry.init({ dsn: this.config.SENTRY_DSN });
             blapi.handle(this, this.config.Botlists);
         }

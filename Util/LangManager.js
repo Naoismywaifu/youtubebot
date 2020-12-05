@@ -20,7 +20,7 @@ class LocaleStructure {
 
     async startLocales() {
         try {
-            i18next.use(translationBackend).init({
+            await i18next.use(translationBackend).init({
                 ns: this.ns,
                 preload: await readdirSync("./locales/"),
                 fallbackLng: "en-US",
@@ -28,9 +28,12 @@ class LocaleStructure {
                     loadPath: "./locales/{{lng}}/{{ns}}.json"
                 },
                 interpolation: {
-                    escapeValue: false
+                    escapeValue: false,
+                    defaultVariables: {
+                        emojis: require("../config.js").EMOJIS
+                    }
                 },
-                returnEmpyString: false
+                returnEmptyString: false,
             })
         } catch (err) {
             console.error(err)

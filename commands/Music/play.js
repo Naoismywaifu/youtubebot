@@ -5,7 +5,7 @@ class Play extends Command {
     constructor(client) {
         super(client, {
             name: "play",
-            aliases: ["p"],
+            aliases: ["p", "jouer"],
         });
 
     }

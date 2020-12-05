@@ -3,3 +3,4 @@ package-lock.json
 .env
 config.js
 yarn.lock
+json.sqlite

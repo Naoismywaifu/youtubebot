@@ -31,9 +31,12 @@ class Message {
         const command = this.client.getCommand(cmd);
         if (!command) return;
 
-        command.setT(t)
 
-        if(command.help.category == "Owner" && !this.client.config.OWNERS.includes(message.author.id))
+        command.setT(t);
+        message.t = t;
+        message.guild.t = t;
+
+        if(command.help.category === "Owner" && !this.client.config.OWNERS.includes(message.author.id))
             return message.channel.send(t("commands:unallowed"))
 
         try {
