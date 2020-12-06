@@ -56,6 +56,7 @@
         "Author": "{{emojis.upload}} **❱** {{author}} {{attributes}}",
         "Live": "**[{{liveicon}} Live]**",
         "Duration": "{{emojis.clock}} **❱** {{duration}}",
-        "AudioServer": "{{emojis.router}} **❱** {{serverID}} {{attributes}}"
+        "AudioServer": "{{emojis.router}} **❱** {{serverID}} {{attributes}}",
+        "FailedGenerateQueue": "{{emojis.no}} | Failed to generate queue {{err}}"
     }
 }
