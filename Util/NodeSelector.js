@@ -1,29 +1,57 @@
+const {Collection} = require("discord.js")
 /**
- * 
- * @param {Array} onlineNodes 
- * @param {Boolean} isPremium 
+ *
+ * @param {Collection} queue
+ * @param {Array} onlineNodes
+ * @param {Boolean} isPremium
  */
 
 function BestNode(queue, onlineNodes, isPremium) {
+    let nodesload = []
     if(isPremium){
         let nodes = onlineNodes.filter(n => Boolean(n.premium))
-        
+        nodes.forEach(n => nodesload.push({ name: n.id, load: 0}))
+
+
         if(!nodes.length)
             return onlineNodes[0]
-       
-    nodes.forEach(n => n.stats.players)
 
-    let node = nodes.find(node => node.stats.players === Math.min.apply(null, nodes.map(n => node.stats.players)));
-        
-    return node;
+        queue.each(q => {
+            if(nodesload.some(n => n.name === q.node)) {
+                nodesload.filter(n => n.name === q.node)[0].load++
+            } else {
+                if(q.node.startsWith("Premium"))
+                    nodesload.push({
+                        name: q.node,
+                        load: 1
+                    })
+            }
+        })
+
+        let n = nodesload.sort((a, b) => a.load - b.load)[0]
+
+        return onlineNodes.filter(nodeuh => nodeuh.id === n.name)[0]||onlineNodes[0];
         
     } else {
-    let nodes = onlineNodes.filter(n => !n.premium)
-        
-    nodes.forEach(n => n.stats.players)
 
-    let node = nodes.find(node => node.stats.players === Math.min.apply(null, nodes.map(n => node.stats.players)));
-    return node;
+    let nodes = onlineNodes.filter(n => !n.premium)
+        nodes.forEach(n => nodesload.push({ name: n.id, load: 0}))
+
+        queue.each(q => {
+            if(nodesload.some(n => n.name === q.node)) {
+                nodesload.filter(n => n.name === q.node)[0].load++
+            } else {
+                if(q.node.startsWith("Free"))
+                nodesload.push({
+                    name: q.node,
+                    load: 1
+                })
+            }
+        })
+
+        let n = nodesload.sort((a, b) => a.load - b.load)[0]
+
+        return onlineNodes.filter(nodeuh => nodeuh.id === n.name)[0]||onlineNodes[0];
     }
 }
 

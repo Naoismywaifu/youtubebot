@@ -15,12 +15,18 @@ class Play extends Command {
 
         if (!message.member.voice.channel) return message.channel.send(this.t("commands:Music.play.novc"));
 
+        let song;
+
         let track = args.join(" ")
-        
-        let song = await this.client.player.getSongs(track);
+        try {
+            song = await this.client.player.getSongs(track, message.guild.id);
+        } catch (e) {
+            this.client.logger.log(`An error occurred while tried to get search songs: ${e}`, 'error')
+            return message.channel.send(message.t("commands:Music.no_audio_nodes_online"));
+        }
         switch (song.loadType) {
             case "SEARCH_RESULT":
-                this.client.player.handleVideo(message, message.member.voice.channel, song.tracks[0]);
+                await this.client.player.handleVideo(message, message.member.voice.channel, song.tracks[0]);
                 break;
             case "NO_MATCHES":
                 this.error(message, "there is no matching video with your query")
@@ -35,10 +41,10 @@ class Play extends Command {
                   return [ song.tracks[selected] ];
       
                 let playlist = song.tracks.slice(0, 200);
-                this.client.player.handleVideo(message, message.member.voice.channel, playlist);
+                await this.client.player.handleVideo(message, message.member.voice.channel, playlist);
                 break;
             case "TRACK_LOADED":
-                this.client.player.handleVideo(message, message.member.voice.channel, song.tracks[0]);
+                await this.client.player.handleVideo(message, message.member.voice.channel, song.tracks[0]);
                 break;
             default:
                 this.error(message, "unknown error code")

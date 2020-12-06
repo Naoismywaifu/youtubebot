@@ -15,13 +15,16 @@ class Player {
     constructor(client) {
         this.client = client;
         this.startedNodes = [];
-        this.manager = new Manager(client, client.config.NODES,  {
-            user: client.user.id,
-            shards: client.shard ? client.shard.count : 1
-        });
+        try {
+            this.manager = new Manager(client, client.config.NODES, {
+                user: client.user.id,
+                shards: client.shard ? client.shard.count : 1
+            });
 
-        this.manager.connect();
-        
+            this.manager.connect();
+        } catch (e) {
+            this.client.logger.log("failed to connect to nodes" + e)
+        }
         this.queue = new Collection();
 
         this.manager.on("ready", node => {
@@ -38,23 +41,38 @@ class Player {
             this.client.logger.log(`[Node : ${node.id}] Reconnecting...`, 'warn')
         })
 
-
     }
 
     async handleVideo(message, voiceChannel, song) {
-        if(!this.startedNodes.length) return message.channel.send(message.t("commands:Music.no_audio_nodes_online"))
+        if(!this.startedNodes.length) return message.channel.send(message.t("commands:Music.no_audio_nodes_online"));
         const serverQueue = this.queue.get(message.guild.id);
 
+        let premiumStatus = this.client.functions.isGuildPremium(message.guild.id)
+
+        let maxQueueLength = premiumStatus ? this.client.config.PREMIUM_MAX_QUEUE_LENGTH : this.client.config.MUSIC.MAX_QUEUE_LENGTH;
+
         if (!serverQueue) {
-            const queue = new Queue(this.client, {
-                textChannel: message.channel,
-                voiceChannel,
-                node: BestNode(this.queue, this.startedNodes, true).id
-            });
+            let queue;
+            try {
+                queue = new Queue(this.client, {
+                    textChannel: message.channel,
+                    voiceChannel,
+                    node: BestNode(this.queue, this.startedNodes, premiumStatus).id
+                });
+            } catch (e) {
+                message.channel.send(message.t("commands:Music.FailedGenerateQueue", {
+                    err: e
+                }))
+            }
             if(Array.isArray(song)){
                 let mimporting = await message.channel.send(message.t("commands:Music.importing_playlist", {
                     songs: song.length
                 }))
+
+                if(song.length >= maxQueueLength) return message.channel.send(message.t("commands:Music.reach_queue_limit", {
+                    limit: maxQueueLength
+                }))
+
                 for (let i = 0; i < song.length; i++) {
                     const s = song[i];
                     s.requestedBy = message.author
@@ -92,9 +110,10 @@ class Player {
                     songs: song.length
                 }))
 
-                if(song.length + serverQueue.songs.length >= 200) return message.channel.send(message.t("commands:Music.reach_queue_limit", {
-                    limit: 200
+                if(song.length + serverQueue.songs.length >= maxQueueLength) return message.channel.send(message.t("commands:Music.reach_queue_limit", {
+                    limit: maxQueueLength
                 }))
+
 
                 for (let i = 0; i < song.length; i++) {
                     const s = song[i];
@@ -102,14 +121,13 @@ class Player {
                     serverQueue.songs.push(s)
                 }
             } else {
-                if(serverQueue.songs.length + 1 >= 200) return message.channel.send(message.t("commands:Music.reach_queue_limit", {
-                    limit: 200,
+                if(serverQueue.songs.length + 1 >= maxQueueLength) return message.channel.send(message.t("commands:Music.reach_queue_limit", {
+                    limit: maxQueueLength,
                 }))
             song.requestedBy = message.author
             serverQueue.songs.push(song);
             }
 
-            //message.channel.send(`Added ${Array.isArray(song) ? `**${song.length}** videos to the queue` : `**${song.info.title||"none"}** by **${song.info.author||"none"}**`}`)
             message.channel.send(Array.isArray(song) ? message.t("commands:Music.added_queue", {
                 length: song.length
             }) : message.t("commands:Music.added_track", {
@@ -152,9 +170,9 @@ class Player {
         }
     }
 
-    async getSongs(query) {
-        const node = BestNode(this.queue, this.startedNodes, true);
-        this.client.logger.log(`selected ${node.id} as node.`, "debug")
+    async getSongs(query, GuildID) {
+        const node = BestNode(this.queue, this.startedNodes, this.client.functions.isGuildPremium(GuildID));
+        this.client.logger.log(`selected ${node.id} as node for query ${query}.`, "debug")
       // let res = Rest.load(this.manager.nodes.get(`${node.id}`), `ytsearch: ${query}`) don't support urls
 
         const params = new URLSearchParams();

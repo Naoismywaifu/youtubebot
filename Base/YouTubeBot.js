@@ -9,18 +9,19 @@ class Client extends DiscordClient {
     constructor(...args) {
         super(...args);
 
-        db.premium = new db.table('premium')
-        .radio = new db.table('radio')
-        .notifier = new db.table('notifier')
-        .guildconf = new db.table('guildconf')
-        .stats = new db.table('stats')
-        .errors = new db.table('errors')
-        .users = new db.table("users")
-        .codes = new db.table("codes");
+        db.premium = new db.table('premium');
+        db.radio = new db.table('radio');
+        db.notifier = new db.table('notifier');
+        db.guildconf = new db.table('guildconf');
+        db.stats = new db.table('stats');
+        db.errors = new db.table('errors');
+        db.users = new db.table("users");
+        db.codes = new db.table("codes");
 
         this.commands = new Collection();
         this.aliases = new Collection();
         this.db = db;
+        this.functions = require("../Util/Functions");
         this.player = null;
         this.config = require("../config");
         this.logger = require("../Util/Logger")
