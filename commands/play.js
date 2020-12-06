@@ -1,7 +1,7 @@
 const { play } = require("../include/play");
 const { YOUTUBE_API_KEY } = require("../config.json");
 const ytdl = require("ytdl-core");
-const ytsr = require('ytsr');
+const ytsr = require('@distube/ytsr');
 const YouTubeAPI = require("simple-youtube-api");
 const { codePointAt } = require("ffmpeg-static");
 const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
@@ -97,25 +97,13 @@ module.exports = {
       try {
         message.channel.send(message.language.get("MUSIC_SEARCHING", search))
 
-        //const results = await youtube.searchVideos(search, 1);
-        
-        let videourl;
-
-        let filters = await ytsr.getFilters(search)
-          const filter = filters.get('Type').find(o => o.name === 'Video');
-          const options = {
-            limit: 2,
-            nextpageRef: filter.ref
-          }
-          const searchResults = await ytsr(search, options);
-
-          videourl = searchResults.items[1].link;
-
+          const searchResults = await ytsr(search, { limit: 5, safeSearch: false });
+          videourl = searchResults.items[0].url;
           if(!videourl) return message.channel.send(message.language.get("MUSIC_QUERY_NOT_EXIST"))
-
+        console.log(searchResults.items[0])
 
         songInfo = await ytdl.getInfo(videourl);
-        var uploaddate = new Date(songInfo.videoDetails.publishDate)
+        let uploaddate = new Date(songInfo.videoDetails.publishDate)
         song = {
           title: songInfo.videoDetails.title,
           url: songInfo.videoDetails.video_url,

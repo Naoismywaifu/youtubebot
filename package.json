@@ -6,7 +6,9 @@
   "author": "HiiZun <hiizun@protonmail.com>",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
-    "@sentry/node": "5.27.4",
+    "@distube/ytsr": "^1.0.6",
+    "@sentry/node": "^5.27.4",
+    "@sentry/tracing": "^5.27.4",
     "axios": "^0.21.0",
     "bufferutil": "^4.0.2",
     "cheerio": "^1.0.0-rc.3",
@@ -27,7 +29,6 @@
     "simple-youtube-api": "^5.2.1",
     "utf-8-validate": "^5.0.3",
     "ytdl-core": "^4.0.5",
-    "ytsr": "git://github.com/TimeForANinja/node-ytsr.git#wip-api-adjustments",
     "zlib-sync": "^0.1.7"
   },
   "scripts": {
