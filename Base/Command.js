@@ -18,6 +18,9 @@ class Command {
             name: ops.name || null,
             description: ops.category|| "No description provided!",
             aliases: ops.aliases || [],
+            botPerms: [],
+            userPerms: [],
+            premiumOnly: false,
             category: "Others"
         };
 

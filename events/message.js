@@ -20,7 +20,17 @@ class Message {
 			t = translate
 		}
 
-		const language = "en-US"
+		let language = this.client.db.guildconf.has(`${message.guild.id}.language`) ? this.client.db.guildconf.get(`${message.guild.id}.language`) : 'en-US';
+		if(["french", "english"].includes(language)){
+		    switch (language) {
+                case "french":
+                    language = "fr-FR"
+                    break;
+                case "english":
+                    language = "en-US"
+                    break;
+            }
+        }
 		setFixedT(i18next.getFixedT(language))
 
         

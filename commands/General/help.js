@@ -40,7 +40,7 @@ class Help extends Command {
 						? cmd.help.aliases.map(a => "`" + a + "`").join(", ")
 						: this.t("commands:General.help.specific.NoAliases")
 				)
-				.setColor("BLUE")
+				.setColor("DARK_RED")
 	try {
 		return message.channel.send(groupEmbed);
 	} catch (e) {

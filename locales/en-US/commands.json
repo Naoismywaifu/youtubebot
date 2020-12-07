@@ -1,6 +1,11 @@
 {
     "unallowed": "Hey ! you're not allowed to use this command!",
     "requestedBy": "Requested by {{user}}",
+    "online": "Online",
+    "offline": "Offline",
+    "none": "None",
+    "enabled": "enabled",
+    "disabled": "disabled",
     "Fun": {
         "reverse": {
             "description":"Reverse your message",
@@ -30,20 +35,56 @@
                 "Desc":"You can find **{{cmdslength}}** commands in **{{categorieslength}}** categories"
             },
             "failedSendEmbed": "{{emojis.no}} | Oops an error occurred while i tried to send the help embed: {{err}}"
+        },
+        "nodes": {
+            "description": "See all audio nodes status",
+            "fetching": "{{emojis.loading}} Fetching nodes information please wait...",
+            "embed":  {
+                "desc": "There is **{{onlinenodes}}/{{totalnodes}}** audio nodes online. Bot is playing in **{{totalplaying}} guilds**",
+                "nodeTitle": "{{status}} **{{nodeID}}**",
+                "nodeDetails":"Status: **{{status}}**\nPlaying in: **{{playing}} guilds**\nAttributes: **{{attributes}}**\nUptime: **{{uptime}}**"
+            }
         }
     },
     "Owner": {
         "eval": {
             "description":"Evaluate some code"
+        },
+        "reload": {
+            "description": "Reload a command.",
+            "noCommandName": "{{emojis.no}} | Please provide a command name to reload.",
+            "noExistCmd": "{{emojis.no}} | That command doesn't exist!",
+            "reloaded": "{{emojis.yes}} | the command {{cmd}} has been reloaded!"
+        },
+        "reload-lang": {
+            "description": "Reload all languages.",
+            "success": "{{emojis.yes}} | Successfully reloaded all languages",
+            "failed": "{{emojis.no}} | Failed to reload languages: {{err}}"
         }
-    },
+        },
     "Music": {
         "play": {
             "description":"Play a music, playlist from YouTube.",
             "novc":"{{emojis.no}} | You must join a voice channel to use this command!",
             "error": "{{emojis.no}} | Oops an error occurred while i tried to search: {{err}}"
         },
+        "queue": {
+            "description": "List songs in the queue ready to be played.",
+            "currentqueue": "**Current Queue**",
+            "andmore": "And {{number}} more...",
+            "estimatedduration": "Estimated duration: {{duration}}"
+        },
+        "loop": {
+            "description": "Repeat the currently played music",
+            "loopSucess": "{{emojis.yes}} | Loop has been {{status}} !"
+        },
+        "nowplaying": {
+            "description": "Name of the currently played music",
+            "paused": "{{emojis.no}} | Player is paused !",
+            "np": "{{emojis.yes}} | Now playing: **{{title}}** by **{{author}}**, requested by **{{requestedBy}}**"
+        },
 
+        "emptyQueue": "{{emojis.no}} | Queue is empty !",
         "importing_playlist": "{{emojis.loading}} | Playlist detected! Importing **{{songs}}** tracks, please wait...",
         "success_import_playlist": "{{emojis.yes}} | Imported **{{songs}}** tracks !",
         "no_audio_nodes_online": "{{emojis.no}} | Oops there isn't any audio node available ! please try again later.",
@@ -59,5 +100,14 @@
         "Duration": "{{emojis.clock}} **❱** {{duration}}",
         "AudioServer": "{{emojis.router}} **❱** {{serverID}} {{attributes}}",
         "FailedGenerateQueue": "{{emojis.no}} | Failed to generate queue {{err}}"
+    },
+"Config": {
+    "language": {
+        "description": "Change Bot's language to another language from the list.",
+        "noValueProvided": "{{emojis.no}} | Please provide a valid language.\n{{emojis.arrow}} **{{languages}}**",
+        "successSetNewValue": "{{emojis.yes}} | Successfully set the language to {{language}}",
+        "warningDeprecatedLang": "{{emojis.warn}} Deprecation | **You're using __old language names__ (english or french) please __update__ the name of the language by using {{prefix}}lang set en-US for example**",
+        "defaultMessage": "The currently used language is **{{lang}}**\nTo change the language use the command {{prefix}}language set <languageName>\nAvailable languages: **{{allLang}}**`"
     }
+}
 }

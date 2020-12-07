@@ -57,7 +57,7 @@ class Player {
                 queue = new Queue(this.client, {
                     textChannel: message.channel,
                     voiceChannel,
-                    node: BestNode(this.queue, this.startedNodes, premiumStatus).id
+                    node: BestNode(this, this.startedNodes, premiumStatus).id
                 });
             } catch (e) {
                 message.channel.send(message.t("commands:Music.FailedGenerateQueue", {
@@ -171,7 +171,7 @@ class Player {
     }
 
     async getSongs(query, GuildID) {
-        const node = BestNode(this.queue, this.startedNodes, this.client.functions.isGuildPremium(GuildID));
+        const node = BestNode(this, this.startedNodes, this.client.functions.isGuildPremium(GuildID));
         this.client.logger.log(`selected ${node.id} as node for query ${query}.`, "debug")
       // let res = Rest.load(this.manager.nodes.get(`${node.id}`), `ytsearch: ${query}`) don't support urls
 

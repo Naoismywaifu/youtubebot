@@ -6,6 +6,7 @@ class LocaleStructure {
     constructor(client) {
         this.client = client
         this.languages = ["en-US", "fr-FR"]
+        this.client.languages = this.languages;
         this.ns = ["about", "commands"]
     }
 
@@ -30,13 +31,24 @@ class LocaleStructure {
                 interpolation: {
                     escapeValue: false,
                     defaultVariables: {
-                        emojis: require("../config.js").EMOJIS
+                        emojis: require("../config.js").EMOJIS,
+                        prefix: this.client.functions.getPrefix()
                     }
                 },
                 returnEmptyString: false,
             })
         } catch (err) {
             console.error(err)
+        }
+    }
+
+    async reloadLanguages() {
+        try {
+            await i18next.reloadResources();
+        } catch (e) {
+            throw new Error(`Failed to reload languages: ${e}`)
+        } finally {
+            return true;
         }
     }
 

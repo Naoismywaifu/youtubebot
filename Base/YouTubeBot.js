@@ -80,7 +80,8 @@ class Client extends DiscordClient {
 	loadLocales() {
 		const Locales = require("../Util/LangManager")
 		const locales = new Locales(this)
-		locales.load()
+        this.localemanager = locales
+        locales.load()
 	}
 
     getCommand(name) {
@@ -90,7 +91,7 @@ class Client extends DiscordClient {
     login(token = null) {
         this.registerCommands();
         this.registerEvents();
-        this.loadLocales()
+        this.loadLocales();
 
         return super.login(token);
     }
