@@ -5,6 +5,9 @@ class Play extends Command {
     constructor(client) {
         super(client, {
             name: "play",
+            DJOnly: true,
+            guildOnly: true,
+            botPerms: ["CONNECT", "SPEAK"],
             aliases: ["p", "jouer"],
         });
 
@@ -13,7 +16,14 @@ class Play extends Command {
     async run(message, args) {
 
 
-        if (!message.member.voice.channel) return message.channel.send(this.t("commands:Music.play.novc"));
+        if (!message.member.voice.channel)
+            return message.channel.send(this.t("commands:Music.play.novc"));
+
+        if(!message.member.voice.channel.joinable)
+            return message.channel.send(this.t("commands:Music.unjoinable"))
+        if(!message.member.voice.channel.speakable)
+            return message.channel.send(this.t("commands:Music.unspeakable"))
+
 
         let song;
 
@@ -24,6 +34,9 @@ class Play extends Command {
             this.client.logger.log(`An error occurred while tried to get search songs: ${e}`, 'error')
             return message.channel.send(message.t("commands:Music.no_audio_nodes_online"));
         }
+        if(!song.loadType)
+            return message.channel.send(this.t("commands:Music.unknownErrorNode"))
+
         switch (song.loadType) {
             case "SEARCH_RESULT":
                 await this.client.player.handleVideo(message, message.member.voice.channel, song.tracks[0]);

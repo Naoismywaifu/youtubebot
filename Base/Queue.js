@@ -42,7 +42,7 @@ class Queue {
     }
 
     async skip() {
-        return await this.player.stop();
+        return this.player.stop();
     }
 
     async setVolume(value) {
@@ -57,8 +57,9 @@ class Queue {
     }
 
     async destroy() {
-        this.client.musicManager.queue.delete(this.textChannel.guild.id);
-        await this.client.musicManager.manager.leave(this.textChannel.guild.id);
+        await this.client.player.queue.delete(this.textChannel.guild.id);
+        await this.client.player.manager.leave(this.textChannel.guild.id);
+        return true;
     }
 }
 

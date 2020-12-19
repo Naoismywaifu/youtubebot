@@ -1,6 +1,6 @@
 class Command {
 
-    constructor(client, ops = {}) {
+    constructor(client, ops) {
         this.client = client;
         this._patch(ops);
     }
@@ -13,15 +13,18 @@ class Command {
 		return this.t
 	}
 
-    _patch(ops = {}) {
+    _patch(ops) {
         this.help = {
             name: ops.name || null,
-            description: ops.category|| "No description provided!",
             aliases: ops.aliases || [],
-            botPerms: [],
-            userPerms: [],
-            premiumOnly: false,
-            category: "Others"
+            DJOnly: ops.DJOnly||false,
+            enabled: ops.enabled||true,
+            guildOnly: ops.guildOnly||false,
+            StaffOnly: ops.StaffOnly||false,
+            botPerms: ops.botPerms||[],
+            userPerms: ops.userPerms||[],
+            premiumOnly: ops.premiumOnly||false,
+            category: ops.category||"Core"
         };
 
         this.name = this.help.name;

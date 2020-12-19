@@ -21,7 +21,9 @@ class Reload extends Command {
         delete require.cache[require.resolve(`../${command.help.category}/${command.name}.js`)];
         this.client.commands.delete(command.name);
         const props = require(`../${command.help.category}/${command.name}.js`);
-        this.client.commands.set(command.name, new props(this.client));
+        this.client.commands.set(command.name, new props(this.client, {
+                category: command.help.category
+        }));
         return message.channel.send(this.t("commands:Owner.reload.reloaded", {
             cmd: command.name
         }));

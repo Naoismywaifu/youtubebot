@@ -6,6 +6,7 @@ class Language extends Command {
     constructor(client) {
         super(client, {
             name: "language",
+            guildOnly: true,
             aliases: ["lang", "languages"],
         });
         this.altlangs = ["french", "english"] // support old languages names

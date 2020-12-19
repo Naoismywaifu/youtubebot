@@ -49,7 +49,7 @@ class Player {
 
         let premiumStatus = this.client.functions.isGuildPremium(message.guild.id)
 
-        let maxQueueLength = premiumStatus ? this.client.config.PREMIUM_MAX_QUEUE_LENGTH : this.client.config.MUSIC.MAX_QUEUE_LENGTH;
+        let maxQueueLength = premiumStatus ? this.client.config.MUSIC.PREMIUM_MAX_QUEUE_LENGTH : this.client.config.MUSIC.MAX_QUEUE_LENGTH;
 
         if (!serverQueue) {
             let queue;
@@ -57,7 +57,7 @@ class Player {
                 queue = new Queue(this.client, {
                     textChannel: message.channel,
                     voiceChannel,
-                    node: BestNode(this, this.startedNodes, premiumStatus).id
+                    node: BestNode(this, premiumStatus).id
                 });
             } catch (e) {
                 message.channel.send(message.t("commands:Music.FailedGenerateQueue", {
@@ -65,20 +65,20 @@ class Player {
                 }))
             }
             if(Array.isArray(song)){
-                let mimporting = await message.channel.send(message.t("commands:Music.importing_playlist", {
+                let messageImporting = await message.channel.send(message.t("commands:Music.importing_playlist", {
                     songs: song.length
-                }))
+                }));
 
                 if(song.length >= maxQueueLength) return message.channel.send(message.t("commands:Music.reach_queue_limit", {
                     limit: maxQueueLength
-                }))
+                }));
 
                 for (let i = 0; i < song.length; i++) {
                     const s = song[i];
                     s.requestedBy = message.author
                     queue.songs.push(s)
                 }
-                await mimporting.edit(message.t("commands:Music.success_import_playlist", {
+                await messageImporting.edit(message.t("commands:Music.success_import_playlist", {
                     songs: song.length
                 }))
             } else {
@@ -161,7 +161,7 @@ class Player {
                 .setTitle(guild.t("commands:Music.nowPlaying"))
                 .setURL(song.info.uri)
                 .setThumbnail(`http://img.youtube.com/vi/${song.info.identifier||null}/hqdefault.jpg`)
-                .setDescription(guild.t("commands:Music.Title", { title: song.info.title||song.info.identifier, attributes: song.info.isStream ? guild.t("commands:Music.Live", {liveicon: "🔴"}) : ""}) + "\n" + guild.t("commands:Music.Author", { author: song.info.author||"None", attributes:"" }) + "\n" + guild.t("commands:Music.Duration", {duration: song.info.isStream ? guild.t("commands:Music.Live", {liveicon:"🔴"}) : ms(song.info.length||0, { long:true })}) +'\n' + guild.t("commands:Music.AudioServer", { serverID: serverQueue.node, attributes: serverQueue.node.startsWith("Premium") ? "⭐" : "" }))
+                .setDescription(guild.t("commands:Music.Title", { title: song.info.title||song.info.identifier, attributes: song.info.isStream ? guild.t("commands:Music.Live", {liveicon: "🔴"}) : ""}) + "\n" + guild.t("commands:Music.Author", { author: song.info.author||"None", attributes:"" }) + "\n" + guild.t("commands:Music.Duration", {duration: song.info.isStream ? guild.t("commands:Music.Live", {liveicon:"🔴"}) : this.client.functions.millisToDuration(song.info.length||0)}) +'\n' + guild.t("commands:Music.AudioServer", { serverID: serverQueue.node, attributes: serverQueue.node.startsWith("Premium") ? "⭐" : "" }))
                 .setColor("DARK_RED")
                 .setFooter(guild.t("commands:requestedBy", { user: song.requestedBy.tag }), song.requestedBy.displayAvatarURL({ dynamic: true }))
 
@@ -171,9 +171,8 @@ class Player {
     }
 
     async getSongs(query, GuildID) {
-        const node = BestNode(this, this.startedNodes, this.client.functions.isGuildPremium(GuildID));
+        const node = BestNode(this, this.client.functions.isGuildPremium(GuildID));
         this.client.logger.log(`selected ${node.id} as node for query ${query}.`, "debug")
-      // let res = Rest.load(this.manager.nodes.get(`${node.id}`), `ytsearch: ${query}`) don't support urls
 
         const params = new URLSearchParams();
         const isHttp = /^https?:\/\//.test(query);

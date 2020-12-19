@@ -15,12 +15,12 @@ class Ping extends Command {
 
         const initial = message.createdTimestamp;
 
-        message.channel.send(this.t("commands:General.ping.pinging"))
+        message.channel.send(this.t("commands:Core.ping.pinging"))
 
             .then(m => {
                 const latency = m.createdTimestamp - initial;
 
-                return m.edit(this.t("commands:General.ping.success", {
+                return m.edit(this.t("commands:Core.ping.success", {
                     latency: latency
                 }));
             });

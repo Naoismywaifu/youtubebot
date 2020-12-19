@@ -5,7 +5,7 @@
             "noMessage": "Veuillez spécifier un message à retourner."
         }
     },
-    "General": {
+    "Core": {
         "ping": {
             "description": "Récupérez la latence du bot.",
             "pinging": "Ping ?",
@@ -28,6 +28,5 @@
                 "Desc":"Trouvez **{{cmdslength}}** commandes dans **{{categorieslength}}** catégories"
             }
         }
-    },
-    "hello": "bonjour monde!"
+    }
 }

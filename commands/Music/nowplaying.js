@@ -5,6 +5,7 @@ class NowPlaying extends Command {
     constructor(client) {
         super(client, {
             name: "nowplaying",
+            guildOnly: true,
             aliases: ["np", "now", "current", "nowPlaying", "now-playing"],
             description: "See the currently played track"
         });

@@ -5,6 +5,8 @@ class Loop extends Command {
     constructor(client) {
         super(client, {
             name: "loop",
+            DJOnly: true,
+            guildOnly: true,
             aliases: ["repeat"]
         });
     }

@@ -2,7 +2,7 @@ const { Client: DiscordClient, Collection } = require("discord.js");
 const fs = require("fs");
 const db = require("quick.db")
 const Sentry = require('@sentry/node');
-const blapi = require("blapi");
+const Poster = require("./Poster")
 
 class Client extends DiscordClient {
 
@@ -10,7 +10,7 @@ class Client extends DiscordClient {
         super(...args);
 
         db.premium = new db.table('premium');
-        db.radio = new db.table('radio');
+        db.radiomanager = new db.table('radiomanager');
         db.notifier = new db.table('notifier');
         db.guildconf = new db.table('guildconf');
         db.stats = new db.table('stats');
@@ -21,16 +21,18 @@ class Client extends DiscordClient {
         this.commands = new Collection();
         this.aliases = new Collection();
         this.db = db;
+        this.notifier = null;
         this.functions = require("../Util/Functions");
         this.player = null;
+        this.radioManager = null;
         this.config = require("../config");
-        this.logger = require("../Util/Logger")
+        this.logger = require("../Util/Logger");
+        this.poster = new Poster(this);
         this.commandsDir = __dirname + "/../commands";
         this.eventsDir = __dirname + "/../events";
         
         if(this.config.ENV === "PRODUCTION") {
             Sentry.init({ dsn: this.config.SENTRY_DSN });
-            blapi.handle(this, this.config.Botlists);
         }
     
     }

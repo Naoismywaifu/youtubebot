@@ -6,6 +6,7 @@ class Premium extends Command {
     constructor(client) {
         super(client, {
             name: "premium",
+            guildOnly: true,
             aliases: ["vip"],
         });
 
@@ -18,15 +19,14 @@ class Premium extends Command {
         if (this.client.db.guildconf.get(`${message.guild.id}.premium`)) {
             embed = new Discord.MessageEmbed()
                 .setTitle("YouTube Bot Premium 🌟")
-                .setDescription("yes")
-                .setFooter("YouTube Bot")
+                .setDescription(this.t("commands:Premium.premium.yes"))
+                .setFooter("YouTube Bot", this.client.user.displayAvatarURL())
                 .setColor("GREEN");
         } else {
-
             embed = new Discord.MessageEmbed()
                 .setTitle("YouTube Bot Premium 🌟")
-                .setDescription("no !")
-                .setFooter("YouTube Bot")
+                .setDescription(this.t("commands:Premium.premium.no"))
+                .setFooter("YouTube Bot", this.client.user.displayAvatarURL())
                 .setColor("RED");
 
         }
