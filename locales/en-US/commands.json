@@ -1,35 +1,12 @@
 {
-    "unallowed": "{{emojis.no}} | Hey ! you're not allowed to use this command!",
-    "requestedBy": "Requested by {{user}}",
-    "online": "Online",
-    "offline": "Offline",
-    "none": "None",
-    "current": "Current",
-    "channels": "Channels",
-    "ram": "RAM",
-    "ping": "Ping",
-    "users": "Users",
-    "servers": "Servers",
-    "enabled": "enabled",
-    "onlyGuild": "{{emojis.no}} | This command can't be used inside DMs!",
-    "helloServer": "Hello {{username}}! my prefix is **{{theprefix}}**, i'm YouTube Bot an powerful music-oriented discord bot.",
-    "premiumOnly": "{{emojis.no}} | This command can only be used by premium guilds!",
-    "MISSING_BOT_PERMS": "{{emojis.no}} | In order for this command to work correctly, I need these permissions: **{{list}}**",
-    "MISSING_MEMBER_PERMS": "{{emojis.no}} | To use this command you need these permissions: **{{list}}**",
-    "helloDM": "Hello {{username}}! my prefix is **{{prefix}}**, i'm YouTube Bot an powerful music-oriented discord bot.",
-    "RadioPlaying": "{{emojis.no}} | You can't use music commands because the bot is in **radio mode**, please disable it before!",
-    "disabled": "disabled",
-    "notStaff": "{{emojis.no}} | You're not staff! You need to have MANAGE_GUILD permission or the staff role (if configured)",
-    "notDJ": "{{emojis.no}} | You're not DJ! You need the DJ role (if configured) or ADMINISTRATOR permission or a role named **DJ**",
-    "commandError": "{{emojis.no}} An error occurred with the command **{{cmd}}**\nError: **{{err}}**",
     "Fun": {
         "reverse": {
-            "description":"Reverse your message",
+            "description": "Reverse your message",
             "noMessage": "{{emojis.no}} | Please specify a message to reverse!"
         },
         "meme": {
             "description": "Fetch some fresh memes",
-            "footer": "\uD83D\uDC4D {{upVotes}} | \uD83D\uDCAC {{comments}} | From /r/{{subreddit}}"
+            "footer": "👍 {{upVotes}} | 💬 {{comments}} | From /r/{{subreddit}}"
         },
         "urban": {
             "description": "urban dictionary",
@@ -38,7 +15,7 @@
             "def": "Definition",
             "example": "Example",
             "notProvided": "Not provided",
-            "footer": "\uD83D\uDC4D {{up}} | \uD83D\uDC4E {{down}}"
+            "footer": "👍 {{up}} | 👎 {{down}}"
         },
         "cat": {
             "description": "Meow!",
@@ -47,97 +24,53 @@
         "dog": {
             "description": "Dogs!",
             "noFound": "{{emojis.no}} i didn't found any dog in my database!"
-
         }
-    }, 
-    "Core": {
+    },
+    "General": {
         "ping": {
-            "description":"Get latency of the bot.",
-            "pinging":"pinging...",
-            "success":"Pong ! ({{latency}} ms)"
+            "description": "Get latency of the bot.",
+            "pinging": "pinging...",
+            "success": "Pong ! ({{latency}} ms)"
         },
         "help": {
-            "description":"Get help about the bot.",
+            "description": "Get help about the bot.",
             "specific": {
-                "commandDoNotExist": "{{emojis.no}} | This command don't exist !",
+                "NoDesc": "No description provided!",
+                "NoName": "No name provided!",
+                "NoCategory": "Other",
+                "NoAliases": "No aliases provided",
                 "name": "Name",
                 "description": "Description",
                 "aliases": "aliases",
-                "category": "category",
-                "NoDesc":"No description provided!",
-                "NoName":"No name provided!",
-                "NoCategory":"Other",
-                "NoAliases":"No aliases provided"
+                "category": "category"
             },
             "global": {
-                "Title":"**Help - YouTube Bot**",
-                "Desc":"You can find **{{cmdslength}}** commands in **{{categorieslength}}** categories"
+                "Title": "**Help - YouTube Bot**",
+                "Desc": "You can find **{{cmdslength}}** commands in **{{categorieslength}}** categories"
             },
             "failedSendEmbed": "{{emojis.no}} | Oops an error occurred while i tried to send the help embed: {{err}}"
-        },
-        "botinfo": {
-            "description": "Get information about the bot and the system",
-            "about": "YouTube Bot is a bot developed with ❤ by HiiZun",
-            "botInfo": "{{emojis.HELPEMOJIS.Core}} | Bot information",
-            "ServInfo": "{{emojis.router}} | Server information",
-            "SoftInfo": "{{emojis.router}} | Software information",
-            "TOTALSERVERS": "Discord servers",
-            "TOTAL_SERVERS": "Number of servers",
-            "TOTAL_USERS": "Number of members",
-            "SHARD_NUMBER": "Number of shards",
-            "SHARD_CURRENT": "Current shard",
-            "GUILD": "Server",
-            "COMMANDS_EXECUTED": "Commands executed",
-            "OS": "OS",
-            "ARCH": "Arch",
-            "RAM": "RAM usage",
-            "BOT_VERSION": "YouTube Bot",
-            "BOT_LIB": "Library",
-            "BOT_CORE": "Language",
-            "PLAYING_COUNT": "Playing on",
-            "PREMIUM_COUNT": "Premium on",
-            "SHARD": "Shard"
-        },
-        "info": {
-            "description": "Get information about the bot",
-            "infoDesc": "Hello! YouTube Bot is running on the version **{{version}}**. Your current shard is **#{{shardID}}** with a total of **{{shardCount}}** shards. I'm powering **{{totalGuilds}}** Communities with a total of **{{totalMembers}}** users. Want donate or buy premium ? [Click HERE](https://donatebot.iocommands:General/checkout/718419838145527910)"
         },
         "nodes": {
             "description": "See all audio nodes status",
             "fetching": "{{emojis.loading}} Fetching nodes information please wait...",
-            "embed":  {
+            "embed": {
                 "desc": "There is **{{onlinenodes}}/{{totalnodes}}** audio nodes online. Bot is playing in **{{totalplaying}} guilds**",
                 "nodeTitle": "{{status}} **{{nodeID}}**",
-                "nodeDetails":"Status: **{{status}}**\nPlaying in: **{{playing}} guilds**\nAttributes: **{{attributes}}**\nUptime: **{{uptime}}**"
+                "nodeDetails": "Status: **{{status}}**\nPlaying in: **{{playing}} guilds**\nAttributes: **{{attributes}}**\nUptime: **{{uptime}}**"
             }
-        },
-        "shards": {
-            "description":"Fetch information about shards",
-            "shardInfo": "YouTube Bot works through \"shards\" which are instances of YouTube Bot started at the same time that share the task of providing you with the best experience!\n__**Global stats**__\n> **{{allServers}}** Servers\n> **{{allMembers}}** Users"
-        },
-        "uptime": {
-            "description": "Get Bot's uptime",
-            "uptime": "I'm online since {{uptime}}."
-        },
-        "vote": {
-            "description": "Get a list of websites were you can vote for YouTube Bot",
-            "desc": "Support YouTube Bot by voting for me!",
-            "website": "Website",
-            "vote": "Vote"
-        },
-        "invite": {
-            "description": "Get an invite to invite YouTube Bot on your own server!",
-            "desc": "Invite YouTube Bot to your own Discord Server!",
-            "allPerms": "Invite with all permissions (recommended)",
-            "noPerms": "Invite without permissions (not recommended)",
-            "vote": "Vote for the bot",
-            "voteWord": "Vote",
-            "inviteWord": "Invite"
         }
     },
+    "hello": "hello world!",
+    "unallowed": "Hey ! you're not allowed to use this command!",
+    "requestedBy": "Requested by {{user}}",
+    "online": "Online",
+    "offline": "Offline",
+    "none": "None",
+    "enabled": "enabled",
+    "disabled": "disabled",
     "Owner": {
         "eval": {
-            "description":"Evaluate some code"
+            "description": "Evaluate some code"
         },
         "reload": {
             "description": "Reload a command.",
@@ -150,11 +83,11 @@
             "success": "{{emojis.yes}} | Successfully reloaded all languages",
             "failed": "{{emojis.no}} | Failed to reload languages: {{err}}"
         }
-        },
+    },
     "Music": {
         "play": {
-            "description":"Play a music, playlist from YouTube.",
-            "novc":"{{emojis.no}} | You must join a voice channel to use this command!",
+            "description": "Play a music, playlist from YouTube.",
+            "novc": "{{emojis.no}} | You must join a voice channel to use this command!",
             "error": "{{emojis.no}} | Oops an error occurred while i tried to search: {{err}}"
         },
         "queue": {
@@ -172,6 +105,22 @@
             "paused": "{{emojis.no}} | Player is paused !",
             "np": "{{emojis.yes}} | Now playing: **{{title}}** by **{{author}}**, requested by **{{requestedBy}}**"
         },
+        "emptyQueue": "{{emojis.no}} | Queue is empty !",
+        "importing_playlist": "{{emojis.loading}} | Playlist detected! Importing **{{songs}}** tracks, please wait...",
+        "success_import_playlist": "{{emojis.yes}} | Imported **{{songs}}** tracks !",
+        "no_audio_nodes_online": "{{emojis.no}} | Oops there isn't any audio node available ! please try again later.",
+        "cannot_join_vc": "{{emojis.no}} | Oops i couldn't join your voice channel: {{err}}",
+        "reach_queue_limit": "{{emojis.no}} | Oh no ! you reached queue's limit of **{{limit}}** tracks, consider subscribing to youtube bot premium if isn't already done to be able to add more songs.",
+        "empty_queue": "{{emojis.no}} | Queue is empty ! Leaving voice channel...",
+        "added_queue": "{{emojis.plus}} | Added **{{length}}** tracks from a playlist to the queue",
+        "added_track": "{{emojis.plus}} | Added **{{title}}** by **{{author}}** to the queue",
+        "nowPlaying": "{{emojis.music_notes}} Now Playing {{emojis.music_notes}}",
+        "Title": "{{emojis.disk}} **❱** {{title}} {{attributes}}",
+        "Author": "{{emojis.upload}} **❱** {{author}} {{attributes}}",
+        "Live": "**[{{liveicon}} Live]**",
+        "Duration": "{{emojis.clock}} **❱** {{duration}}",
+        "AudioServer": "{{emojis.router}} **❱** {{serverID}} {{attributes}}",
+        "FailedGenerateQueue": "{{emojis.no}} | Failed to generate queue {{err}}",
         "stop": {
             "description": "Clear queue and disconnect bot from voice channel",
             "success": "{{emojis.yes}} | Left voice channel!",
@@ -214,10 +163,6 @@
             "description": "Shuffle the queue.",
             "success": "{{emojis.yes}} | Shuffled!"
         },
-        "shuffle": {
-            "description": "Shuffle the queue.",
-            "success": "{{emojis.yes}} | Shuffled!"
-        },
         "join": {
             "description": "Make the bot join a voice channel.",
             "success": "{{emojis.yes}} | Summoned in {{vcName}}!"
@@ -237,12 +182,11 @@
         },
         "search": {
             "description": "Search a song and play it.",
-            "noArgs": "{{emojis.no}} | Please provide a query!",
+            "noArgs": "{{emojis.no}} | Please provide a number of tracks to skip",
             "picknb": "Pick a number from 1-{{max}} or cancel",
             "noTime": "{{emojis.no}} | Timed out, please try again!",
             "cancelled": "{{emojis.no}} | Cancelled",
             "success": "{{emojis.search}} | waiting for audio servers...",
-            "noArgs": "{{emojis.no}} | Please provide a number of tracks to skip",
             "PremiumInfo": "did you know? With youtube bot premium you can go from 10 to 25 possibilities!"
         },
         "playlist": {
@@ -259,83 +203,168 @@
         "unjoinable": "{{emojis.no}} | I can't join the voice channel!",
         "unspeakable": "{{emojis.no}} | I can't speak in the voice channel!",
         "unknownErrorNode": "{{emojis.no}} | Oops an error occurred due to a problem while bot tried to communicate with audio server",
-        "emptyQueue": "{{emojis.no}} | Queue is empty !",
         "alreadyInChannel": "{{emojis.no}} | Bot is already in a voice channel!",
-        "importing_playlist": "{{emojis.loading}} | Playlist detected! Importing **{{songs}}** tracks, please wait...",
-        "success_import_playlist": "{{emojis.yes}} | Imported **{{songs}}** tracks !",
-        "noVoiceChannel": "{{emojis.no}} | Please join a voice channel!",
-        "no_audio_nodes_online": "{{emojis.no}} | Oops there isn't any audio node available ! please try again later.",
-        "cannot_join_vc": "{{emojis.no}} | Oops i couldn't join your voice channel: {{err}}",
-        "reach_queue_limit": "{{emojis.no}} | Oh no ! you reached queue's limit of **{{limit}}** tracks, consider subscribing to youtube bot premium if isn't already done to be able to add more songs.",
-        "empty_queue": "{{emojis.no}} | Queue is empty ! Leaving voice channel...",
-        "added_queue": "{{emojis.plus}} | Added **{{length}}** tracks from a playlist to the queue",
-        "added_track": "{{emojis.plus}} | Added **{{title}}** by **{{author}}** to the queue",
-        "nowPlaying": "{{emojis.music_notes}} Now Playing {{emojis.music_notes}}",
-        "Title": "{{emojis.disk}} **❱** {{title}} {{attributes}}",
-        "Author": "{{emojis.upload}} **❱** {{author}} {{attributes}}",
-        "Live": "**[{{liveicon}} Live]**",
-        "Duration": "{{emojis.clock}} **❱** {{duration}}",
-        "AudioServer": "{{emojis.router}} **❱** {{serverID}} {{attributes}}",
-        "FailedGenerateQueue": "{{emojis.no}} | Failed to generate queue {{err}}"
+        "noVoiceChannel": "{{emojis.no}} | Please join a voice channel!"
     },
-"Config": {
-    "language": {
-        "description": "Change Bot's language to another language from the list.",
-        "noValueProvided": "{{emojis.no}} | Please provide a valid language.\n{{emojis.arrow}} **{{languages}}**",
-        "successSetNewValue": "{{emojis.yes}} | Successfully set the language to {{language}}",
-        "warningDeprecatedLang": "{{emojis.warn}} Deprecation | **You're using __old language names__ (english or french) please __update__ the name of the language by using {{prefix}}lang set en-US for example**",
-        "defaultMessage": "The currently used language is **{{lang}}**\nChange language: {{prefix}}language set <lang>\nInfo about a language: {{prefix}}language info <lang>\nAvailable languages: **{{allLang}}**`",
-        "infoEmbed": "Name ❱ **{{name}}**\nRegional name ❱ **{{regionalName}}**\nIdentifier ❱ **{{identifier}}**\nDescription ❱ **{{description}}**\nContributors ❱ **{{contributors}}**"
+    "Config": {
+        "language": {
+            "description": "Change Bot's language to another language from the list.",
+            "noValueProvided": "{{emojis.no}} | Please provide a valid language.\n{{emojis.arrow}} **{{languages}}**",
+            "successSetNewValue": "{{emojis.yes}} | Successfully set the language to {{language}}",
+            "warningDeprecatedLang": "{{emojis.warn}} Deprecation | **You're using __old language names__ (english or french) please __update__ the name of the language by using {{prefix}}lang set en-US for example**",
+            "defaultMessage": "The currently used language is **{{lang}}**\nTo change the language use the command {{prefix}}language set <languageName>\nAvailable languages: **{{allLang}}**`",
+            "infoEmbed": "Name ❱ **{{name}}**\nRegional name ❱ **{{regionalName}}**\nIdentifier ❱ **{{identifier}}**\nDescription ❱ **{{description}}**\nContributors ❱ **{{contributors}}**"
+        },
+        "prefix": {
+            "description": "Change Bot's prefix to another prefix.",
+            "noPrefix": "{{emojis.no}} | Please provide a prefix !",
+            "invalidPrefix": "{{emojis.no}} | The prefix is not valid (more than 3 chars) !",
+            "success": "{{emojis.yes}} | Successfully set the prefix as {{prefix}}",
+            "currPrefix": "Current prefix is **{{prefix}}**\nTo change prefix use {{prefix}}prefix set <prefix>"
+        },
+        "DJ": {
+            "description": "Setup a role which will have access to music commands.",
+            "invalidValue": "{{emojis.no}} | No role specified or invalid role!",
+            "success": "{{emojis.yes}} | DJ role bound to {{role}}",
+            "successRemoved": "{{emojis.yes}} | DJ role removed",
+            "failedRemoved": "{{emojis.no}} | Failed to remove role, this is usually occurred because you didn't set any DJ role",
+            "defaultMessage": "Current DJ role: **{{role}}**\nSet DJ role: **{{prefix}}DJ set @DJ**\nReset role **{{prefix}}DJ reset**"
+        },
+        "staff": {
+            "description": "Setup a role which will have access to staff commands even if user hasn't admin perm.",
+            "invalidValue": "{{emojis.no}} | No role specified or invalid role!",
+            "success": "{{emojis.yes}} | Staff role bound to {{role}}",
+            "successRemoved": "{{emojis.yes}} | Staff role removed",
+            "failedRemoved": "{{emojis.no}} | Failed to remove role, this is usually occurred because you didn't set any Staff role",
+            "defaultMessage": "Current staff role: **{{role}}**\nSet staff role: **{{prefix}}staff set @staff**\nReset role **{{prefix}}staff reset**"
+        }
     },
-    "prefix": {
-        "description": "Change Bot's prefix to another prefix.",
-        "noPrefix": "{{emojis.no}} | Please provide a prefix !",
-        "invalidPrefix": "{{emojis.no}} | The prefix is not valid (more than 3 chars) !",
-        "success": "{{emojis.yes}} | Successfully set the prefix as {{prefix}}",
-        "currPrefix":"Current prefix is **{{prefix}}**\nTo change prefix use {{prefix}}prefix set <prefix>"
+    "current": "Current",
+    "channels": "Channels",
+    "ram": "RAM",
+    "ping": "Ping",
+    "users": "Users",
+    "servers": "Servers",
+    "onlyGuild": "{{emojis.no}} | This command can't be used inside DMs!",
+    "helloServer": "Hello {{username}}! my prefix is **{{theprefix}}**, i'm YouTube Bot an powerful music-oriented discord bot.",
+    "premiumOnly": "{{emojis.no}} | This command can only be used by premium guilds!",
+    "MISSING_BOT_PERMS": "{{emojis.no}} | In order for this command to work correctly, I need these permissions: **{{list}}**",
+    "MISSING_MEMBER_PERMS": "{{emojis.no}} | To use this command you need these permissions: **{{list}}**",
+    "helloDM": "Hello {{username}}! my prefix is **{{prefix}}**, i'm YouTube Bot an powerful music-oriented discord bot.",
+    "RadioPlaying": "{{emojis.no}} | You can't use music commands because the bot is in **radio mode**, please disable it before!",
+    "notStaff": "{{emojis.no}} | You're not staff! You need to have MANAGE_GUILD permission or the staff role (if configured)",
+    "notDJ": "{{emojis.no}} | You're not DJ! You need the DJ role (if configured) or ADMINISTRATOR permission or a role named **DJ**",
+    "commandError": "{{emojis.no}} An error occurred with the command **{{cmd}}**\nError: **{{err}}**",
+    "Core": {
+        "ping": {
+            "description": "Get latency of the bot.",
+            "pinging": "pinging...",
+            "success": "Pong ! ({{latency}} ms)"
+        },
+        "help": {
+            "description": "Get help about the bot.",
+            "specific": {
+                "commandDoNotExist": "{{emojis.no}} | This command don't exist !",
+                "name": "Name",
+                "description": "Description",
+                "aliases": "aliases",
+                "category": "category",
+                "NoDesc": "No description provided!",
+                "NoName": "No name provided!",
+                "NoCategory": "Other",
+                "NoAliases": "No aliases provided"
+            },
+            "global": {
+                "Title": "**Help - YouTube Bot**",
+                "Desc": "You can find **{{cmdslength}}** commands in **{{categorieslength}}** categories"
+            },
+            "failedSendEmbed": "{{emojis.no}} | Oops an error occurred while i tried to send the help embed: {{err}}"
+        },
+        "botinfo": {
+            "description": "Get information about the bot and the system",
+            "about": "YouTube Bot is a bot developed with ❤ by HiiZun",
+            "botInfo": "{{emojis.HELPEMOJIS.Core}} | Bot information",
+            "ServInfo": "{{emojis.router}} | Server information",
+            "SoftInfo": "{{emojis.router}} | Software information",
+            "TOTALSERVERS": "Discord servers",
+            "TOTAL_SERVERS": "Number of servers",
+            "TOTAL_USERS": "Number of members",
+            "SHARD_NUMBER": "Number of shards",
+            "SHARD_CURRENT": "Current shard",
+            "GUILD": "Server",
+            "COMMANDS_EXECUTED": "Commands executed",
+            "OS": "OS",
+            "ARCH": "Arch",
+            "RAM": "RAM usage",
+            "BOT_VERSION": "YouTube Bot",
+            "BOT_LIB": "Library",
+            "BOT_CORE": "Language",
+            "PLAYING_COUNT": "Playing on",
+            "PREMIUM_COUNT": "Premium on",
+            "SHARD": "Shard"
+        },
+        "info": {
+            "description": "Get information about the bot",
+            "infoDesc": "Hello! YouTube Bot is running on the version **{{version}}**. Your current shard is **#{{shardID}}** with a total of **{{shardCount}}** shards. I'm powering **{{totalGuilds}}** Communities with a total of **{{totalMembers}}** users. Want donate or buy premium ? [Click HERE](https://donatebot.iocommands:General/checkout/718419838145527910)"
+        },
+        "nodes": {
+            "description": "See all audio nodes status",
+            "fetching": "{{emojis.loading}} Fetching nodes information please wait...",
+            "embed": {
+                "desc": "There is **{{onlinenodes}}/{{totalnodes}}** audio nodes online. Bot is playing in **{{totalplaying}} guilds**",
+                "nodeTitle": "{{status}} **{{nodeID}}**",
+                "nodeDetails": "Status: **{{status}}**\nPlaying in: **{{playing}} guilds**\nAttributes: **{{attributes}}**\nUptime: **{{uptime}}**"
+            }
+        },
+        "shards": {
+            "description": "Fetch information about shards",
+            "shardInfo": "YouTube Bot works through \"shards\" which are instances of YouTube Bot started at the same time that share the task of providing you with the best experience!\n__**Global stats**__\n> **{{allServers}}** Servers\n> **{{allMembers}}** Users"
+        },
+        "uptime": {
+            "description": "Get Bot's uptime",
+            "uptime": "I'm online since {{uptime}}."
+        },
+        "vote": {
+            "description": "Get a list of websites were you can vote for YouTube Bot",
+            "desc": "Support YouTube Bot by voting for me!",
+            "website": "Website",
+            "vote": "Vote"
+        },
+        "invite": {
+            "description": "Get an invite to invite YouTube Bot on your own server!",
+            "desc": "Invite YouTube Bot to your own Discord Server!",
+            "allPerms": "Invite with all permissions (recommended)",
+            "noPerms": "Invite without permissions (not recommended)",
+            "vote": "Vote for the bot",
+            "voteWord": "Vote",
+            "inviteWord": "Invite"
+        }
     },
-    "DJ": {
-        "description": "Setup a role which will have access to music commands.",
-        "invalidValue": "{{emojis.no}} | No role specified or invalid role!",
-        "success": "{{emojis.yes}} | DJ role bound to {{role}}",
-        "successRemoved": "{{emojis.yes}} | DJ role removed",
-        "failedRemoved": "{{emojis.no}} | Failed to remove role, this is usually occurred because you didn't set any DJ role",
-        "defaultMessage": "Current DJ role: **{{role}}**\nSet DJ role: **{{prefix}}DJ set @DJ**\nReset role **{{prefix}}DJ reset**"
+    "Premium": {
+        "activate": {
+            "description": "Activate your premium on a discord server",
+            "already": "{{emojis.no}} | This discord server is already Premium!",
+            "noPremium": "{{emojis.no}} | You don't have bought any premium! If you've recently bought your premium, please wait some minutes or open a ticket on the support.",
+            "success": "{{emojis.yes}} | Voila! Your premium has been activated! Thank you for your trust, if you haven't received your premium please contact support."
+        },
+        "premium": {
+            "description": "Get your premium status",
+            "no": "{{emojis.no}} Oh no! Your guild isn't premium!\nYouTube Bot premium is a way to boost up your discord with enhanced commands cheaper (only 5€ lifetime), Owners of large communities (1k+ members),\nContact us on our support to get YouTube Bot Premium cheaper, or even free!\n[[Become Premium]](https://donatebot.io/checkout/718419838145527910)",
+            "yes": "{{emojis.yes}} You have YouTube Bot Premium!\nThank you for your support, if you have any problem please come and consult us on our support server!"
+        },
+        "redeem": {
+            "description": "Redeem a gift code and put a Premium licence directly in your account.",
+            "noExist": "{{emojis.no}} | This code don't exist or was already claim!",
+            "success": "{{emojis.yes}} | Successfully claim code, added 1 YouTube Bot Premium license in your account."
+        },
+        "newcode": {
+            "description": "Create a code to give your YouTube Bot Premium license.",
+            "notInDMs": "{{emojis.no}} | You must use this command inside DMs!",
+            "noPremium": "{{emojis.no}} | You don't have any premium license in your wallet!",
+            "generating": "{{emojis.loading}} | Generating...",
+            "success": "{{emojis.yes}} | Generated code: `{{code}}`"
+        }
     },
-    "staff": {
-        "description": "Setup a role which will have access to staff commands even if user hasn't admin perm.",
-        "invalidValue": "{{emojis.no}} | No role specified or invalid role!",
-        "success": "{{emojis.yes}} | Staff role bound to {{role}}",
-        "successRemoved": "{{emojis.yes}} | Staff role removed",
-        "failedRemoved": "{{emojis.no}} | Failed to remove role, this is usually occurred because you didn't set any Staff role",
-        "defaultMessage": "Current staff role: **{{role}}**\nSet staff role: **{{prefix}}staff set @staff**\nReset role **{{prefix}}staff reset**"
-    }
-},
-"Premium": {
-    "activate": {
-        "description": "Activate your premium on a discord server",
-        "already": "{{emojis.no}} | This discord server is already Premium!",
-        "noPremium": "{{emojis.no}} | You don't have bought any premium! If you've recently bought your premium, please wait some minutes or open a ticket on the support.",
-        "success": "{{emojis.yes}} | Voila! Your premium has been activated! Thank you for your trust, if you haven't received your premium please contact support."
-    },
-    "premium": {
-        "description": "Get your premium status",
-        "no": "{{emojis.no}} Oh no! Your guild isn't premium!\nYouTube Bot premium is a way to boost up your discord with enhanced commands cheaper (only 5€ lifetime), Owners of large communities (1k+ members),\nContact us on our support to get YouTube Bot Premium cheaper, or even free!\n[[Become Premium]](https://donatebot.io/checkout/718419838145527910)",
-        "yes": "{{emojis.yes}} You have YouTube Bot Premium!\nThank you for your support, if you have any problem please come and consult us on our support server!"
-    },
-    "redeem": {
-        "description": "Redeem a gift code and put a Premium licence directly in your account.",
-        "noExist": "{{emojis.no}} | This code don't exist or was already claim!",
-        "success": "{{emojis.yes}} | Successfully claim code, added 1 YouTube Bot Premium license in your account."
-    },
-    "newcode": {
-        "description": "Create a code to give your YouTube Bot Premium license.",
-        "notInDMs": "{{emojis.no}} | You must use this command inside DMs!",
-        "noPremium": "{{emojis.no}} | You don't have any premium license in your wallet!",
-        "generating": "{{emojis.loading}} | Generating...",
-        "success": "{{emojis.yes}} | Generated code: `{{code}}`"
-    }
-},
     "Radio": {
         "radio": {
             "description": "Play a radio 24/7 (24h a day, 7d a week) directly in your voice channel.",
