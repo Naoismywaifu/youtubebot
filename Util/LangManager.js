@@ -5,7 +5,7 @@ const translationBackend = require("i18next-node-fs-backend")
 class LocaleStructure {
     constructor(client) {
         this.client = client
-        this.languages = ["en-US", "fr-FR"]
+        this.languages = ["en-US", "en-FR"]
         this.client.languages = this.languages;
         this.ns = ["about", "commands"]
     }
@@ -47,9 +47,9 @@ class LocaleStructure {
             await i18next.reloadResources();
         } catch (e) {
             throw new Error(`Failed to reload languages: ${e}`)
-        } finally {
-            return true;
         }
+            return true;
+
     }
 
 

@@ -284,7 +284,8 @@
         "noValueProvided": "{{emojis.no}} | Please provide a valid language.\n{{emojis.arrow}} **{{languages}}**",
         "successSetNewValue": "{{emojis.yes}} | Successfully set the language to {{language}}",
         "warningDeprecatedLang": "{{emojis.warn}} Deprecation | **You're using __old language names__ (english or french) please __update__ the name of the language by using {{prefix}}lang set en-US for example**",
-        "defaultMessage": "The currently used language is **{{lang}}**\nTo change the language use the command {{prefix}}language set <languageName>\nAvailable languages: **{{allLang}}**`"
+        "defaultMessage": "The currently used language is **{{lang}}**\nChange language: {{prefix}}language set <lang>\nInfo about a language: {{prefix}}language info <lang>\nAvailable languages: **{{allLang}}**`",
+        "infoEmbed": "Name ❱ **{{name}}**\nRegional name ❱ **{{regionalName}}**\nIdentifier ❱ **{{identifier}}**\nDescription ❱ **{{description}}**\nContributors ❱ **{{contributors}}**"
     },
     "prefix": {
         "description": "Change Bot's prefix to another prefix.",

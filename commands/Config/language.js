@@ -31,6 +31,29 @@ class Language extends Command {
                 language: args[1]
             }));
             break;
+        case "info":
+
+            let lang = this.client.db.guildconf.get(`${message.guild.id}.language`)||"en-US"
+            if(this.client.languages.includes(args[1]||"null"))
+                lang = args[1]
+
+                console.log(this.t("about:name", {
+                    lng: lang
+                }))
+
+            let embedinfo = new Discord.MessageEmbed()
+.setDescription(this.t("commands:Config.language.infoEmbed", {
+    name: this.t("about:name", {lng: lang})||"None",
+    regionalName: this.t("about:regionalName", {lng: lang})||"None",
+    identifier: this.t("about:code", {lng: lang})||"None",
+    description: this.t("about:description", {lng: lang})||"None",
+    contributors: this.t("about:contributors", {lng: lang, joinArrays:", "})||"no Contributors"
+})).setColor("RED").setFooter("YouTube Bot", this.client.user.displayAvatarURL())
+
+            message.channel.send(embedinfo)
+
+            break;
+
 
         default:
 

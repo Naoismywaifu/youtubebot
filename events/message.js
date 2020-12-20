@@ -24,7 +24,7 @@ class Message {
         if(["french", "english"].includes(language)){
             switch (language) {
                 case "french":
-                    language = "fr-FR"
+                    language = "en-FR"
                     break;
                 case "english":
                     language = "en-US"
