@@ -87,27 +87,27 @@
     "Music": {
         "play": {
             "description": "Joue une musique, playlist depuis YouTube.",
-            "novc": "{{emojis.no}} | You must join a voice channel to use this command!",
-            "error": "{{emojis.no}} | Oops an error occurred while i tried to search: {{err}}"
+            "novc": "{{emojis.no}} | Vous devez rejoindre un salon vocal pour utiliser cette commande!",
+            "error": "{{emojis.no}} | Une erreur est survenue durant la recherche: {{err}}"
         },
         "queue": {
-            "description": "List songs in the queue ready to be played.",
-            "currentqueue": "**Current Queue**",
-            "andmore": "And {{number}} more...",
-            "estimatedduration": "Estimated duration: {{duration}}"
+            "description": "Liste les musiques dans la liste d'attente",
+            "currentqueue": "**Liste d'attente**",
+            "andmore": "Et {{number}} autres...",
+            "estimatedduration": "Durée estimée: {{duration}}"
         },
         "loop": {
-            "description": "Repeat the currently played music",
-            "loopSucess": "{{emojis.yes}} | Loop has been {{status}} !"
+            "description": "Répéter la musique jouée",
+            "loopSucess": "{{emojis.yes}} | Le mode loop a bien été {{status}} !\n"
         },
         "nowplaying": {
-            "description": "Name of the currently played music",
-            "paused": "{{emojis.no}} | Player is paused !",
-            "np": "{{emojis.yes}} | Now playing: **{{title}}** by **{{author}}**, requested by **{{requestedBy}}**"
+            "description": "Nom de la musique jouée",
+            "paused": "{{emojis.no}} | Le player est en pause !",
+            "np": "{{emojis.yes}} | Je joue: **{{title}}** par **{{author}}**, demandé par **\n{{requestedBy}}**"
         },
-        "emptyQueue": "{{emojis.no}} | Queue is empty !",
-        "importing_playlist": "{{emojis.loading}} | Playlist detected! Importing **{{songs}}** tracks, please wait...",
-        "success_import_playlist": "{{emojis.yes}} | Imported **{{songs}}** tracks !",
+        "emptyQueue": "{{emojis.no}} | Liste d'attente vide!",
+        "importing_playlist": "\n{{emojis.loading}} | Playlist détectée! J'importe **{{songs}}** musiques, veuillez patienter...",
+        "success_import_playlist": "{{emojis.yes}} | Importé **{{songs}}** musiques !",
         "no_audio_nodes_online": "{{emojis.no}} | Oops there isn't any audio node available ! please try again later.",
         "cannot_join_vc": "{{emojis.no}} | Oops i couldn't join your voice channel: {{err}}",
         "reach_queue_limit": "{{emojis.no}} | Oh no ! you reached queue's limit of **{{limit}}** tracks, consider subscribing to youtube bot premium if isn't already done to be able to add more songs.",
