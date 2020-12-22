@@ -67,6 +67,10 @@ module.exports = {
 
 	},
 	async logCMD(client, msg, cmd, args) {
+		client.db.stats.add("global", 1)
+		if(msg.guild)
+			client.db.stats.get(`guild_${msg.guild.id}`)
+
 		return new WebhookClient(client.config.CMDSLOGGER.ID, client.config.CMDSLOGGER.TOKEN).send(new MessageEmbed().setDescription(`${client.config.EMOJIS.arrow} | user **${msg.author.tag||"user#0000"}** ran the command **${cmd}**.\nGuild: **${msg.guild ? msg.guild.name : "DMs"}**\nShard: **#${client.shard.ids[0]+1}**\nArgs: **${args.length ? args.join(", ") : "none"}**`).setColor("YELLOW"))
 	}
 };
