@@ -1,6 +1,7 @@
 const Player = require("../Base/Player")
 const Notifier = require("../Base/NotificationManager")
 const RadioManager = require("../Base/RadioManager")
+const Poster = require("../Base/Poster")
 
 class Ready {
 
@@ -13,6 +14,7 @@ class Ready {
             this.client.player = new Player(this.client)
             this.client.notifier = new Notifier(this.client)
             this.client.radioManager = new RadioManager(this.client)
+            this.client.poster = new Poster(this.client);
         } catch (e) {
             this.client.logger.log(`Failed to init classes at boot: ${e}`, "error")
         }

@@ -27,7 +27,7 @@ class Client extends DiscordClient {
         this.radioManager = null;
         this.config = require("../config");
         this.logger = require("../Util/Logger");
-        this.poster = new Poster(this);
+        this.poster = null;
         this.commandsDir = __dirname + "/../commands";
         this.eventsDir = __dirname + "/../events";
         
