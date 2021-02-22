@@ -12,7 +12,7 @@
             "description": "urban dictionary",
             "noArgs": "{{emojis.no}} | Please provide a query!",
             "noFound": "{{emojis.no}} | i didn't found anything which match with your query!",
-            "def": "Definition",
+            "def": "Définition",
             "example": "Example",
             "notProvided": "Not provided",
             "footer": "👍 {{up}} | 👎 {{down}}"
@@ -108,19 +108,19 @@
         "emptyQueue": "{{emojis.no}} | Liste d'attente vide!",
         "importing_playlist": "\n{{emojis.loading}} | Playlist détectée! J'importe **{{songs}}** musiques, veuillez patienter...",
         "success_import_playlist": "{{emojis.yes}} | Importé **{{songs}}** musiques !",
-        "no_audio_nodes_online": "{{emojis.no}} | Oops there isn't any audio node available ! please try again later.",
-        "cannot_join_vc": "{{emojis.no}} | Oops i couldn't join your voice channel: {{err}}",
-        "reach_queue_limit": "{{emojis.no}} | Oh no ! you reached queue's limit of **{{limit}}** tracks, consider subscribing to youtube bot premium if isn't already done to be able to add more songs.",
-        "empty_queue": "{{emojis.no}} | Queue is empty ! Leaving voice channel...",
-        "added_queue": "{{emojis.plus}} | Added **{{length}}** tracks from a playlist to the queue",
-        "added_track": "{{emojis.plus}} | Added **{{title}}** by **{{author}}** to the queue",
-        "nowPlaying": "{{emojis.music_notes}} Now Playing {{emojis.music_notes}}",
+        "no_audio_nodes_online": "{{emojis.no}} | Oups il n'y a pas de serveur audio disponible ! réessayez plus tard.",
+        "cannot_join_vc": "{{emojis.no}} | Oups je ne peux pas rejoindre votre salon: {{err}}",
+        "reach_queue_limit": "{{emojis.no}} | Oh non ! Vous avez atteint la limite de **{{limit}}** musique, songez à acheter YouTube Bot premium si ce n'est pas déjà fait.",
+        "empty_queue": "{{emojis.no}} | La liste d'attente est vide ! Je quitte le salon...",
+        "added_queue": "{{emojis.plus}} | Ajouté**{{length}}** musiques à la liste d'attente",
+        "added_track": "{{emojis.plus}} | Ajouté **{{title}}** par **{{author}}** à la liste d'attente",
+        "nowPlaying": "{{emojis.music_notes}} en cours de lecture {{emojis.music_notes}}",
         "Title": "{{emojis.disk}} **❱** {{title}} {{attributes}}",
         "Author": "{{emojis.upload}} **❱** {{author}} {{attributes}}",
-        "Live": "**[{{liveicon}} Live]**",
+        "Live": "**[{{liveicon}} Direct]**",
         "Duration": "{{emojis.clock}} **❱** {{duration}}",
         "AudioServer": "{{emojis.router}} **❱** {{serverID}} {{attributes}}",
-        "FailedGenerateQueue": "{{emojis.no}} | Failed to generate queue {{err}}",
+        "FailedGenerateQueue": "{{emojis.no}} | Échec de la création de la file d'attente: {{err}}",
         "stop": {
             "description": "Clear queue and disconnect bot from voice channel",
             "success": "{{emojis.yes}} | Left voice channel!",
@@ -135,7 +135,7 @@
         "seek": {
             "description": "Set the time marker of the video.",
             "noTimeGiven": "{{emojis.no}} | Please provide a number which is the duration (e.g. : 1:55) where will be the marker !",
-            "cannotSeek": "{{emojis.no}} | This track isn't seekable",
+            "cannotSeek": "{{emojis.no}} | Cette musique ne peux pas être seek!",
             "invalidDuration": "{{emojis.no}} | You provided an invalid duration (e.g.: 1:25).",
             "durationTooLong": "{{emojis.no}} | The duration that you provided exceeds the duration of the current track.",
             "success": "{{emojis.yes}} | Seeked to **{{marker}}**!",
@@ -143,7 +143,7 @@
         },
         "volume": {
             "description": "Change or see the current volume.",
-            "currVolume": "{{emojis.yes}} | Current volume: **{{vol}}%**",
+            "currVolume": "{{emojis.yes}} | Volume actuel: **{{vol}}%**",
             "NaN": "{{emojis.no}} | Value isn't a number!",
             "limit": "{{emojis.no}} | Volume limit reached ({{volmax}}%) Buy YouTube Bot (if this isn't already done) premium to increase this limit!",
             "invalidVal": "{{emojis.no}} | Invalid value!",
@@ -151,7 +151,7 @@
         },
         "pause": {
             "description": "Pause the currently played music.",
-            "alreadyPaused": "{{emojis.no}} | Player is already paused!",
+            "alreadyPaused": "{{emojis.no}} | Le Player est en pause!",
             "success": "{{emojis.yes}} | Paused!"
         },
         "resume": {
@@ -185,7 +185,7 @@
             "noArgs": "{{emojis.no}} | Please provide a number of tracks to skip",
             "picknb": "Pick a number from 1-{{max}} or cancel",
             "noTime": "{{emojis.no}} | Timed out, please try again!",
-            "cancelled": "{{emojis.no}} | Cancelled",
+            "cancelled": "{{emojis.no}} | Annulé",
             "success": "{{emojis.search}} | waiting for audio servers...",
             "PremiumInfo": "did you know? With youtube bot premium you can go from 10 to 25 possibilities!"
         },
@@ -203,12 +203,12 @@
         "unjoinable": "{{emojis.no}} | I can't join the voice channel!",
         "unspeakable": "{{emojis.no}} | I can't speak in the voice channel!",
         "unknownErrorNode": "{{emojis.no}} | Oops an error occurred due to a problem while bot tried to communicate with audio server",
-        "alreadyInChannel": "{{emojis.no}} | Bot is already in a voice channel!",
+        "alreadyInChannel": "{{emojis.no}} | Le bot est déjà dans un salon vocal!",
         "noVoiceChannel": "{{emojis.no}} | Please join a voice channel!"
     },
     "Config": {
         "language": {
-            "description": "Change Bot's language to another language from the list.",
+            "description": "Changez la langue de Bot pour une autre langue de la liste.",
             "noValueProvided": "{{emojis.no}} | Please provide a valid language.\n{{emojis.arrow}} **{{languages}}**",
             "successSetNewValue": "{{emojis.yes}} | Successfully set the language to {{language}}",
             "warningDeprecatedLang": "{{emojis.warn}} Deprecation | **You're using __old language names__ (english or french) please __update__ the name of the language by using {{prefix}}lang set en-US for example**",
@@ -220,7 +220,7 @@
             "noPrefix": "{{emojis.no}} | Please provide a prefix !",
             "invalidPrefix": "{{emojis.no}} | The prefix is not valid (more than 3 chars) !",
             "success": "{{emojis.yes}} | Successfully set the prefix as {{prefix}}",
-            "currPrefix": "Current prefix is **{{prefix}}**\nTo change prefix use {{prefix}}prefix set <prefix>"
+            "currPrefix": "Le préfixe actuel est **{{prefix}}**\nPour changer de préfixe faites: {{prefix}}prefix set <prefix>"
         },
         "DJ": {
             "description": "Setup a role which will have access to music commands.",
@@ -239,8 +239,8 @@
             "defaultMessage": "Current staff role: **{{role}}**\nSet staff role: **{{prefix}}staff set @staff**\nReset role **{{prefix}}staff reset**"
         }
     },
-    "current": "Current",
-    "channels": "Channels",
+    "current": "Actuelle",
+    "channels": "Salons",
     "ram": "RAM",
     "ping": "Ping",
     "users": "Users",
@@ -254,7 +254,7 @@
     "RadioPlaying": "{{emojis.no}} | You can't use music commands because the bot is in **radio mode**, please disable it before!",
     "notStaff": "{{emojis.no}} | You're not staff! You need to have MANAGE_GUILD permission or the staff role (if configured)",
     "notDJ": "{{emojis.no}} | You're not DJ! You need the DJ role (if configured) or ADMINISTRATOR permission or a role named **DJ**",
-    "commandError": "{{emojis.no}} An error occurred with the command **{{cmd}}**\nError: **{{err}}**",
+    "commandError": "{{emojis.no}} Une erreur est survenue avec la commande**{{cmd}}**\nErreur: **{{err}}**",
     "Core": {
         "ping": {
             "description": "Récupérez la latence du bot.",
@@ -264,7 +264,7 @@
         "help": {
             "description": "Ayez de l'aide sur le bot.",
             "specific": {
-                "commandDoNotExist": "{{emojis.no}} | This command don't exist !",
+                "commandDoNotExist": "{{emojis.no}} | Cette commande n'existe pas!",
                 "name": "Nom",
                 "description": "Description",
                 "aliases": "allias",
@@ -282,8 +282,8 @@
         },
         "botinfo": {
             "description": "Get information about the bot and the system",
-            "about": "YouTube Bot is a bot developed with ❤ by HiiZun",
-            "botInfo": "{{emojis.HELPEMOJIS.Core}} | Bot information",
+            "about": "YouTube Bot est un bot développé avec ❤ par HiiZun",
+            "botInfo": "{{emojis.HELPEMOJIS.Core}} | Informations du Bot",
             "ServInfo": "{{emojis.router}} | Server information",
             "SoftInfo": "{{emojis.router}} | Software information",
             "TOTALSERVERS": "Discord servers",
@@ -292,13 +292,13 @@
             "SHARD_NUMBER": "Number of shards",
             "SHARD_CURRENT": "Current shard",
             "GUILD": "Server",
-            "COMMANDS_EXECUTED": "Commands executed",
+            "COMMANDS_EXECUTED": "Commandes éxécutées",
             "OS": "OS",
-            "ARCH": "Arch",
+            "ARCH": "Architecture",
             "RAM": "RAM usage",
             "BOT_VERSION": "YouTube Bot",
-            "BOT_LIB": "Library",
-            "BOT_CORE": "Language",
+            "BOT_LIB": "Librairie",
+            "BOT_CORE": "Langue",
             "PLAYING_COUNT": "Playing on",
             "PREMIUM_COUNT": "Premium on",
             "SHARD": "Shard"
@@ -333,7 +333,7 @@
         "invite": {
             "description": "Get an invite to invite YouTube Bot on your own server!",
             "desc": "Invite YouTube Bot to your own Discord Server!",
-            "allPerms": "Invite with all permissions (recommended)",
+            "allPerms": "Inviter avec toutes les permissions (recommandé)",
             "noPerms": "Invite without permissions (not recommended)",
             "vote": "Vote for the bot",
             "voteWord": "Vote",
@@ -343,7 +343,7 @@
     "Premium": {
         "activate": {
             "description": "Activate your premium on a discord server",
-            "already": "{{emojis.no}} | This discord server is already Premium!",
+            "already": "{{emojis.no}} | Ce serveur Discord est déjà Premium !",
             "noPremium": "{{emojis.no}} | You don't have bought any premium! If you've recently bought your premium, please wait some minutes or open a ticket on the support.",
             "success": "{{emojis.yes}} | Voila! Your premium has been activated! Thank you for your trust, if you haven't received your premium please contact support."
         },
@@ -371,7 +371,7 @@
             "listOfRadios": "List of radios",
             "lang": "language: {{lang}}",
             "noExist": "{{emojis.no}} | this radio doesn't exist!",
-            "alreadyInChannel": "{{emojis.no}} | I'm already playing music, please make me leave by using {{prefix}}dc and redo the command.",
+            "alreadyInChannel": "{{emojis.no}} | Je suis déjà en train de jouer de la musique, faites moi quitter en utilisant {{prefix}}dc et refaites la commande.",
             "success": "{{emojis.yes}} | Started playing radio 24/7!"
         },
         "radio-stop": {
@@ -406,7 +406,7 @@
             "guildID": "server ID",
             "exampleWord": "Example",
             "example": "{emojis.youtube} Hey @everyone, **{youtuber.name}** just posted a new video named \\`{video.title}\\`\\nlink: {video.url} - uploaded the {video.date}",
-            "canceled": "{{emojis.no}} | Canceled",
+            "canceled": "{{emojis.no}} | Annulé",
             "success": "{{emojis.yes}} | Successfully saved message"
         }
     }

@@ -34,7 +34,12 @@ class Player {
             
         }).on("disconnect", (wsevent, node) => {
             this.startedNodes = this.startedNodes.filter(n => node.id !== n.id)
-            this.client.logger.log(`[Node : ${node.id}] disconnected: ${wsevent}`, 'warn')
+            let nodeID = node.id
+            this.client.logger.log(`[Node : ${nodeID}] disconnected: ${wsevent}`, 'warn')
+
+            setTimeout(() => {
+                this.manager.nodes.get(nodeID).connect()
+            }, 5*60*1000)
         }).on("error", (err, node) => {
             this.client.logger.log(`[Node : ${node.id}] Error: ${err}`, 'error')
         }).on("reconnecting", (node) => {

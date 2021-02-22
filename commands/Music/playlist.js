@@ -8,11 +8,23 @@ class Search extends Command {
             name: "playlist",
             guildOnly: true,
             DJOnly: true,
+            botPerms:["CONNECT", "SPEAK"],
             aliases: ["pl"],
         });
     }
 
     async run(message, args) {
+
+        if (!message.member.voice.channel)
+            return message.channel.send(this.t("commands:Music.play.novc"));
+
+
+        if(!message.member.voice.channel.joinable)
+            return message.channel.send(this.t("commands:Music.unjoinable"))
+        if(!message.member.voice.channel.speakable)
+            return message.channel.send(this.t("commands:Music.unspeakable"))
+
+
         if (!args.length)
             return message.channel.send(this.t("commands:Music.playlist.noArgs"))
 
