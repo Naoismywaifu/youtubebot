@@ -9,4 +9,4 @@ const manager = new ShardingManager('./index.js', {
 });
 
 manager.on('shardCreate', shard => Logger.log(`Shard ${shard.id} ready !`, 'ready'));
-manager.spawn();
+manager.spawn(SHARDS||"auto", 3*1000, 60*1000);

@@ -17,8 +17,9 @@ class RadioManager {
     async play(ch, url, guildID) {
 
         let song = await this.player.getSongs(url, guildID)
-
-        this.client.logger.log(`Will play in channel ${ch}, song ${song.tracks[0].info ? song.tracks[0].info.title|| "none" : "none"} by ${song.tracks[0].info ? song.tracks[0].info.author || "none" : "none"}.`, "debug")
+        try {
+            this.client.logger.log(`Will play in channel ${ch}, song ${song.tracks[0].info ? song.tracks[0].info.title || "none" : "none"} by ${song.tracks[0].info ? song.tracks[0].info.author || "none" : "none"}.`, "debug")
+        } catch (e) {}
 
         let player = await this.player.manager.join({
             channel: ch,

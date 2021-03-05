@@ -36,7 +36,7 @@ class Lyrics extends Command {
                     await message.channel.send(embed).then(async function(msg) {
                         if (results.lyrics.length < 2048) return;
 
-                        // send reactions so user can see more lyrcis
+                        // send reactions so user can see more lyrics
                         await msg.react('⬆');
                         await msg.react('⬇');
                         // get collector
