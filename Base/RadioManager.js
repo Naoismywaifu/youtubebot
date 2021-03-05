@@ -17,8 +17,10 @@ class RadioManager {
     async play(ch, url, guildID) {
 
         let song = await this.player.getSongs(url, guildID)
+        try {
+            this.client.logger.log(`Will play in channel ${ch}, song ${song.tracks[0].info ? song.tracks[0].info.title || "none" : "none"} by ${song.tracks[0].info ? song.tracks[0].info.author || "none" : "none"}.`, "debug")
+        } catch (e) {}
 
-        //this.client.logger.log(`Will play in channel ${ch}, song ${song.tracks[0].info ? song.tracks[0].info.title|| "none" : "none"} by ${song.tracks[0].info ? song.tracks[0].info.author || "none" : "none"}.`, "debug")
 
         let player = await this.player.manager.join({
             channel: ch,
@@ -33,8 +35,7 @@ class RadioManager {
         await player.volume(100)
 
 
-        player
-            .on("error", (err) => {
+        player.on("error", (err) => {
                 if (err.code == 4014) {
                     player.manager.leave(guildID)
                     this.queue.delete(guildID)
