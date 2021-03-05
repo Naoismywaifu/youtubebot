@@ -21,6 +21,7 @@ class RadioManager {
             this.client.logger.log(`Will play in channel ${ch}, song ${song.tracks[0].info ? song.tracks[0].info.title || "none" : "none"} by ${song.tracks[0].info ? song.tracks[0].info.author || "none" : "none"}.`, "debug")
         } catch (e) {}
 
+
         let player = await this.player.manager.join({
             channel: ch,
             guild: guildID,
@@ -34,8 +35,7 @@ class RadioManager {
         await player.volume(100)
 
 
-        player
-            .on("error", (err) => {
+        player.on("error", (err) => {
                 if (err.code == 4014) {
                     player.manager.leave(guildID)
                     this.queue.delete(guildID)
