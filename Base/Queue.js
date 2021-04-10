@@ -59,6 +59,7 @@ class Queue {
     async destroy() {
         await this.client.player.queue.delete(this.textChannel.guild.id);
         await this.client.player.manager.leave(this.textChannel.guild.id);
+        await this.client.player.manager.players.delete(this.textChannel.guild.id)
         return true;
     }
 }
