@@ -7,6 +7,7 @@ class ShardDisconnect {
     run(shard) {
 
         this.client.logger.shardEvent(this.client, shard+1, "disconnected", null)
+        this.client.poster.stop()
         return this.client.shard.broadcastEval(`if (this.shard.ids[0] === ${shard}) process.exit(0);`);
 
 
