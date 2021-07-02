@@ -17,7 +17,7 @@
         "@lavacord/discord.js": "^0.0.7",
         "@sentry/node": "^5.27.6",
         "@sentry/types": "^5.27.6",
-        "blapi": "^2.0.1",
+        "botlist": "^1.0.1",
         "chalk": "^4.1.0",
         "discord.js": "^12.4.1",
         "i18next": "^19.8.4",
