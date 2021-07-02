@@ -30,7 +30,7 @@ class Client extends DiscordClient {
         this.logger = require("../Util/Logger");
         this.poster = new BotListClient(this.config.BOTID, {
             tokens: this.config.BOTLISTS,
-            interval: 1*60*1000,
+            interval: 30*60*1000,
             verbose: this.config.ENV == "PRODUCTION" ? false : true
         });
         this.commandsDir = __dirname + "/../commands";
