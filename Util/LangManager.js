@@ -20,6 +20,7 @@ class LocaleStructure {
     }
 
     async startLocales() {
+        let prefix = this.client.functions.getPrefix()
         try {
             await i18next.use(translationBackend).init({
                 ns: this.ns,
@@ -32,7 +33,7 @@ class LocaleStructure {
                     escapeValue: false,
                     defaultVariables: {
                         emojis: require("../config.js").EMOJIS,
-                        prefix: this.client.functions.getPrefix()
+                        prefix: Array.isArray(prefix) ? prefix[0] : prefix
                     }
                 },
                 returnEmptyString: false,
