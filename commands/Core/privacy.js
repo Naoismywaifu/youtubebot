@@ -36,7 +36,7 @@ We hold a legal right to update this document AT ANY TIME, we will however, atte
 LAST UPDATED:
 29/08/2020
 `)
-            .setColor("RED")
+.setColor("RED")
 return message.channel.send(emb)
 
     }

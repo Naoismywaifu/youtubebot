@@ -28,7 +28,7 @@ class Ready {
     updatePresence() {
         this.client.user.setPresence({
             activity: {
-                name:`YouTube Bot • ${this.client.config.PREFIX}help • Shard ${this.client.shard.ids[0]+1}/${this.client.shard.count}`,
+                name:`YouTube Bot • ${this.client.config.PREFIX[0]}help • Shard ${this.client.shard.ids[0]+1}/${this.client.shard.count}`,
                 type:"LISTENING",
             },
             afk: false,

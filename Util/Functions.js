@@ -7,7 +7,6 @@ module.exports = {
         return Boolean(db.guildconf.get(`${GuildID}.premium`));
     },
     getPrefix(GuildID) {
-        // TODO: Support prefix
         return db.guildconf.get(`${GuildID}.prefix`)||require("../config").PREFIX;
     },
     premium(message) {

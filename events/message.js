@@ -9,11 +9,7 @@ class Message {
     async run(message) {
         if (message.author.bot) return;
 
-
-
-
         let t;
-
 
         let language = 'en-US'
 
@@ -55,7 +51,13 @@ class Message {
 
         let prefix = this.client.functions.getPrefix(message.guild ? message.guild.id : null);
 
-        if (message.content.indexOf(prefix) !== 0) return;
+        if (Array.isArray(prefix) ? !prefix.some((p) => message.content.indexOf(p) == 0) : message.content.indexOf(prefix) !== 0) return;
+
+        if(Array.isArray(prefix)){
+            prefix = prefix.filter((p) => message.content.indexOf(p) === 0)[0] 
+        }
+
+        message.prefix = prefix
 
         const args = message.content.slice(prefix.length).trim().split(" ");
         const cmd = args.shift().toLowerCase();
