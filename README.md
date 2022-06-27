@@ -34,7 +34,7 @@ the bot has a lot of freatures listed here !
 __**Interessed ? if yes enjoy the bot by adding it right now !**__
 
 __**Stable Vesion (recommanded for 98% of users)**__ 
-[Invite](https://discordapp.com/oauth2/authorize?client_id=486948160124485642&scope=bot&permissions=2146958847) || [Vote](https://discordbots.org/bot/486948160124485642/vote)
+[Invite](https://discord.com/api/oauth2/authorize?client_id=486948160124485642&permissions=517610138960&scope=bot) || [Vote](https://discordbots.org/bot/486948160124485642/vote)
 
 __**Canary Vesion (not recommanded for almost every users, with the last version from GitHub)**__ 
 [Invite](https://discordapp.com/oauth2/authorize?client_id=596068311863918604&scope=bot&permissions=2146958847)
