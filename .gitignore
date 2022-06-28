@@ -17,3 +17,5 @@ json.sqlite
 
 # PM2
 report*.json
+
+.vscode
