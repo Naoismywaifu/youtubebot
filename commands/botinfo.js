@@ -20,7 +20,7 @@ exports.run = (client, message, args) => {
             const totalRam = (bruttotalRam / 1024 / 1024).toFixed(2);
         let embed = new Discord.MessageEmbed()
         .setColor("RED")
-        .setDescription("Youtube bot is a Discord Bot developed with ❤ By HiiZun\nif you enjoy the bot you can vote for it be executing the command yt*vote and voting")
+        .setDescription("Youtube bot is a Discord Bot developed with ❤ By Nao\nif you enjoy the bot you can vote for it be executing the command yt*vote and voting")
         .addField(`<:bot:653279330021015562> Bot's Statistics`, `
         > Total of servers ❱ \`${totalGuilds}\` servers
         > ↳ shard ❱ \`${client.guilds.cache.size}\` servers
