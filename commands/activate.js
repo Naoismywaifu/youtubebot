@@ -4,12 +4,12 @@ const {premium} = require("../premium")
 exports.run = async (client, message, args) => {
 
 let errguild = new Discord.MessageEmbed()
-.setDescription("🛑 | Error: please execute this command in the support server ! [support server](https://discord.gg/C67wqwZ)")
+.setDescription("🛑 | Error: please execute this command in the support server ! [support server](https://discord.gg/545tamc5ZD)")
 .setColor("RED")
 .setFooter("YouTube Bot")
 
 let errnopremium = new Discord.MessageEmbed()
-.setDescription("🛑 | Oops you're not premium ! you can't activate them ! to get premium licence join the [support server](https://discord.gg/C67wqwZ) and [become patreon](https://www.patreon.com/botyoutube)")
+.setDescription("🛑 | Oops you're not premium ! you can't activate them ! to get premium licence join the [support server](https://discord.gg/545tamc5ZD)")
 .setColor("RED")
 .setFooter("YouTube Bot")
 
