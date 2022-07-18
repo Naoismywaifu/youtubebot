@@ -4,7 +4,7 @@ const Logger = require("./Util/Logger")
 const manager = new ShardingManager('./index.js', { 
     token: TOKEN,
     respawn: true,
-    mode: "worker",
+    mode: "process",
     totalShards: SHARDS||"auto"
 });
 
