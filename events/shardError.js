@@ -6,6 +6,10 @@ class ShardReady {
 
     run(shard, err) {
 
+        if (err) {
+            this.client.logger.error(`Shard ${shard.id} errored ! ${err}`, "error");
+        }
+        
         return this.client.logger.shardEvent(this.client, shard+1, "error", err.message)
 
     }
