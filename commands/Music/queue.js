@@ -18,7 +18,7 @@ class Queue extends Command {
         if (!serverQueue) return message.channel.send(this.t("commands:Music.emptyQueue"));
         let index = 0;
 
-        message.channel.send(new MessageEmbed().setDescription(`
+        message.channel.send({embeds : [new MessageEmbed().setDescription(`
 ${this.t("commands:Music.queue.currentqueue")}
 
 ${serverQueue.songs.map(songs => `**${++index}.** ${songs.info.title}`).splice(0, 10).join("\n")}
@@ -29,7 +29,7 @@ ${serverQueue.songs.length <= 10 ? "" : this.t("commands:Music.queue.andmore", {
 ${this.t("commands:Music.queue.estimatedduration", {
     duration: ms(serverQueue.songs.map(s => s.info.length).reduce((a, b) => a + b), { long: true})||"Unfetchable"
         })}
-`).setColor("RED").setFooter("YouTube Bot", this.client.user.displayAvatarURL()));
+`).setColor("RED").setFooter("YouTube Bot", this.client.user.displayAvatarURL())]});
     }
 
 }

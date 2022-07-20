@@ -21,7 +21,7 @@ class Invite extends Command {
             .addField(this.t("commands:Core.invite.vote"), `[${this.t("commands:Core.invite.voteWord")}](https://top.gg/bot/486948160124485642/vote)`, false)
             .setFooter("Youtube Bot", this.client.user.displayAvatarURL())
             .setColor("RED")
-        return message.channel.send(embed)
+        return message.channel.send({embeds: [embed]})
 
     }
 

@@ -69,7 +69,7 @@ class BotInfo extends Command {
 
 
 
-               return message.channel.send(embed)
+               return message.channel.send({embeds: [embed]})
 
             }).catch(console.error);
 

@@ -53,15 +53,15 @@ module.exports = {
 
 		switch (type) {
 			case "ready":
-				return new WebhookClient(client.config.SHARDSLOGGER.ID, client.config.SHARDSLOGGER.TOKEN).send(new MessageEmbed().setDescription(`${client.config.EMOJIS.STATUSEMOJIS.online} | Shard **#${shardID}** now ready!`).setColor("GREEN"))
+				return new WebhookClient({id: client.config.SHARDSLOGGER.ID, token: client.config.SHARDSLOGGER.TOKEN}).send({ embeds: [new MessageEmbed().setDescription(`${client.config.EMOJIS.STATUSEMOJIS.online} | Shard **#${shardID}** now ready!`).setColor("GREEN")]})
 			case "reconnect":
-				return new WebhookClient(client.config.SHARDSLOGGER.ID, client.config.SHARDSLOGGER.TOKEN).send(new MessageEmbed().setDescription(`${client.config.EMOJIS.STATUSEMOJIS.dnd} | Shard **#${shardID}** reconnecting...`).setColor("RED"))
+				return new WebhookClient({id: client.config.SHARDSLOGGER.ID, token: client.config.SHARDSLOGGER.TOKEN}).send({ embeds: [new MessageEmbed().setDescription(`${client.config.EMOJIS.STATUSEMOJIS.dnd} | Shard **#${shardID}** reconnecting...`).setColor("RED")]})
 			case "disconnected":
-				return new WebhookClient(client.config.SHARDSLOGGER.ID, client.config.SHARDSLOGGER.TOKEN).send(new MessageEmbed().setDescription(`${client.config.EMOJIS.STATUSEMOJIS.offline} | Shard **#${shardID}** disconnected! waiting for connection...`).setColor("GREY"))
+				return new WebhookClient({id: client.config.SHARDSLOGGER.ID, token: client.config.SHARDSLOGGER.TOKEN}).send({ embeds: [new MessageEmbed().setDescription(`${client.config.EMOJIS.STATUSEMOJIS.offline} | Shard **#${shardID}** disconnected! waiting for connection...`).setColor("GREY")]})
 			case "resumed":
-				return new WebhookClient(client.config.SHARDSLOGGER.ID, client.config.SHARDSLOGGER.TOKEN).send(new MessageEmbed().setDescription(`${client.config.EMOJIS.STATUSEMOJIS.idle} | Shard **#${shardID}** resumed!`).setColor("YELLOW"))
+				return new WebhookClient({id: client.config.SHARDSLOGGER.ID, token: client.config.SHARDSLOGGER.TOKEN}).send({ embeds: [new MessageEmbed().setDescription(`${client.config.EMOJIS.STATUSEMOJIS.idle} | Shard **#${shardID}** resumed!`).setColor("YELLOW")]})
 			case "error":
-				return new WebhookClient(client.config.SHARDSLOGGER.ID, client.config.SHARDSLOGGER.TOKEN).send(new MessageEmbed().setDescription(`${client.config.EMOJIS.STATUSEMOJIS.dnd} | Shard **#${shardID}** received an error!\nError: ${err}`).setColor("DARK_RED"))
+				return new WebhookClient({id: client.config.SHARDSLOGGER.ID, token: client.config.SHARDSLOGGER.TOKEN}).send({ embeds: [new MessageEmbed().setDescription(`${client.config.EMOJIS.STATUSEMOJIS.dnd} | Shard **#${shardID}** received an error!\nError: ${err}`).setColor("DARK_RED")]})
 		}
 		return true;
 
@@ -71,6 +71,6 @@ module.exports = {
 		if(msg.guild)
 			client.db.stats.get(`guild_${msg.guild.id}`)
 
-		return new WebhookClient(client.config.CMDSLOGGER.ID, client.config.CMDSLOGGER.TOKEN).send(new MessageEmbed().setDescription(`${client.config.EMOJIS.arrow} | user **${msg.author.tag||"user#0000"}** ran the command **${cmd}**.\nGuild: **${msg.guild ? msg.guild.name : "DMs"}**\nShard: **#${client.shard.ids[0]+1}**\nArgs: **${args.length ? args.join(", ") : "none"}**`).setColor("YELLOW"))
+		return new WebhookClient({id: client.config.CMDSLOGGER.ID, token: client.config.CMDSLOGGER.TOKEN}).send({embeds: [new MessageEmbed().setDescription(`${client.config.EMOJIS.arrow} | user **${msg.author.tag||"user#0000"}** ran the command **${cmd}**.\nGuild: **${msg.guild ? msg.guild.name : "DMs"}**\nShard: **#${client.shard.ids[0]+1}**\nArgs: **${args.length ? args.join(", ") : "none"}**`).setColor("YELLOW")]})
 	}
 };

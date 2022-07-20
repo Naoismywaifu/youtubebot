@@ -40,7 +40,7 @@ class Urban extends Command {
                 down: answer.thumbs_down
             }))
 
-        message.channel.send(embed);
+        message.channel.send({embeds: [embed]});
 
 
         }

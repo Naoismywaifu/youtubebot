@@ -37,7 +37,7 @@ LAST UPDATED:
 29/08/2020
 `)
 .setColor("RED")
-return message.channel.send(emb)
+return message.channel.send({embeds: [emb]})
 
     }
 

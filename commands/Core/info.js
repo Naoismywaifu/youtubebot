@@ -39,7 +39,7 @@ class Info extends Command {
                     }))
                     .setFooter("Youtube Bot", this.client.user.displayAvatarURL())
                     .setColor("ORANGE")
-                return message.channel.send(embed)
+                return message.channel.send({embeds: [embed]})
 
             })
             .catch(console.error);

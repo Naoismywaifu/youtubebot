@@ -50,7 +50,7 @@ class Language extends Command {
     contributors: this.t("about:contributors", {lng: lang, joinArrays:", "})||"no Contributors"
 })).setColor("RED").setFooter("YouTube Bot", this.client.user.displayAvatarURL())
 
-            message.channel.send(embedinfo)
+            message.channel.send({embeds: [embedinfo]})
 
             break;
 
@@ -69,7 +69,7 @@ class Language extends Command {
                 }))
                 .setColor("DARK_RED")
 
-            await message.channel.send(embed)
+            await message.channel.send({embeds: [embed]})
 
             break;
     }

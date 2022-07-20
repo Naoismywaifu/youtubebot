@@ -1,6 +1,6 @@
 const i18next = require("i18next");
 
-class Message {
+class MessageCreate {
 
     constructor(client) {
         this.client = client;
@@ -145,4 +145,4 @@ class Message {
 
 }
 
-module.exports = Message;
+module.exports = MessageCreate;

@@ -1,4 +1,5 @@
 const prettyMilliseconds = require("pretty-ms");
+const { Permissions } = require('discord.js');
 let db = require("quick.db")
 
 
@@ -20,7 +21,7 @@ module.exports = {
         }
     },
     isDJ(message) {
-        if(message.member.hasPermission("ADMINISTRATOR")) return true;
+        if(message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) return true;
         if(!db.guildconf.get(`${message.guild.id}.djrole`)){
             return true;
         } else {
@@ -40,7 +41,7 @@ module.exports = {
                 return false;
             }
         } else {
-            if(message.member.hasPermission("MANAGE_GUILD")){
+            if(message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)){
                 return true;
             } else {
                 return false;

@@ -52,7 +52,7 @@ class Meme extends Command {
                     subreddit: subReddit||"none"
                 }));
 
-               return message.channel.send(embed);
+               return message.channel.send({embeds: [embed]});
             })
             .catch(console.error);
     }

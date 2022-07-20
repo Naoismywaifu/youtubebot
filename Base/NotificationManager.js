@@ -10,7 +10,7 @@ class NotificationManager {
         this.startAt = this.client.readyTimestamp;
         this.lastVideos = {};
 
-        this.client.setInterval(() => {
+        setInterval(async () => {
             this.check(this.client)
         }, 5*60*1000)
     }

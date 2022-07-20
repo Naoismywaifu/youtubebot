@@ -41,7 +41,7 @@ class Shards extends Command {
         });
         embed.setFooter("YouTube Bot", this.client.user.displayAvatarURL())
         embed.setColor("RED")
-        return message.channel.send(embed)
+        return message.channel.send({embeds: [embed]})
 
     }
 

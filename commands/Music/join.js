@@ -1,3 +1,4 @@
+const { joinVoiceChannel } = require('@discordjs/voice');
 const Command = require("../../Base/Command");
 
 class Loop extends Command {
@@ -23,9 +24,14 @@ class Loop extends Command {
 
         if(this.client.player.queue.get(message.guild.id) && !message.guild.me.voice.channel) return message.channel.send(this.t("commands:Music.alreadyInChannel"))
 
-        message.member.voice.channel.join().then(() => {
-            message.channel.send(this.t("commands:Music.join.success", { vcName: message.member.voice.channel.name }))
-        })
+        let connection = joinVoiceChannel({
+            channelId: message.member.voice.channel.id,
+            guildId: message.guild.id,
+            adapterCreator: message.guild.voiceAdapterCreator,
+        });
+
+        message.channel.send(this.t("commands:Music.join.success", { vcName: message.member.voice.channel.name }))
+
     }
 
 }

@@ -39,7 +39,7 @@ class Radio extends Command {
                 }), true)
             }
             
-            return message.channel.send(listradiosembed)
+            return message.channel.send({embeds: [listradiosembed]})
         }
         if(!radios[args[0]])
             return message.channel.send(this.t("commands:Radio.radio.noExist"))

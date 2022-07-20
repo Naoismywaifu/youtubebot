@@ -43,7 +43,7 @@ class Help extends Command {
 				)
 				.setColor("DARK_RED")
 	try {
-		return message.channel.send(groupEmbed);
+		return message.channel.send({embeds: [groupEmbed]});
 	} catch (e) {
 		return message.channel.send(this.t(".help.failedSendEmbed", {
 			err: e
@@ -79,7 +79,7 @@ class Help extends Command {
             .setFooter(this.client.user.tag, this.client.user.displayAvatarURL({ dynamic: true, format: "gif", size:4096})).setTimestamp()
 		});
         
-        return message.channel.send(embed);
+        return message.channel.send({embeds: [embed]});
 
 
     }

@@ -30,7 +30,7 @@ class Premium extends Command {
                 .setColor("RED");
 
         }
-        return message.channel.send(embed)
+        return message.channel.send({embeds : [embed]})
     }
 
 

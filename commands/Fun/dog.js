@@ -27,7 +27,7 @@ class Dog extends Command {
             .setColor("RANDOM")
             .setFooter("YouTube Bot", this.client.user.displayAvatarURL())
 
-        return message.channel.send(embed)
+        return message.channel.send({embeds: [embed]})
 
     }
 

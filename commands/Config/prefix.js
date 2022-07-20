@@ -43,7 +43,7 @@ class Prefix extends Command {
                     }))
                     .setColor("DARK_RED")
 
-                await message.channel.send(embed)
+                await message.channel.send({embeds:[embed]})
 
                 break;
         }

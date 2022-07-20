@@ -20,21 +20,21 @@ class Ready {
         this.client.logger.log(`${this.client.user.tag} is online on shard #${this.client.shard.ids[0]||0}`)
 
         this.updatePresence()
-        this.client.setInterval(() => this.updatePresence(), 25*60*1000)
+        setInterval(() => this.updatePresence(), 25*60*1000)
 
 
     }
 
     updatePresence() {
         this.client.user.setPresence({
-            activity: {
+            activities: [{
                 name:`YouTube Bot • ${this.client.config.PREFIX[0]}help • Shard ${this.client.shard.ids[0]+1}/${this.client.shard.count}`,
                 type:"LISTENING",
-            },
+            }],
             afk: false,
             shardID: this.client.shard.ids[0],
             status: "online"
-        }).catch(e => this.client.logger.log(e, "error"))
+        })
     }
 
 }

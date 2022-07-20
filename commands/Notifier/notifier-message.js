@@ -32,7 +32,7 @@ class NotifierMessage extends Command {
 \`\`\``, true)
             .addField(this.t("commands:Notifier.notifier-message.exampleWord"), `\`\`\`${this.t("commands:Notifier.notifier-message.example")}\`\`\``, false)
 
-        const msg = await message.channel.send(embed)
+        const msg = await message.channel.send({embeds: [embed]})
 
         let collected = await message.channel.awaitMessages(filter, opt).catch(() => {});
         if(!collected || !collected.first()){

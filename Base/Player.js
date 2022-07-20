@@ -152,7 +152,9 @@ class Player {
         } else {
             serverQueue.player.play(song.track);
             serverQueue.player
-                .once("error", console.error)
+                .on("error", e => console.error(e))
+                .on("raw", e => console.log(e))
+                .on("disconnect", (e,c) => console.log("e : " + e + " c : " + c))
                 .once("end", data => {
                     if (data.reason === "REPLACED") return;
                     if (!serverQueue.loop) {
@@ -171,7 +173,7 @@ class Player {
                 .setFooter(guild.t("commands:requestedBy", { user: song.requestedBy.tag }), song.requestedBy.displayAvatarURL({ dynamic: true }))
 
             serverQueue.player.volume(serverQueue.volume);
-            serverQueue.textChannel.send(embed);
+            serverQueue.textChannel.send({embeds: [embed]});
         }
     }
 
