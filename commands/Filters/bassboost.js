@@ -1,5 +1,4 @@
 const Command = require("../../Base/Command");
-const { PlayerEqualizerBand } = require("lavacord")
 
 class BassBoost extends Command {
 
@@ -19,7 +18,7 @@ class BassBoost extends Command {
 
     async run(message, args) {
 
-        const serverQueue = this.client.player.queue.get(message.guild.id);
+        const serverQueue = this.client.player.manager.players.get(message.guild.id);
         if(!serverQueue) return message.channel.send(this.t("commands:Music.emptyQueue"));
 
         if(!args[0]) return message.channel.send(this.t("commands:Music.bassboost.noLevel", {
@@ -28,19 +27,18 @@ class BassBoost extends Command {
 
         let level = "none";
         if (args.length && args[0].toLowerCase() in this.levels) level = args[0].toLowerCase();
-    try {
-        let lvl = new PlayerEqualizerBand()
 
-        await serverQueue.player.equalizer(...new Array(3).fill(null).map((_, i) => ({
-            band: i,
-            gain: this.levels[level]
-        })));
+        const bands = new Array(3)
+        .fill(null)
+        .map((_, i) =>
+          ({ band: i, gain: this.levels[level] })
+        );
+
+        serverQueue.setEQ(...bands);
+
         return message.reply(this.t("commands:Music.bassboost.success", {
             bassLevel: level||"none"
         }));
-    } catch (e) {
-        
-    }
     }
 
 }

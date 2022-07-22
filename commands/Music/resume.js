@@ -12,10 +12,10 @@ class Pause extends Command {
     }
 
     async run(message, args) {
-        const serverQueue = this.client.player.queue.get(message.guild.id);
+        const serverQueue = this.client.player.manager.players.get(message.guild.id);
         if (!serverQueue) return message.channel.send(this.t("commands:Music.emptyQueue"));
-        if (serverQueue.playing) return message.channel.send(this.t("commands:Music.resume.notPaused"));
-        serverQueue.resume();
+        if (!serverQueue.paused) return message.channel.send(this.t("commands:Music.resume.notPaused"));
+        serverQueue.pause(false);
         message.channel.send(this.t("commands:Music.resume.success"));
     }
 

@@ -14,6 +14,8 @@ class Lyrics extends Command {
 
         async run(message, args) {
 
+            return message.reply("This command got disabled for now.");
+
                 let song;
                 if (!args[0])
                     return message.channel.send(this.t("commands:Music.lyrics.noArgs"))

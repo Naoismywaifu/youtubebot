@@ -43,9 +43,11 @@ class Search extends Command {
         resp += '```';
         await message.channel.send(resp);
 
-        message.channel.awaitMessages(filter, { max: 1, time: 30*1000, errors: ['time'] }).then((collected) => {
+        message.channel.awaitMessages({filter, max: 1, time: 60000, errors: ['time'] }).then((collected) => {
             console.log(collected.first().content)
+            console.log("fgdf")
             if (!isNaN(collected.first().content)) {
+                console.log("jaja")
                 message.channel.send(this.t("commands:Music.search.success"))
                 this.client.getCommand("play").run(message, [`${videos[collected.first().content - 1].url}`]);
             } else if (collected.first().content.toLowerCase() == 'cancel') {

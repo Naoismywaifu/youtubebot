@@ -7,42 +7,58 @@ const Player = require("../Base/Player")
  * @param {Boolean} isPremium
  */
 
-function BestNode(player, isPremium) {
+function BestNode(nodes, isPremium) {
     let nodesLoad = [];
-    let onlineNodes = player.startedNodes;
+    let onlineNodes = nodes;
 
-    if(isPremium){
-        let nodes = onlineNodes.filter(n => Boolean(n.premium))
+    console.log("IS PREMIUM ? "+isPremium)
+
+    if(Boolean(isPremium)){
+        console.log("IS PREMIUM")
+        let nodes = onlineNodes.filter(n => Boolean(n.options.id.startsWith("Premium")));
 
         if(!nodes.length)
             return onlineNodes[0]
 
         nodes.forEach(node => {
-            if(node.id.startsWith("Premium"))
+            if(node.options.id.startsWith("Premium"))
             nodesLoad.push({
-                name: node.id,
-                load: player.manager.nodes.get(node.id).stats.players||0
+                name: node.options.id,
+                identifier: node.options.identifier,
+                load: node.stats.cpu.lavalinkLoad
             })
         })
 
         let n = nodesLoad.sort((a, b) => a.load - b.load)[0]
 
-        return onlineNodes.filter(nodeuh => nodeuh.id === n.name)[0]||onlineNodes[0];
+        return onlineNodes.filter(nodeuh => nodeuh.options.id === n.name)[0]||onlineNodes[0];
 
     } else {
 
-    let nodes = onlineNodes.filter(n => n.premium === false)
+        console.log("eee")
+
+    let nodes = onlineNodes.filter(n => !Boolean(n.options.id.startsWith("Premium")))
+
+        console.log(nodes)
 
         nodes.forEach(node => {
+            console.log("Node" + node.toString())
             nodesLoad.push({
-                name: node.id,
-                load: player.manager.nodes.get(node.id).stats.players||0
+                name: node.options.id,
+                identifier: node.options.identifier,
+                load: node.stats.cpu.lavalinkLoad
             })
         })
 
         let n = nodesLoad.sort((a, b) => a.load - b.load)[0]
 
-        return onlineNodes.filter(nodeuh => nodeuh.id === n.name)[0]||nodes[0];
+        console.log(n)
+
+        console.log("selected node :"+  n.identifier)
+
+
+        
+        return n.identifier;
     }
 }
 

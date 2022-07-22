@@ -17,7 +17,7 @@ class NotifierMessage extends Command {
     async run(message, args) {
 
         const filter = (m) => m.author.id === message.author.id,
-            opt = { max: 1, time: 90000, errors: [ "time" ] };
+            opt = {  };
 
         let embed = new MessageEmbed()
             .addField(this.t("commands:Notifier.notifier-message.info"), `\`\`\`${this.t("commands:Notifier.notifier-message.provide")}\`\`\``, true)
@@ -34,7 +34,7 @@ class NotifierMessage extends Command {
 
         const msg = await message.channel.send({embeds: [embed]})
 
-        let collected = await message.channel.awaitMessages(filter, opt).catch(() => {});
+        let collected = await message.channel.awaitMessages({filter, max: 1, time: 90000, errors: [ "time" ]}).catch(() => {});
         if(!collected || !collected.first()){
             msg.delete()
             return message.channel.send(this.t("commands:Notifier.notifier-message.canceled"))

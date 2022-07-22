@@ -16,23 +16,33 @@ class RadioManager {
 
     async play(ch, url, guildID) {
 
-        let song = await this.player.getSongs(url, guildID)
+        let song = await this.player.manager.search(url, guildID)
         try {
             this.client.logger.log(`Will play in channel ${ch}, song ${song.tracks[0].info ? song.tracks[0].info.title || "none" : "none"} by ${song.tracks[0].info ? song.tracks[0].info.author || "none" : "none"}.`, "debug")
         } catch (e) {}
 
-
-        let player = await this.player.manager.join({
-            channel: ch,
+ 
+        let player = await this.player.manager.create({
+            voiceChannel: ch,
             guild: guildID,
-            node: await BestNode(this.client.player, true).id
+            node: await BestNode(this.client.player.manager.nodes, true)
         }, {
             selfdeaf: true
         })
 
-        await player.play(song.tracks[0].track)
+        console.log(song)
 
-        await player.volume(100)
+        if(song.loadType == "NO_MATCHES") {
+            await this.client.db.radiomanager.delete(guildID)
+            return this.client.logger.log(`No matches for ${url}, canceling player`, "error")
+        } else if (song.loadType == 'LOAD_FAILED') {
+            await this.client.db.radiomanager.delete(guildID)
+            return this.client.logger.log(`No invalid format ${url}, canceling player`, "error")    
+        }
+
+        await player.queue.add(song.tracks[0])
+        await player.play()
+        this.client.radioManager.queue.set(message.guild.id, true)
 
 
         player.on("error", (err) => {

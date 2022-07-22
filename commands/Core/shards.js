@@ -16,7 +16,7 @@ class Shards extends Command {
 
         const guildsCounts = await this.client.shard.fetchClientValues("guilds.cache.size");
         const guildsCount = guildsCounts.reduce((p, count) => p + count);
-        const usersCounts = await this.client.shard.broadcastEval('this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)');
+        const usersCounts = await this.client.shard.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0));
         const usersCount = usersCounts.reduce((p, count) => p + count);
 
 

@@ -13,13 +13,13 @@ class Seek extends Command {
     }
 
     async run(message, args) {
-        const serverQueue = this.client.player.queue.get(message.guild.id);
+        const serverQueue = this.client.player.manager.players.get(message.guild.id);
         if (!serverQueue) return message.channel.send(this.t("commands:Music.emptyQueue"));
         if (!args[0]) return message.channel.send(this.t("commands:Music.seek.noTimeGiven"))
 
         let duration = args[0]
 
-        if (!serverQueue.songs[0].info.isSeekable)
+        if (!serverQueue.queue.current.isSeekable)
             return message.channel.send(this.t("commands:Music.seek.cannotSeek"));
 
 
@@ -27,11 +27,11 @@ class Seek extends Command {
             return message.channel.send(this.t("commands:Music.seek.invalidDuration"));
 
         let durationMs = this.client.functions.durationToMillis(duration);
-        if (durationMs > serverQueue.songs[0].info.length)
+        if (durationMs > serverQueue.queue.current.duration)
             return message.channel.send(this.t("commands:Music.seek.durationTooLong"));
 
         try {
-            await serverQueue.player.seek(durationMs);
+            await serverQueue.seek(durationMs);
             message.channel.send(this.t("commands:Music.seek.success", {
                 marker: this.client.functions.millisToDuration(durationMs)
             }));

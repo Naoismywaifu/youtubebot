@@ -19,10 +19,10 @@ class BotInfo extends Command {
 
         const promises = [
             this.client.shard.fetchClientValues('guilds.cache.size'),
-            this.client.shard.broadcastEval('this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)'),
+            this.client.shard.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
             this.client.shard.fetchClientValues('channels.cache.size'),
-            this.client.shard.broadcastEval('process.memoryUsage().heapUsed'),
-            this.client.shard.fetchClientValues('player.queue.size'),
+            this.client.shard.broadcastEval(c => process.memoryUsage().heapUsed),
+            this.client.shard.fetchClientValues('player.manager.players.size'),
 
         ];
         Promise.all(promises)
@@ -44,7 +44,7 @@ class BotInfo extends Command {
                 > ${this.t("commands:Core.botinfo.TOTAL_USERS")} ❱ \`${totalMembers}\` ${this.t("commands:users")}
                 > ↳ ${this.t("commands:Core.botinfo.SHARD")} ❱ \`${this.client.users.cache.size}\` ${this.t("commands:users")}
                 > ${this.t("commands:Core.botinfo.PLAYING_COUNT")} ❱ \`${totalplaying}\` ${this.t("commands:servers")}
-                > ↳ ${this.t("commands:Core.botinfo.SHARD")} ❱ \`${this.client.player.queue.size}\` ${this.t("commands:servers")}
+                > ↳ ${this.t("commands:Core.botinfo.SHARD")} ❱ \`${this.client.player.manager.players.size}\` ${this.t("commands:servers")}
                 > ${this.t("commands:Core.botinfo.COMMANDS_EXECUTED")} ❱ \`${this.client.db.stats.get("global")||0}\`
                 > ↳ ${this.t("commands:Core.botinfo.GUILD")} ❱ \`${this.client.db.stats.get(`guild_${message.guild.id}`)||0}\`
         

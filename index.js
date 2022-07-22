@@ -1,13 +1,14 @@
 const Client = require("./Base/YouTubeBot");
 const {Intents} = require("discord.js");
-const CustomIntents = new Intents();
-CustomIntents.add(Intents.FLAGS.GUILDS);
-CustomIntents.add(Intents.FLAGS.GUILD_MESSAGES);
-CustomIntents.add(Intents.FLAGS.GUILD_MEMBERS);
-CustomIntents.add(Intents.FLAGS.GUILD_MESSAGE_REACTIONS);
-CustomIntents.add(Intents.FLAGS.DIRECT_MESSAGES);
-CustomIntents.add(Intents.FLAGS.DIRECT_MESSAGE_REACTIONS);
-const client = new Client({ intents: CustomIntents });
+const YtBotIntents = new Intents();
+YtBotIntents.add(Intents.FLAGS.GUILDS);
+YtBotIntents.add(Intents.FLAGS.GUILD_MESSAGES);
+YtBotIntents.add(Intents.FLAGS.GUILD_MEMBERS);
+YtBotIntents.add(Intents.FLAGS.GUILD_MESSAGE_REACTIONS);
+YtBotIntents.add(Intents.FLAGS.DIRECT_MESSAGES);
+YtBotIntents.add(Intents.FLAGS.DIRECT_MESSAGE_REACTIONS);
+YtBotIntents.add(Intents.FLAGS.GUILD_VOICE_STATES);
+const client = new Client({ intents: YtBotIntents });
 
 client.login(client.config.TOKEN);
 

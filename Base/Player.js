@@ -1,5 +1,11 @@
 const { Collection, MessageEmbed } = require("discord.js");
-const { Manager, Rest } = require("@lavacord/discord.js");
+//const { Manager, Rest } = require("@lavacord/discord.js");
+const {Manager } = require("erela.js")
+const Spotify = require("better-erela.js-spotify").default;
+const AppleMusic  = require("erela.js-apple");
+const TIDAL  = require("erela.js-tidal");
+const Facebook = require("erela.js-facebook");
+const Deezer  = require("erela.js-deezer");
 const fetch = require("node-fetch")
 const { BestNode } = require("../Util/NodeSelector")
 const Queue = require("./Queue");
@@ -14,61 +20,86 @@ class Player {
      */
     constructor(client) {
         this.client = client;
-        this.startedNodes = [];
         try {
-            this.manager = new Manager(client, client.config.NODES, {
-                user: client.user.id,
-                shards: client.shard ? client.shard.count : 1
-            });
+            this.manager = new Manager({
+                nodes: this.client.config.NODES,
+                send(id, payload) {
+                    const guild = client.guilds.cache.get(id);
+                    if (guild) guild.shard.send(payload);
+                  },
+                plugins: [
+                    new Spotify(),
+                    new AppleMusic(),
+                    new TIDAL(),
+                    new Facebook(),
+                    new Deezer()
+                ],
+                autoPlay: true,
+                clientId: this.client.user.id,
+                shards: this.client.shard.count
+            }).on("nodeConnect", node => {
+                this.client.logger.log(`[Node : ${node.options.id}] connected !`, 'ready')            
+            }).on("nodeDisconnect", (node, e) => {
+                this.client.logger.log(`[Node : ${node.options.id}] disconnected: ${e}`, 'warn')
+            }).on("nodeError", (err, node) => {
+                this.client.logger.log(`[Node : ${node.options.id}] Error: ${err}`, 'error')
+            }).on("nodeReconnect", (node) => {
+                this.client.logger.log(`[Node : ${node.options.id}] Reconnecting...`, 'warn')
+            }).on("nodeError", (node, error) => console.log(`Node ${node.options.id} had an error: ${error.message}`))
+                .on("trackStart", (player, track) => {
 
-            this.manager.connect();
+                    let embed = new MessageEmbed()
+                    .setTitle(this.client.t("commands:Music.nowPlaying"))
+                    .setURL(track.uri)
+                    .setThumbnail(`http://img.youtube.com/vi/${track.identifier||null}/hqdefault.jpg`)
+                    .setDescription(this.client.t("commands:Music.Title", { title: track.title||track.identifier, attributes: track.isStream ? this.client.t("commands:Music.Live", {liveicon: "🔴"}) : ""}) + "\n" + this.client.t("commands:Music.Author", { author: track.author||"None", attributes:"" }) + "\n" + this.client.t("commands:Music.Duration", {duration: track.isStream ? this.client.t("commands:Music.Live", {liveicon:"🔴"}) : this.client.functions.millisToDuration(track.duration||0)}) +'\n' + this.client.t("commands:Music.AudioServer", { serverID: player.node.options.id, attributes: player.node.options.id.startsWith("Premium") ? "⭐" : "" }))
+                    .setColor("DARK_RED")
+                    .setFooter(this.client.t("commands:requestedBy", { user: track.requester.tag }), track.requester.displayAvatarURL({ dynamic: true }))
+
+
+
+                  this.client.channels.cache
+                    .get(player.textChannel)
+                    .send({embeds: [embed]});
+
+                    console.log(track)
+                })
+                .on("queueEnd", (player) => {
+                  this.client.channels.cache
+                    .get(player.textChannel)
+                    .send("Queue has ended.");
+              
+                  player.destroy();
+                });
+
+            this.manager.init(this.client.user.id)
         } catch (e) {
             this.client.logger.log("failed to connect to nodes" + e)
-        }
-        this.queue = new Collection();
-
-        this.manager.on("ready", node => {
-            this.client.logger.log(`[Node : ${node.id}] connected !`, 'ready')
-            let isPremiumNode = node.id.startsWith("Premium")
-            this.startedNodes.push({ "id":node.id, "host":node.host, "port":node.port, "premium": isPremiumNode, "password":node.password, "stats":node.stats })
-            
-        }).on("disconnect", (wsevent, node) => {
-            this.startedNodes = this.startedNodes.filter(n => node.id !== n.id)
-            let nodeID = node.id
-            this.client.logger.log(`[Node : ${nodeID}] disconnected: ${wsevent}`, 'warn')
-
-            setTimeout(() => {
-                this.manager.nodes.get(nodeID).connect()
-            }, 5*60*1000)
-        }).on("error", (err, node) => {
-            this.client.logger.log(`[Node : ${node.id}] Error: ${err}`, 'error')
-        }).on("reconnecting", (node) => {
-            this.client.logger.log(`[Node : ${node.id}] Reconnecting...`, 'warn')
-        })
+        }        
 
     }
 
     async handleVideo(message, voiceChannel, song) {
-        if(!this.startedNodes.length) return message.channel.send(message.t("commands:Music.no_audio_nodes_online"));
-        const serverQueue = this.queue.get(message.guild.id);
+        if(this.manager.nodes.size == 0) return message.channel.send(message.t("commands:Music.no_audio_nodes_online"));
+        //const serverQueue = this.queue.get(message.guild.id);
 
         let premiumStatus = this.client.functions.isGuildPremium(message.guild.id)
 
+        //console.log("Is premium ? " +premiumStatus)
+
         let maxQueueLength = premiumStatus ? this.client.config.MUSIC.PREMIUM_MAX_QUEUE_LENGTH : this.client.config.MUSIC.MAX_QUEUE_LENGTH;
 
-        if (!serverQueue) {
-            let queue;
-            try {
-                queue = new Queue(this.client, {
-                    textChannel: message.channel,
-                    voiceChannel,
-                    node: BestNode(this, premiumStatus).id
-                });
-            } catch (e) {
-                message.channel.send(message.t("commands:Music.FailedGenerateQueue", {
-                    err: e
-                }))
-            }
+        const player = this.manager.create({
+            guild: message.guild.id,
+            voiceChannel: message.member.voice.channel.id,
+            textChannel: message.channel.id,
+            node: BestNode(this.manager.nodes, premiumStatus),
+            selfDeafen: true,
+            volume: 100
+          });
+
+          player.connect();
+
             if(Array.isArray(song)){
                 let messageImporting = await message.channel.send(message.t("commands:Music.importing_playlist", {
                     songs: song.length
@@ -80,123 +111,31 @@ class Player {
 
                 for (let i = 0; i < song.length; i++) {
                     const s = song[i];
-                    s.requestedBy = message.author
-                    queue.songs.push(s)
+                    player.queue.add(s)
                 }
                 await messageImporting.edit(message.t("commands:Music.success_import_playlist", {
                     songs: song.length
                 }))
             } else {
-            song.requestedBy = message.author
-            queue.songs.push(song);
+            player.queue.add(song);
+            if(player.queue.size) {
+            message.channel.send(message.t("commands:Music.added_track", {
+                title: song.title,
+                author: song.author
+            }))
             }
-            this.queue.set(message.guild.id, queue);
+            }
+
 
             try {
-                const player = await this.manager.join({
-                    channel: voiceChannel.id,
-                    guild: message.guild.id,
-                    node: await queue.getNode()
-                }, {
-                    selfdeaf: true
-                });
-                queue.setPlayer(player);
-                this.play(message.guild, Array.isArray(song) ? song[0] : song);
+                if (!player.playing && !player.paused && player.queue.size <= 1) player.play()
             } catch (error) {
                 message.channel.send(message.t("commands:Music.cannot_join_vc", {
                     err: error.message
                 }));
-                this.queue.delete(message.guild.id);
-                await this.manager.leave(message.guild.id);
+                player.destroy(1)
             }
-        } else {
-            if(Array.isArray(song)){
-                message.channel.send(message.t("commands:Music.importing_playlist", {
-                    songs: song.length
-                }))
-
-                if(song.length + serverQueue.songs.length >= maxQueueLength) return message.channel.send(message.t("commands:Music.reach_queue_limit", {
-                    limit: maxQueueLength
-                }))
-
-
-                for (let i = 0; i < song.length; i++) {
-                    const s = song[i];
-                    s.requestedBy = message.author
-                    serverQueue.songs.push(s)
-                }
-            } else {
-                if(serverQueue.songs.length + 1 >= maxQueueLength) return message.channel.send(message.t("commands:Music.reach_queue_limit", {
-                    limit: maxQueueLength,
-                }))
-            song.requestedBy = message.author
-            serverQueue.songs.push(song);
-            }
-
-            message.channel.send(Array.isArray(song) ? message.t("commands:Music.added_queue", {
-                length: song.length
-            }) : message.t("commands:Music.added_track", {
-                title: song.info.title,
-                author: song.info.author
-            }))
-
-        }
-    }
-
-    play(guild, song) {
-        const serverQueue = this.queue.get(guild.id);
-        if (!song) {
-            serverQueue.textChannel.send(guild.t("commands:Music.empty_queue"));
-            this.manager.leave(guild.id);
-            this.queue.delete(guild.id);
-        } else {
-            serverQueue.player.play(song.track);
-            serverQueue.player
-                .on("error", e => console.error(e))
-                .on("raw", e => console.log(e))
-                .on("disconnect", (e,c) => console.log("e : " + e + " c : " + c))
-                .once("end", data => {
-                    if (data.reason === "REPLACED") return;
-                    if (!serverQueue.loop) {
-                        let queue = serverQueue.songs
-                        queue.shift();
-                        serverQueue.songs = queue;
-                    }
-                    this.play(guild, serverQueue.songs[0]);
-                });
-                let embed = new MessageEmbed()
-                .setTitle(guild.t("commands:Music.nowPlaying"))
-                .setURL(song.info.uri)
-                .setThumbnail(`http://img.youtube.com/vi/${song.info.identifier||null}/hqdefault.jpg`)
-                .setDescription(guild.t("commands:Music.Title", { title: song.info.title||song.info.identifier, attributes: song.info.isStream ? guild.t("commands:Music.Live", {liveicon: "🔴"}) : ""}) + "\n" + guild.t("commands:Music.Author", { author: song.info.author||"None", attributes:"" }) + "\n" + guild.t("commands:Music.Duration", {duration: song.info.isStream ? guild.t("commands:Music.Live", {liveicon:"🔴"}) : this.client.functions.millisToDuration(song.info.length||0)}) +'\n' + guild.t("commands:Music.AudioServer", { serverID: serverQueue.node, attributes: serverQueue.node.startsWith("Premium") ? "⭐" : "" }))
-                .setColor("DARK_RED")
-                .setFooter(guild.t("commands:requestedBy", { user: song.requestedBy.tag }), song.requestedBy.displayAvatarURL({ dynamic: true }))
-
-            serverQueue.player.volume(serverQueue.volume);
-            serverQueue.textChannel.send({embeds: [embed]});
-        }
-    }
-
-    async getSongs(query, GuildID) {
-        const node = BestNode(this, this.client.functions.isGuildPremium(GuildID));
-        this.client.logger.log(`selected ${node.id} as node for query ${query}.`, "debug")
-
-        const params = new URLSearchParams();
-        const isHttp = /^https?:\/\//.test(query);
-        query = isHttp ? query : `ytsearch: ${query}`;
-        params.append('identifier', query);
-
-
-        return fetch(`http://${node.host}:${node.port}/loadtracks?${params.toString()}`, {
-            headers: {
-                Authorization: node.password
-            }
-        }).then(res => res.json())
-            .catch(err => {
-                console.error(err)
-                return null
-            });
-
+       
     }
 }
 

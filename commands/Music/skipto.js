@@ -20,13 +20,13 @@ class SkipTo extends Command {
 
         if(!args[0]) return message.channel.send(this.t("commands:Music.skipto.noArgs"))
 
-        if(isNaN(args[0]) || args[0] > serverQueue.songs.size || args[0] <= 1)
+        if(isNaN(args[0]) || args[0] > serverQueue.queue.size || args[0] <= 1)
             return message.channel.send(this.t("commands:Music.skipto.invalidValue"))
 
 
         try {
-            serverQueue.songs = serverQueue.songs.slice(args[0] - 2);
-            await serverQueue.skip();
+            serverQueue.queue.remove(0, args[0]);
+            serverQueue.stop();
         } catch (e) {
             return message.channel.send(this.t("commands:Music.skipto.failed", {
                 err: e

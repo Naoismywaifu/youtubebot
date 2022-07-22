@@ -10,9 +10,9 @@ class Shuffle extends Command {
     }
 
     async run(message, args) {
-        const serverQueue = this.client.player.queue.get(message.guild.id);
+        const serverQueue = this.client.player.manager.players.get(message.guild.id);
         if (!serverQueue) return message.channel.send(this.t("commands:Music.emptyQueue"));
-        serverQueue.songs = this.client.functions.shuffleArray(serverQueue.songs)
+        serverQueue.queue.shuffle()
         return message.channel.send(this.t("commands:Music.shuffle.success"))
     }
 

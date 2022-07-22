@@ -17,6 +17,7 @@ class MessageCreate {
             language = this.client.db.guildconf.has(`${message.guild ? message.guild.id : null}.language`) ? this.client.db.guildconf.get(`${message.guild ? message.guild.id : null}.language`) : 'en-US';
         }
 
+
         if(["french", "english"].includes(language)){
             switch (language) {
                 case "french":
@@ -34,6 +35,8 @@ class MessageCreate {
         function setFixedT(translate) {
             t = translate
         }
+
+        this.client.t = t
 
         if(message.content.match(new RegExp(`^<@!?${this.client.user.id}>( |)$`))){
             if(message.guild){
@@ -123,9 +126,6 @@ class MessageCreate {
                 }));
             }
 
-
-            if(["Music", "Filters"].includes(command.help.category) && this.client.radioManager.queue.has(message.guild.id))
-                return message.channel.send(t("commands:RadioPlaying"))
 
 
         }

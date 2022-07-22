@@ -18,7 +18,7 @@ class Info extends Command {
 
         const promises = [
             await this.client.shard.fetchClientValues('guilds.cache.size'),
-            await this.client.shard.broadcastEval('this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)'),
+            await this.client.shard.broadcastEval(c => c.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)),
         ];
 
         Promise.all(promises)
