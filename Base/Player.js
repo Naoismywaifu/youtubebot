@@ -41,8 +41,8 @@ class Player {
                 this.client.logger.log(`[Node : ${node.options.id}] connected !`, 'ready')            
             }).on("nodeDisconnect", (node, e) => {
                 this.client.logger.log(`[Node : ${node.options.id}] disconnected: ${e}`, 'warn')
-            }).on("nodeError", (err, node) => {
-                this.client.logger.log(`[Node : ${node.options.id}] Error: ${err}`, 'error')
+            }).on("nodeError", (node, err) => {
+                this.client.logger.log(`[Node : ${node.options.identifier}] Error: ${err}`, 'error')
             }).on("nodeReconnect", (node) => {
                 this.client.logger.log(`[Node : ${node.options.id}] Reconnecting...`, 'warn')
             }).on("nodeError", (node, error) => console.log(`Node ${node.options.id} had an error: ${error.message}`))
@@ -67,8 +67,7 @@ class Player {
                 .on("queueEnd", (player) => {
                   this.client.channels.cache
                     .get(player.textChannel)
-                    .send("Queue has ended.");
-              
+                    .send(this.t("commands:Music.emptyQueue"));
                   player.destroy();
                 });
 
@@ -88,6 +87,14 @@ class Player {
         //console.log("Is premium ? " +premiumStatus)
 
         let maxQueueLength = premiumStatus ? this.client.config.MUSIC.PREMIUM_MAX_QUEUE_LENGTH : this.client.config.MUSIC.MAX_QUEUE_LENGTH;
+
+        let freshPlayer = false
+
+        // check if player is new
+        let fplayer = this.manager.players.get(message.guild.id);
+        if(!fplayer)
+            freshPlayer = true
+
 
         const player = this.manager.create({
             guild: message.guild.id,
@@ -128,7 +135,7 @@ class Player {
 
 
             try {
-                if (!player.playing && !player.paused && player.queue.size <= 1) player.play()
+                if (!player.playing && !player.paused && freshPlayer) player.play()
             } catch (error) {
                 message.channel.send(message.t("commands:Music.cannot_join_vc", {
                     err: error.message

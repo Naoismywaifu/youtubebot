@@ -1,6 +1,6 @@
 {
     "name": "youtubebot",
-    "version": "4.0.2",
+    "version": "5.0.0-rc.2",
     "description": "Official youtube bot code",
     "main": "sharder.js",
     "scripts": {

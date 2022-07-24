@@ -12,9 +12,9 @@ class SkipTo extends Command {
     }
 
     async run(message, args) {
-        const serverQueue = this.client.player.queue.get(message.guild.id);
+        const serverQueue = this.client.player.manager.players.get(message.guild.id);
         if (!serverQueue) return message.channel.send(this.t("commands:Music.emptyQueue"));
-        if(serverQueue.loop) return message.channel.send(this.t("commands:Music.skipto.loopOn"))
+        if(serverQueue.trackRepeat) return message.channel.send(this.t("commands:Music.skipto.loopOn"))
         if (!serverQueue.playing) serverQueue.playing = true;
 
 
