@@ -4,3 +4,11 @@ package-lock.json
 config.js
 yarn.lock
 json.sqlite
+.npm/
+.cache/
+.pnp/
+.pnp.js/
+.pnp.json/
+.pnp.js.map/
+.pnp.json.map/
+.pnp.js.map.gz/
