@@ -88,7 +88,8 @@
         "play": {
             "description": "Joue une musique, playlist depuis YouTube.",
             "novc": "{{emojis.no}} | Vous devez rejoindre un salon vocal pour utiliser cette commande!",
-            "error": "{{emojis.no}} | Une erreur est survenue durant la recherche: {{err}}"
+            "error": "{{emojis.no}} | Une erreur est survenue durant la recherche: {{err}}",
+            "noArgs": "{{emojis.no}} | Please provide a query!"
         },
         "queue": {
             "description": "Liste les musiques dans la liste d'attente",

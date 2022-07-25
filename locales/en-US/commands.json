@@ -88,7 +88,8 @@
         "play": {
             "description": "Play a music, playlist from YouTube.",
             "novc": "{{emojis.no}} | You must join a voice channel to use this command!",
-            "error": "{{emojis.no}} | Oops an error occurred while i tried to search: {{err}}"
+            "error": "{{emojis.no}} | Oops an error occurred while i tried to search: {{err}}",
+            "noArgs": "{{emojis.no}} | Please provide a query!"
         },
         "queue": {
             "description": "List songs in the queue ready to be played.",

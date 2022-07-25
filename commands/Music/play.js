@@ -28,6 +28,9 @@ class Play extends Command {
 
         let song;
 
+        if(!args[0])
+            return message.channel.send(this.t("commands:Music.play.noArgs"))
+
         let track = args.join(" ")
         try {
            
