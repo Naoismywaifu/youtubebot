@@ -18,23 +18,23 @@ class BassBoost extends Command {
 
     async run(message, args) {
 
-        const serverQueue = this.client.player.manager.players.get(message.guild.id);
+        const serverQueue = await this.client.player.manager.players.get(message.guild.id);
         if(!serverQueue) return message.channel.send(this.t("commands:Music.emptyQueue"));
 
         if(!args[0]) return message.channel.send(this.t("commands:Music.bassboost.noLevel", {
-            levels: Object.keys(this.levels).join(", ")||"none"
+            levels: await Object.keys(this.levels).join(", ")||"none"
         }))
 
         let level = "none";
         if (args.length && args[0].toLowerCase() in this.levels) level = args[0].toLowerCase();
 
-        const bands = new Array(3)
+        const bands = await new Array(3)
         .fill(null)
         .map((_, i) =>
           ({ band: i, gain: this.levels[level] })
         );
 
-        serverQueue.setEQ(...bands);
+        await serverQueue.setEQ(...bands);
 
         return message.reply(this.t("commands:Music.bassboost.success", {
             bassLevel: level||"none"

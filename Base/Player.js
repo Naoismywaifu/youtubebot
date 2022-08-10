@@ -116,13 +116,13 @@ class Player {
                     limit: maxQueueLength
                 }));
 
-                for (let i = 0; i < song.length; i++) {
-                    const s = song[i];
-                    player.queue.add(s)
-                }
+                // song = res.tracks
+                await player.queue.add(song)
+
                 await messageImporting.edit(message.t("commands:Music.success_import_playlist", {
                     songs: song.length
                 }))
+
             } else {
             player.queue.add(song);
             if(player.queue.size) {
@@ -133,9 +133,11 @@ class Player {
             }
             }
 
+            console.log("Is it fresh player ?" + freshPlayer)
+            
 
             try {
-                if (!player.playing && !player.paused && freshPlayer) player.play()
+                if (!player.playing && !player.paused && freshPlayer) await player.play()
             } catch (error) {
                 message.channel.send(message.t("commands:Music.cannot_join_vc", {
                     err: error.message

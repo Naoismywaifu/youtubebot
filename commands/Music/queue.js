@@ -21,13 +21,13 @@ class Queue extends Command {
         message.channel.send({embeds : [new MessageEmbed().setDescription(`
 ${this.t("commands:Music.queue.currentqueue")}
 
-${serverQueue.queue.map(songs => `**${++index}.** ${songs.title}`).splice(0, 10).join("\n")}
+${serverQueue.queue.size ? serverQueue.queue.map(songs => `**${++index}.** ${songs.title}`).splice(0, 10).join("\n") : "- " + serverQueue.queue.current.title} 
 ${serverQueue.queue.size <= 10 ? "" : this.t("commands:Music.queue.andmore", {
     number: serverQueue.queue.size - 10
 })}
 
 ${this.t("commands:Music.queue.estimatedduration", {
-    duration: ms(serverQueue.queue.map(s => s.duration).reduce((a, b) => a + b), { long: true})||"Unfetchable"
+    duration: ms(serverQueue.queue.size ?serverQueue.queue.map(s => s.duration).reduce((a, b) => a + b) : serverQueue.queue.current.duration, { long: true})||"Unfetchable"
         })}
 `).setColor("RED").setFooter("YouTube Bot", this.client.user.displayAvatarURL())]});
     }
