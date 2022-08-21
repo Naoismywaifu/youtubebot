@@ -14,7 +14,7 @@ class NewCode extends Command {
 
     async run(message, args) {
 
-        if(message.channel.type !== "dm") return message.channel.send(this.t("commands:Premium.newcode.notInDMs"))
+        if(message.channel.type !== "DM") return message.channel.send(this.t("commands:Premium.newcode.notInDMs"))
 
         if(this.client.db.users.get(`${message.author.id}.premiums`) <= 0) return message.channel.send(this.t("commands:Premium.newcode.noPremium"))
 
