@@ -8,7 +8,7 @@ YtBotIntents.add(Intents.FLAGS.GUILD_MESSAGE_REACTIONS);
 YtBotIntents.add(Intents.FLAGS.DIRECT_MESSAGES);
 YtBotIntents.add(Intents.FLAGS.DIRECT_MESSAGE_REACTIONS);
 YtBotIntents.add(Intents.FLAGS.GUILD_VOICE_STATES);
-const client = new Client({ intents: YtBotIntents });
+const client = new Client({ intents: YtBotIntents, partials: ['CHANNEL'] });
 
 client.login(client.config.TOKEN);
 
