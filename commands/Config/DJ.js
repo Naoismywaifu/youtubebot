@@ -13,6 +13,9 @@ class DJ extends Command {
 
     async run(message, args) {
 
+        return message.channel.send("Music commands are disabled!")
+
+
         if(!args[0]) args[0] = "none"
 
         switch (args[0].toLowerCase()) {

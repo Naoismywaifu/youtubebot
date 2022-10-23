@@ -1,3 +1,4 @@
+const { MessageEmbed } = require("discord.js");
 const i18next = require("i18next");
 
 class MessageCreate {
@@ -76,6 +77,11 @@ class MessageCreate {
         message.t = t;
         if(message.guild) {
             message.guild.t = t;
+        }
+
+        // check if command takes part of Music category 
+        if (["Filters", "Music"].includes(command.help.category)) {
+            return message.channel.send({embeds: [new MessageEmbed().setDescription("Since October 4th,\nDiscord has killed the music features of YouTube Bot.\nIn order to allow the bot to survive we decided to disable the music commands.\nThank you for your support!").setColor("RED").setImage("https://cdn.discordapp.com/attachments/845729381262688312/1033659232953827348/unknown.png")]})
         }
 
         if(command.help.guildOnly && !message.guild)

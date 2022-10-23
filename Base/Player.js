@@ -20,19 +20,32 @@ class Player {
      */
     constructor(client) {
         this.client = client;
-        try {
-            this.manager = new Manager({
+        this.manager =  new Manager({
                 nodes: this.client.config.NODES,
                 send(id, payload) {
                     const guild = client.guilds.cache.get(id);
                     if (guild) guild.shard.send(payload);
                   },
+                autoPlay: true,
+                clientName: `YouTubeBot/v${require("../package.json").version} (Bot: ${
+                    this.config.clientId
+                  })`,
                 plugins: [
-                    new Spotify(),
                     new AppleMusic(),
                     new TIDAL(),
                     new Facebook(),
-                    new Deezer()
+                    new Deezer(),
+                    new Spotify({
+                        clientId: this.client.config.SPOTIFY.CLIENT_ID,
+                        strategy: "API",
+                        clientSecret: this.client.config.SPOTIFY.CLIENT_SECRET,
+                        convertUnresolved: true,
+                        useSpotifyMetadata: true,
+                        playlistPageLimit: 10,
+                        playlistTracksPageLimit: 100,
+                        cacheTrack: true,
+                        countryMarket: "FR",
+                    }),
                 ],
                 autoPlay: true,
                 clientId: this.client.user.id,
@@ -72,9 +85,7 @@ class Player {
                 });
 
             this.manager.init(this.client.user.id)
-        } catch (e) {
-            this.client.logger.log("failed to connect to nodes" + e)
-        }        
+     
 
     }
 

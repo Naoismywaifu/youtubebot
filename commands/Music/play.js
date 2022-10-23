@@ -32,13 +32,16 @@ class Play extends Command {
             return message.channel.send(this.t("commands:Music.play.noArgs"))
 
         let track = args.join(" ")
-        try {
+       // try {
            
               // Search for tracks using a query or url, using a query searches youtube automatically and the track requester object
+              console.log(track)
+              console.log(this.client.player)
               song = await this.client.player.manager.search(track, message.author);
               // Check the load type as this command is not that advanced for basics
 
               console.log(song)
+
 
               if(!song.loadType)
                 return message.channel.send(this.t("commands:Music.unknownErrorNode"))
@@ -76,10 +79,10 @@ class Play extends Command {
                   this.error(message, "unknown error code")
                   break;
           }
-        } catch (e) {
-            this.client.logger.log(`An error occurred while tried to get search songs: ${e}`, 'error')
-            return message.channel.send(message.t("commands:Music.no_audio_nodes_online"));
-        }
+       // } catch (e) {
+       //     this.client.logger.log(`An error occurred while tried to get search songs: ${e}`, 'error')
+       //     return message.channel.send(message.t("commands:Music.no_audio_nodes_online"));
+       // }
         
 
     }

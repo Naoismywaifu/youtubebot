@@ -59,6 +59,9 @@ class Help extends Command {
 				if(command.help.category === "Owner" && !this.client.config.OWNERS.includes(message.author.id)){
 					return;
 				}
+				if(["Music", "Filters"].includes(command.help.category)) {
+					return;
+				}
 				categories.push(command.help.category);
 			}
 		});

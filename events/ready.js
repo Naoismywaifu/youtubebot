@@ -10,7 +10,7 @@ class Ready {
 
     run() {
         try {
-            this.client.player = new Player(this.client);
+            //this.client.player = new Player(this.client);
             this.client.notifier = new Notifier(this.client);
             //this.client.radioManager = new RadioManager(this.client);
             this.client.poster.start();

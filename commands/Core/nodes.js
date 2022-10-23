@@ -15,6 +15,8 @@ class Nodes extends Command {
 
     async run(message, args) {
 
+        return message.channel.send("Music commands are disabled!")
+
         let m = await message.channel.send(this.t("commands:Core.nodes.fetching"))
 
         let totalPlaying = this.client.player.manager.nodes.map(n => this.client.player.manager.nodes.get(n.options.identifier).stats.players).reduce((a, b) => a + b, 0)||0
