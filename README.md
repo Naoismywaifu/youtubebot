@@ -4,8 +4,8 @@
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <a href="https://twitter.com/hiizunfr" target="_blank">
-    <img alt="Twitter: hiizunfr" src="https://img.shields.io/twitter/follow/hiizunfr.svg?style=social" />
+  <a href="https://twitter.com/naoismywaifu" target="_blank">
+    <img alt="Twitter: NaoismyWaifu" src="https://img.shields.io/twitter/follow/naoismywaifu.svg?style=social" />
   </a>
 </p>
 
@@ -25,11 +25,11 @@ yarn run start
 
 ## Author
 
-👤 **HiiZun**
+👤 **Nao**
 
-* Website: https://hiizun.codes
-* Twitter: [@hiizunfr](https://twitter.com/hiizunfr)
-* Github: [@HiiZun](https://github.com/HiiZun)
+* Website: https://nao.rip
+* Twitter: [@hiizunfr](https://twitter.com/naoismywaifu)
+* Github: [@HiiZun](https://github.com/naoismywaifu)
 
 ## Show your support
 
