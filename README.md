@@ -28,8 +28,8 @@ yarn run start
 👤 **Nao**
 
 * Website: https://nao.rip
-* Twitter: [@hiizunfr](https://twitter.com/naoismywaifu)
-* Github: [@HiiZun](https://github.com/naoismywaifu)
+* Twitter: [@NaoismyWaifu](https://twitter.com/naoismywaifu)
+* Github: [@NaoismyWaifu](https://github.com/naoismywaifu)
 
 ## Show your support
 
